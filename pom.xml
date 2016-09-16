@@ -14,15 +14,16 @@
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
-			<artifactId>junit<artifactId>
+			<artifactId>junit</artifactId>
 			<version>4.11</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>orj.apache.maven.plugins<groupId>
+				<groupId>orj.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.0</version>
 				<configuration>
@@ -31,5 +32,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 </project>
