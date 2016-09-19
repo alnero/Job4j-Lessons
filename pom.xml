@@ -9,6 +9,7 @@
 
 	<modules>
 		<module>Part01-Lesson01</module>
+		<module>Part01-Lesson02</module>
 	</modules>
 
 	<properties>
