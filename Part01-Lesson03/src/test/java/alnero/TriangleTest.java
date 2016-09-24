@@ -52,24 +52,27 @@ public class TriangleTest {
     }
 
     /**
-     * Test that you can't create a triangle when all points are on the same vertical line
+     * Test that when create a triangle with all points on the same vertical line an area is zero.
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void whenCreateTriangleWithAllPointsOnOneVerticalLineThenIllegalArgumentExceptionIsThrown() {
+    @Test
+    public void whenCreateTriangleWithAllPointsOnOneVerticalLineThenAreaIsZero() {
         Random random = new Random();
         double fixedYCoordinate = random.nextDouble();
+
         Point a = new Point(random.nextDouble(), fixedYCoordinate);
         Point b = new Point(random.nextDouble(), fixedYCoordinate);
         Point c = new Point(random.nextDouble(), fixedYCoordinate);
+
         Triangle triangle = new Triangle(a, b, c);
+        Assert.assertThat(triangle.area(), is(0.0));
     }
 
     /**
-     * Test that you can't create a triangle when all points are on the same line.
+     * Test that when create a triangle with all points on the same line an area is zero
      * Private class Line is used for generating random points on the same line.
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void whenCreateTriangleWithAllPointsOnTheSameLineThenIllegalArgumentExceptionIsThrown() {
+    @Test
+    public void whenCreateTriangleWithAllPointsOnTheSameLineThenAreaIsZero() {
         Random random = new Random();
         Line line = new Line(random.nextDouble(), random.nextDouble());
 

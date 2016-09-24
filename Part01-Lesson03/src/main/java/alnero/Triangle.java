@@ -17,8 +17,8 @@ public class Triangle {
     private Point c;
 
     /**
-     * Triangle can be created only using three different point objects.
-     * If all points are on the same line, triangle object can't be created.
+     * Triangle can be created using three point objects.
+     * If all points are on the same line the returned area of triangle will be zero.
      * @param a point a
      * @param b point b
      * @param c point c
@@ -27,9 +27,6 @@ public class Triangle {
         this.a = a;
         this.b = b;
         this.c = c;
-        if(this.area() == 0.0) {
-            throw new IllegalArgumentException("Triangle can't be created using these points.");
-        }
     }
 
     /**
