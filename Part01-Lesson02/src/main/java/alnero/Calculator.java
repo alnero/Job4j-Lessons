@@ -7,6 +7,11 @@ package alnero;
  */
 public class Calculator {
     /**
+     * Precision of calculations, number of decimal digits in calculation results.
+     */
+    private static final int NUMBER_OF_DECIMALS = 8;
+
+    /**
      * Variable to store the result of calculations, initialized by zero.
      */
     private double result = 0.0;
@@ -57,7 +62,7 @@ public class Calculator {
      * @return rounded result of calculations
      */
     public double getResult() {
-        return roundResultToDecimalPlaces(8);
+        return roundResultToDecimalPlaces(NUMBER_OF_DECIMALS);
     }
 
     /**
