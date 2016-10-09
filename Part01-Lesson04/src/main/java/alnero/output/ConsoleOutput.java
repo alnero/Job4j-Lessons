@@ -6,6 +6,9 @@ import java.io.PrintStream;
  * Class for output to system console.
  */
 public class ConsoleOutput implements Output {
+    /**
+     * Reference to PrintStream object
+     */
     private PrintStream out;
 
     /**
@@ -16,6 +19,10 @@ public class ConsoleOutput implements Output {
         this.out = out;
     }
 
+    /**
+     * Print of values by PrintStream object
+     * @param value something to be printed
+     */
     @Override
     public void println(Object value) {
         this.out.println(value);

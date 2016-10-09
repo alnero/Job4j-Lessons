@@ -10,7 +10,7 @@ public class MockOutput implements Output {
     private StringBuilder output = new StringBuilder();
 
     /**
-     * Every print of some value adds a line ot StringBuilder object
+     * Every print of some value adds a line to StringBuilder object
      * @param value something for output
      */
     @Override
