@@ -337,7 +337,7 @@ public class ArrayHandlerTest {
     }
 
     /**
-     * Test that empty array does not cause any exception
+     * Test rotation of empty array
      */
     @Test
     public void whenRotateEmptyArray90degreesClockwiseAndAfterAntiClockwiseThenReturnEmptyArray() {
@@ -345,10 +345,13 @@ public class ArrayHandlerTest {
                 {}
         };
 
-        this.arrayHandler.reverseRows(initialArray);
-        this.arrayHandler.reverseColumns(initialArray);
-        this.arrayHandler.rotateArray90DegreesClockwise(initialArray);
-        this.arrayHandler.rotateArray90DegreesAntiClockwise(initialArray);
+        int[][] checkArray = new int[][]{
+                {}
+        };
+
+        int[][] rotationClockwise = this.arrayHandler.rotateArray90DegreesClockwise(initialArray);
+        int[][] rotationAntiClockwise = this.arrayHandler.rotateArray90DegreesAntiClockwise(rotationClockwise);
+        Assert.assertThat(rotationAntiClockwise, is(checkArray));
     }
 
     /**
