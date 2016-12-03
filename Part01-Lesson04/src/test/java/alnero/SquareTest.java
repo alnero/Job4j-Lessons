@@ -15,7 +15,7 @@ import static org.hamcrest.core.IsNot.not;
  */
 public class SquareTest {
     /**
-     * Test calculations for coefficients forming equation y = x^2
+     * Test calculations for coefficients forming equation y = x^2.
      */
     @Test
     public void whenFirstArgIsOneAndRestAreZeroesAndSupplyTwoThenResultIsFour() {
@@ -25,7 +25,7 @@ public class SquareTest {
     }
 
     /**
-     * Test calculations for coefficients forming equation y = x^2 + x
+     * Test calculations for coefficients forming equation y = x^2 + x.
      */
     @Test
     public void whenFirstArgIsOneSecondArgIsOneAndSupplyTwoThenResultIsSix() {
@@ -35,7 +35,7 @@ public class SquareTest {
     }
 
     /**
-     * Test calculations for coefficients forming equation y = x^2 + x + 5
+     * Test calculations for coefficients forming equation y = x^2 + x + 5.
      */
     @Test
     public void whenFirstArgIsOneSecondArgIsOneThirdArgIsFiveAndSupplyTwoThenResultIsEleven() {
@@ -45,7 +45,7 @@ public class SquareTest {
     }
 
     /**
-     * Test calculations for coefficients forming equation y = 2 * x^2
+     * Test calculations for coefficients forming equation y = 2 * x^2.
      */
     @Test
     public void whenFirstArgIsTwoAndRestAreZeroesAndSupplyTwoThenResultIsEight() {
@@ -55,7 +55,7 @@ public class SquareTest {
     }
 
     /**
-     * Test calculations for coefficients forming arbitrary equation y = 3 * x^2 + 4 * x + 5
+     * Test calculations for coefficients forming arbitrary equation y = 3 * x^2 + 4 * x + 5.
      */
     @Test
     public void whenFirstArgIsThreeSecondArgIsFourThirdArgIsFiveAndSupplyOneThenResultIsTwelve() {
@@ -65,7 +65,7 @@ public class SquareTest {
     }
 
     /**
-     * Test calculations for coefficients forming equation y = x^2 - 2 * x - 3
+     * Test calculations for coefficients forming equation y = x^2 - 2 * x - 3.
      * Supply x=-1 and x=3 both results should be zero, as this is answers for quadratic equation x^2 - 2 * x - 3 = 0
      */
     @Test
@@ -78,7 +78,7 @@ public class SquareTest {
     }
 
     /**
-     * Test calculations for coefficients forming equation y = 5 * x^2 + 3 * x + 7
+     * Test calculations for coefficients forming equation y = 5 * x^2 + 3 * x + 7.
      * For any supplied x answer will never be zero, cause this quadratic equation 5 * x^2 + 3 * x + 7 = 0 has no answers
      */
     @Test
@@ -93,7 +93,7 @@ public class SquareTest {
     // For the following tests the MockOutput object is used to check the printouts
 
     /**
-     * Show values from x1=0.0 to x2=1.0 and step 1.0 for simple function y = x^2
+     * Show values from x1=0.0 to x2=1.0 and step 1.0 for simple function y = x^2.
      */
     @Test
     public void whenShowFromZeroToOneWithStepOneForXSquaredThenPrintZeroOne() {
@@ -106,7 +106,7 @@ public class SquareTest {
     }
 
     /**
-     * Show values from x1=0.0 to x2=5.0 and step 1.0 for simple function y = x^2
+     * Show values from x1=0.0 to x2=5.0 and step 1.0 for simple function y = x^2.
      */
     @Test
     public void whenShowFromZeroToFiveWithStepOneForXSquaredThenPrintZeroOneFourNineSixteenTwentyFive() {
@@ -119,7 +119,7 @@ public class SquareTest {
     }
 
     /**
-     * Show values from x1=0.0 to x2=5.0 and step 2.0 for simple function y = x^2
+     * Show values from x1=0.0 to x2=5.0 and step 2.0 for simple function y = x^2.
      * Last calculation for x2=5.0 should be also included.
      */
     @Test
@@ -133,7 +133,7 @@ public class SquareTest {
     }
 
     /**
-     * Show values from x1=-5.0 to x2=5.0 and step 5.0 for function y = 2 * x^2 + 1
+     * Show values from x1=-5.0 to x2=5.0 and step 5.0 for function y = 2 * x^2 + 1.
      */
     @Test
     public void whenShowFromMinusFiveToFiveWithStepFiveForTwoXSquaredPlusOneThenPrintFiftyOneOneFiftyOne() {
@@ -146,7 +146,7 @@ public class SquareTest {
     }
 
     /**
-     * Show values from x1=-3.0 to x2=-1.5 and step 0.5 for function y = x^2 + x + 1
+     * Show values from x1=-3.0 to x2=-1.5 and step 0.5 for function y = x^2 + x + 1.
      * Results truncated up to one decimal digit.
      */
     @Test
@@ -160,7 +160,7 @@ public class SquareTest {
     }
 
     /**
-     * Show values from x1=5.0 to x2=2.0 and step 2.0 for function y = 2 * x^2 + 2 * x + 3
+     * Show values from x1=5.0 to x2=2.0 and step 2.0 for function y = 2 * x^2 + 2 * x + 3.
      * Results should be for section [2.0, 5.0] with step 2.0
      */
     @Test
@@ -174,7 +174,7 @@ public class SquareTest {
     }
 
     /**
-     * Show values from x1=-1.0 to x2=-3.0 and step -1.0 for function y = x^2 + 10 * x
+     * Show values from x1=-1.0 to x2=-3.0 and step -1.0 for function y = x^2 + 10 * x.
      * Results should be for section [-3.0, -1.0] with step 1.0
      */
     @Test
@@ -188,7 +188,7 @@ public class SquareTest {
     }
 
     /**
-     * Show values from x1=0.0 to x2=0.0 and step 10.0 for function y = x^2 + 10 * x + 1
+     * Show values from x1=0.0 to x2=0.0 and step 10.0 for function y = x^2 + 10 * x + 1.
      * Only one value should be printed.
      */
     @Test

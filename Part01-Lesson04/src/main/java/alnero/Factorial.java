@@ -12,13 +12,13 @@ public class Factorial {
      * @throws IllegalArgumentException when supplied parameter is a negative number
      */
     public int getFactorialOf(int n) {
-        if(n < 0) {
+        if (n < 0) {
             throw new IllegalArgumentException("Factorial for negative numbers is not defined!");
         }
 
         int result = 1;
 
-        for(int i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             result = result * i;
         }
 

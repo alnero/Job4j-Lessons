@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Max {
     /**
-     * Triangle for which calculations are performed
+     * Triangle for which calculations are performed.
      */
     private Triangle triangle;
 
@@ -24,6 +24,9 @@ public class Max {
 
     /**
      * Find the longest side using three sides of the triangle.
+     * @param sideAB side of the triangle
+     * @param sideBC side of the triangle
+     * @param sideCA side of the triangle
      * @return longest side of the triangle
      */
     public double max(double sideAB, double sideBC, double sideCA) {

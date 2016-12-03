@@ -7,13 +7,19 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 
 /**
- * Testing removing of duplicates from String array
+ * Testing removing of duplicates from String array.
  */
 public class DuplicatesTest {
+    /**
+     * Common Duplicates object for testing.
+     */
     private Duplicates duplicatesHandler;
 
+    /**
+     * Creating common Duplicates object for testing.
+     */
     @Before
-    public void createCommonHandlerForRemovingDuplicatesFromStringArray(){
+    public void createCommonHandlerForRemovingDuplicatesFromStringArray() {
         duplicatesHandler = new Duplicates();
     }
 
@@ -30,7 +36,7 @@ public class DuplicatesTest {
     }
 
     /**
-     * Test on array containing the same string three times
+     * Test on array containing the same string three times.
      */
     @Test
     public void whenRemoveDuplicateFromThreeStringsArrayThenReturnArrayWithOneString() {
@@ -42,7 +48,7 @@ public class DuplicatesTest {
     }
 
     /**
-     * Test on array containing the same string seven times
+     * Test on array containing the same string seven times.
      */
     @Test
     public void whenRemoveDuplicateFromSevenStringsArrayThenReturnArrayWithOneString() {

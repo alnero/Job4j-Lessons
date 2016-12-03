@@ -17,16 +17,16 @@ public class Substring {
         char[] originChars = origin.toCharArray();
         char subFirstChar = sub.charAt(0);
 
-        for(int i = 0; i < originLength; i++) {
+        for (int i = 0; i < originLength; i++) {
             // check that first char of substring is contained in string
-            if(originChars[i] == subFirstChar){
+            if (originChars[i] == subFirstChar) {
                 // if substring is longer than part of string from first matching char, than it is not part of the string
                 // e.g. "abbb" does not contain "bbbb"
-                if(originLength - i < subLength) {
+                if (originLength - i < subLength) {
                     return false;
                 }
                 // new string is generated from original string chars array and compared to substring
-                if( sub.equals(new String(originChars, i, subLength)) ) {
+                if (sub.equals(new String(originChars, i, subLength))) {
                     return true;
                 }
             }

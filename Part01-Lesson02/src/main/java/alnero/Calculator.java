@@ -35,7 +35,7 @@ public class Calculator {
     }
 
     /**
-     * Performs multiplication
+     * Performs multiplication.
      * @param a first argument
      * @param b second argument
      */
@@ -44,7 +44,7 @@ public class Calculator {
     }
 
     /**
-     * Performs division
+     * Performs division.
      * @param a first argument
      * @param b second argument
      * @throws IllegalArgumentException is thrown when divisor is zero.

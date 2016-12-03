@@ -5,12 +5,12 @@ package alnero.output;
  */
 public class MockOutput implements Output {
     /**
-     * Object collecting output
+     * Object collecting output.
      */
     private StringBuilder output = new StringBuilder();
 
     /**
-     * Every print of some value adds a line to StringBuilder object
+     * Every print of some value adds a line to StringBuilder object.
      * @param value something for output
      */
     @Override

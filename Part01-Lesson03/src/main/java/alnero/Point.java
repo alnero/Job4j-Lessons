@@ -5,9 +5,12 @@ package alnero;
  */
 public class Point {
     /**
-     * Variables hold the coordinates of the point.
+     * X coordinate of the point.
      */
     private double x;
+    /**
+     * Y coordinate of the point.
+     */
     private double y;
 
     /**
@@ -37,7 +40,7 @@ public class Point {
     }
 
     /**
-     * Calculate distance to other point
+     * Calculate distance to other point.
      * @param point point to which the distance should be measured
      * @return distance between current and supplied point
      */

@@ -7,22 +7,28 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 
 /**
- * Testing class RotatingArray and its methods for handling square two-dimensional arrays:
+ * Testing class RotatingArray and its methods for handling square two-dimensional arrays.
  *   - rotate clockwise and anticlockwise
  *   - transpose
  *   - reverse rows
  *   - reverse columns
  */
 public class ArrayHandlerTest {
+    /**
+     * Common ArrayHandler object for testing.
+     */
     private ArrayHandler arrayHandler;
 
+    /**
+     * Creating common ArrayHandler object for testing.
+     */
     @Before
     public void createCommonArrayHandlerObjectForTests() {
         arrayHandler = new ArrayHandler();
     }
 
     /**
-     * Test that simple 2D array is transposed properly:
+     * Test that simple 2D array is transposed properly.
      * [1, 1, 1]        [1, 2, 3]
      * [2, 2, 2]   ->   [1, 2, 3]
      * [3, 3, 3]        [1, 2, 3]
@@ -72,7 +78,7 @@ public class ArrayHandlerTest {
     }
 
     /**
-     * Test reverse of rows in square 2D array:
+     * Test reverse of rows in square 2D array.
      * [0, 1, 2]        [2, 1, 0]
      * [0, 1, 2]   ->   [2, 1, 0]
      * [0, 1, 2]        [2, 1, 0]
@@ -147,7 +153,7 @@ public class ArrayHandlerTest {
     }
 
     /**
-     * Test that simple 2D array is turned 90 clockwise correctly:
+     * Test that simple 2D array is turned 90 clockwise correctly.
      * [1, 1, 1]        [3, 2, 1]
      * [2, 2, 2]   ->   [3, 2, 1]
      * [3, 3, 3]        [3, 2, 1]
@@ -233,7 +239,7 @@ public class ArrayHandlerTest {
     }
 
     /**
-     * Test reverse of columns in square 2D array:
+     * Test reverse of columns in square 2D array.
      * [0, 0, 0]        [2, 2, 2]
      * [1, 1, 1]   ->   [1, 1, 1]
      * [2, 2, 2]        [0, 0, 0]
@@ -283,7 +289,7 @@ public class ArrayHandlerTest {
     }
 
     /**
-     * Test that simple 2D array is turned 90 anti-clockwise correctly:
+     * Test that simple 2D array is turned 90 anti-clockwise correctly.
      * [1, 1, 1]        [1, 2, 3]
      * [2, 2, 2]   ->   [1, 2, 3]
      * [3, 3, 3]        [1, 2, 3]
@@ -337,7 +343,7 @@ public class ArrayHandlerTest {
     }
 
     /**
-     * Test rotation of empty array
+     * Test rotation of empty array.
      */
     @Test
     public void whenRotateEmptyArray90degreesClockwiseAndAfterAntiClockwiseThenReturnEmptyArray() {

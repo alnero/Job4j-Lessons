@@ -9,7 +9,7 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
 /**
- * Testing class Point and its public methods
+ * Testing class Point and its public methods.
  */
 public class PointTest {
 
@@ -26,7 +26,7 @@ public class PointTest {
     }
 
     /**
-     * Test distance between center of axes and point on x-axe
+     * Test distance between center of axes and point on x-axe.
      */
     @Test
     public void whenCalculateDistanceBetweenZeroZeroAndFiveZeroThenReturnFive() {
@@ -37,10 +37,10 @@ public class PointTest {
     }
 
     /**
-     * Test distance between two point on x-axe
+     * Test distance between two point on x-axe.
      */
     @Test
-    public void whenCalculateDistanceBetweenMinusFiveZeroAndFiveZeroThenReturnTen(){
+    public void whenCalculateDistanceBetweenMinusFiveZeroAndFiveZeroThenReturnTen() {
         Point point1 = new Point(-5.0, 0.0);
         Point point2 = new Point(5.0, 0.0);
         double distanceBetweenPoints = point1.distanceTo(point2);
@@ -48,10 +48,10 @@ public class PointTest {
     }
 
     /**
-     * Test distance between two point on y-axe
+     * Test distance between two point on y-axe.
      */
     @Test
-    public void whenCalculateDistanceBetweenZeroSevenAndZeroMinusFiveThenReturnTwelve(){
+    public void whenCalculateDistanceBetweenZeroSevenAndZeroMinusFiveThenReturnTwelve() {
         Point point1 = new Point(0.0, 7.0);
         Point point2 = new Point(0.0, -5.0);
         double distanceBetweenPoints = point1.distanceTo(point2);
@@ -59,7 +59,7 @@ public class PointTest {
     }
 
     /**
-     * Test distance between equal points
+     * Test distance between equal points.
      */
     @Test
     public void whenCalculateDistanceBetweenEqualPointsThenReturnZero() {
@@ -70,7 +70,7 @@ public class PointTest {
     }
 
     /**
-     * Test that distance between two random points is always grater or equals zero
+     * Test that distance between two random points is always grater or equals zero.
      */
     @Test
     public void whenCalculateDistanceBetweenTwoRandomPointsThenResultIsAlwaysPositive() {

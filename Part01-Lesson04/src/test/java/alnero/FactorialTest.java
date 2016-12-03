@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.core.Is.is;
 
 /**
- * Testing class Factorial
+ * Testing class Factorial.
  */
 public class FactorialTest {
     /**
@@ -27,7 +27,7 @@ public class FactorialTest {
     }
 
     /**
-     * 3! = 1 * 2 * 3 = 6
+     * 3! = 1 * 2 * 3 = 6.
      */
     @Test
     public void whenCalculateFactorialOfThreeThenReturnSix() {
@@ -36,7 +36,7 @@ public class FactorialTest {
     }
 
     /**
-     * 5! = 1 * 2 * 3 * 4 * 5 = 120
+     * 5! = 1 * 2 * 3 * 4 * 5 = 120.
      */
     @Test
     public void whenCalculateFactorialOfFiveThenReturnOneHundredAndTwenty() {
@@ -45,7 +45,7 @@ public class FactorialTest {
     }
 
     /**
-     * !0 = 1
+     * !0 = 1.
      */
     @Test
     public void whenCalculateFactorialOfZeroThenReturnOne() {
@@ -67,7 +67,7 @@ public class FactorialTest {
     }
 
     /**
-     * !10 = 3 628 800, see https://en.wikipedia.org/wiki/Factorial
+     * !10 = 3 628 800, see https://en.wikipedia.org/wiki/Factorial.
      */
     @Test
     public void whenCalculateFactorialOfTenThenReturnThreeMillionSixHundredAndTwentyEightThousandEightHundred() {

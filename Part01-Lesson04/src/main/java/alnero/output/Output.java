@@ -1,12 +1,13 @@
 package alnero.output;
 
 /**
- * Abstraction of Output system
+ * Abstraction of Output system.
  */
 public interface Output {
     /**
-     * All objects will support printing of some values
+     * All objects will support printing of some values.
+     * @param value something for output
      */
-    public void println(Object value);
+    void println(Object value);
 }
 

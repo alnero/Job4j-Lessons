@@ -11,9 +11,17 @@ public class Triangle {
      * Precision of calculations, number of decimal digits in calculation results.
      */
     private static final int NUMBER_OF_DECIMALS = 8;
-
+    /**
+     * A - point of the triangle.
+     */
     private Point a;
+    /**
+     * B - point of the triangle.
+     */
     private Point b;
+    /**
+     * C - point of the triangle.
+     */
     private Point c;
 
     /**
@@ -37,8 +45,8 @@ public class Triangle {
      */
     public double area() {
         double area = 0.5 * (
-                (this.a.getX() - this.c.getX()) * (this.b.getY() - this.c.getY()) -
-                (this.b.getX() - this.c.getX()) * (this.a.getY() - this.c.getY())
+                (this.a.getX() - this.c.getX()) * (this.b.getY() - this.c.getY())
+              - (this.b.getX() - this.c.getX()) * (this.a.getY() - this.c.getY())
         );
         return Math.abs(roundToDecimalPlaces(area, NUMBER_OF_DECIMALS));
     }
@@ -57,6 +65,7 @@ public class Triangle {
 
     /**
      * Performs rounding of the result of calculations.
+     * @param value number which is to be rounded
      * @param numOfDecimal number of digits after the decimal
      * @return result rounded to the specified number of decimal places
      */

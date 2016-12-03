@@ -13,8 +13,14 @@ import static org.hamcrest.core.Is.is;
  * Testing methods of the class Substring.
  */
 public class SubstringTest {
+    /**
+     * Common Substring object for testing.
+     */
     private Substring substringFinder;
 
+    /**
+     * Creating common Substring object for testing.
+     */
     @Before
     public void createCommonSubstringFinderObjectForTests() {
         substringFinder = new Substring();

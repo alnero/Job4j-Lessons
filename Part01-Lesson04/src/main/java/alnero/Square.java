@@ -4,7 +4,7 @@ import alnero.output.ConsoleOutput;
 import alnero.output.Output;
 
 /**
- * Class to calculate function values for the quadratic equation y = a * x^2 + b * x + c
+ * Class to calculate function values for the quadratic equation y = a * x^2 + b * x + c.
  */
 public class Square {
     /**
@@ -19,17 +19,20 @@ public class Square {
     private Output output = new ConsoleOutput(System.out);
 
     /**
-     * Variables hold main coefficients of the quadratic equation
+     * Variables hold main coefficients of the quadratic equation.
      */
+    /** a coefficient. */
     private float a;
+    /** b coefficient. */
     private float b;
+    /** c coefficient. */
     private float c;
 
     /**
-     * Receives main coefficients for the quadratic equation a, b, c
-     * @param a
-     * @param b
-     * @param c
+     * Receives main coefficients for the quadratic equation a, b, c.
+     * @param a a coefficient
+     * @param b b coefficient
+     * @param c c coefficient
      */
     public Square(float a, float b, float c) {
         this.a = a;
@@ -78,7 +81,7 @@ public class Square {
         StringBuilder dataStr = new StringBuilder();
 
         String delimiter = "";
-        for(float i = start; i < finish; i += step){
+        for (float i = start; i < finish; i += step) {
             float value = this.calculate(i);
             dataStr.append(delimiter).append(value);
             delimiter = "  ";
@@ -92,6 +95,7 @@ public class Square {
 
     /**
      * Performs rounding of the result of calculations.
+     * @param value number to be rounded
      * @param numOfDecimal number of digits after the decimal
      * @return result rounded to the specified number of decimal places
      */

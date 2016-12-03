@@ -7,7 +7,7 @@ import java.io.PrintStream;
  */
 public class ConsoleOutput implements Output {
     /**
-     * Reference to PrintStream object
+     * Reference to PrintStream object.
      */
     private PrintStream out;
 
@@ -20,7 +20,7 @@ public class ConsoleOutput implements Output {
     }
 
     /**
-     * Print of values by PrintStream object
+     * Print of values by PrintStream object.
      * @param value something to be printed
      */
     @Override

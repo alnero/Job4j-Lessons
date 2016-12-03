@@ -10,17 +10,16 @@ import java.util.Random;
 import static org.hamcrest.core.Is.is;
 
 /**
- * Testing class Sorting and its method bubbleSort()
+ * Testing class Sorting and its method bubbleSort().
  */
 public class SortingTest {
-    /**
-     * Common objects to use in tests
-     */
+    /** Common Sorting object to use in tests. */
     private Sorting sorting;
+    /** Common Random object to use in tests. */
     private Random random;
 
     /**
-     * Initializing common objects for tests
+     * Initializing common objects for tests.
      */
     @Before
     public void createCommonSortingAndRandomObjectsForTests() {
@@ -29,7 +28,7 @@ public class SortingTest {
     }
 
     /**
-     * Simple array sorting [3,2,1] -> [1,2,3]
+     * Simple array sorting [3,2,1] -> [1,2,3].
      */
     @Test
     public void whenBubbleSortArrayThreeTwoOneThenReturnArrayOneTwoThree() {
@@ -38,7 +37,7 @@ public class SortingTest {
     }
 
     /**
-     * Sorting array with duplicate values [9,9,9,1,2,3] -> [1,2,3,9,9,9]
+     * Sorting array with duplicate values [9,9,9,1,2,3] -> [1,2,3,9,9,9].
      */
     @Test
     public void whenBubbleSortArrayNineNineNineOneTwoThreeThenReturnArrayOneTwoThreeNineNineNine() {
@@ -47,7 +46,7 @@ public class SortingTest {
     }
 
     /**
-     * Sorting array of negative numbers [-5,-10,-3,-6] -> [-10,-6,-5,-3]
+     * Sorting array of negative numbers [-5,-10,-3,-6] -> [-10,-6,-5,-3].
      */
     @Test
     public void whenBubbleSortArrayMinusFiveMinusTenMinusThreeMinusSixThenReturnArrayMinusTenMinusSixMinusFiveMinusThree() {
@@ -56,7 +55,7 @@ public class SortingTest {
     }
 
     /**
-     * Sorting array with the same value in the middle [2,1,0,-1,-2] -> [-2,-1,0,1,2]
+     * Sorting array with the same value in the middle [2,1,0,-1,-2] -> [-2,-1,0,1,2].
      */
     @Test
     public void whenBubbleSortArrayTwoOneZeroMinusOneMinusTwoThenReturnArrayMinusTwoMinusOneZeroOneTwo() {
@@ -65,7 +64,7 @@ public class SortingTest {
     }
 
     /**
-     * Sorting array with one random integer, the same array should be returned [randomInt] -> [sameRandomInt]
+     * Sorting array with one random integer, the same array should be returned [randomInt] -> [sameRandomInt].
      */
     @Test
     public void whenBubbleSortArrayWithOneRandomValueThenReturnArrayWithThisValue() {
@@ -78,7 +77,7 @@ public class SortingTest {
     }
 
     /**
-     * Sorting empty array [] -> []
+     * Sorting empty array [] -> [].
      */
     @Test
     public void whenBubbleSortEmptyArrayThenReturnEmptyArray() {
@@ -94,7 +93,7 @@ public class SortingTest {
         int[] arrayForBubbleSort = new int[10];
         int[] arrayForStandardSort = new int[10];
 
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             int randomInt = this.random.nextInt();
             arrayForBubbleSort[i] = randomInt;
             arrayForStandardSort[i] = randomInt;

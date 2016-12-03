@@ -3,7 +3,6 @@ package alnero;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -11,11 +10,11 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.core.Is.is;
 
 /**
- * Testing class Triangle and its public methods
+ * Testing class Triangle and its public methods.
  */
 public class TriangleTest {
     /**
-     * Test that triangle object is created using three different points
+     * Test that triangle object is created using three different points.
      */
     @Test
     public void whenCreatingTriangleThenItIsCreatedSuccessfully() {
@@ -27,7 +26,7 @@ public class TriangleTest {
     }
 
     /**
-     * Calculate area of the simple triangle
+     * Calculate area of the simple triangle.
      */
     @Test
     public void whenCalculateAreaOfTriangleZeroZeroZeroThreeFourZeroThenResultIsSix() {
@@ -39,7 +38,7 @@ public class TriangleTest {
     }
 
     /**
-     * Check that for random three points triangle area is always positive
+     * Check that for random three points triangle area is always positive.
      */
     @Test
     public void whenCalculateAreaOfRandomPointsTriangleThenResultIsAlwaysPositive() {
@@ -68,7 +67,7 @@ public class TriangleTest {
     }
 
     /**
-     * Test that when create a triangle with all points on the same line an area is zero
+     * Test that when create a triangle with all points on the same line an area is zero.
      * Private class Line is used for generating random points on the same line.
      */
     @Test
@@ -105,13 +104,12 @@ public class TriangleTest {
      * Class for generating points located on one line.
      * Line is described by following formula y = k*x + b.
      */
-    private class Line{
+    private class Line {
         /**
          * Parameters describing the line y = k*x + b.
-         * k - slope or gradient of the line
-         * b - y-intercept of the line
-         */
+         * k - slope or gradient of the line. */
         private double k;
+         /** b - y-intercept of the line. */
         private double b;
 
         /**
@@ -119,7 +117,7 @@ public class TriangleTest {
          * @param k slope or gradient
          * @param b y-intercept
          */
-        public Line(double k, double b) {
+        Line(double k, double b) {
             this.k = k;
             this.b = b;
         }
@@ -129,11 +127,11 @@ public class TriangleTest {
          * Coordinates of the point are calculated according to line formula and coefficients.
          * @return random object of class Point
          */
-        public Point getRandomPoint() {
+        Point getRandomPoint() {
             double x = new Random().nextDouble();
             double y = this.k * x + this.b;
 
-            return new Point(x,y);
+            return new Point(x, y);
         }
     }
 }

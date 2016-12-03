@@ -19,13 +19,15 @@ public class ArrayHandler {
      * @return supplied array of values but transposed or initial array if it is not square array
      */
     public int[][] transposeArray(int[][] values) {
-        if(!isSquareArray(values)) return values;
+        if (!isSquareArray(values)) {
+            return values;
+        }
 
         int rows = values.length;
         int columns = values[0].length;
 
-        for(int i = 0; i < rows; i++) {
-            for(int j = i + 1; j < columns; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = i + 1; j < columns; j++) {
                 int temp = values[i][j];
                 values[i][j] = values[j][i];
                 values[j][i] = temp;
@@ -45,13 +47,15 @@ public class ArrayHandler {
      * @return supplied array of values but with reversed rows or initial array if it is not square array
      */
     public int[][] reverseRows(int[][] values) {
-        if(!isSquareArray(values)) return values;
+        if (!isSquareArray(values)) {
+            return values;
+        }
 
         int rows = values.length;
         int columns = values[0].length;
 
-        for(int i = 0; i < rows; i++) {
-            for(int j = 0; j < columns / 2; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns / 2; j++) {
                 int temp = values[i][j];
                 values[i][j] = values[i][columns - 1 - j];
                 values[i][columns - 1 - j] = temp;
@@ -71,13 +75,15 @@ public class ArrayHandler {
      * @return supplied array of values but with reversed columns or initial array if it is not square array
      */
     public int[][] reverseColumns(int[][] values) {
-        if(!isSquareArray(values)) return values;
+        if (!isSquareArray(values)) {
+            return values;
+        }
 
         int rows = values.length;
         int columns = values[0].length;
 
-        for(int i = 0; i < rows / 2; i++) {
-            for(int j = 0; j < columns; j++) {
+        for (int i = 0; i < rows / 2; i++) {
+            for (int j = 0; j < columns; j++) {
                 int temp = values[i][j];
                 values[i][j] = values[rows - 1 - i][j];
                 values[rows - 1 - i][j] = temp;
@@ -97,7 +103,9 @@ public class ArrayHandler {
      * @return supplied array of values but turned 90 degrees clockwise or initial array if it is not square array
      */
     public int[][] rotateArray90DegreesClockwise(int[][] values) {
-        if(!isSquareArray(values)) return values;
+        if (!isSquareArray(values)) {
+            return values;
+        }
 
         return this.reverseRows(this.transposeArray(values));
     }
@@ -112,7 +120,9 @@ public class ArrayHandler {
      * @return supplied array of values but turned 90 degrees anti-clockwise or initial array if it is not square array
      */
     public int[][] rotateArray90DegreesAntiClockwise(int[][] values) {
-        if(!isSquareArray(values)) return values;
+        if (!isSquareArray(values)) {
+            return values;
+        }
 
         return this.reverseColumns(this.transposeArray(values));
     }
@@ -123,10 +133,6 @@ public class ArrayHandler {
      * @return boolean true if array is squared, false if not
      */
     private boolean isSquareArray(int[][] values) {
-        if (values.length == values[0].length) {
-            return true;
-        } else {
-            return false;
-        }
+        return values.length == values[0].length;
     }
 }
