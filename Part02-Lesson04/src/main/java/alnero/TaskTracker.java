@@ -73,12 +73,10 @@ public class TaskTracker {
         }
 
         long taskId = task.getId();
+        Task taskInTracker = this.findById(taskId);
 
-        for (int i = 0; i < this.nextTaskIndex; i++) {
-            if (this.taskStorage[i].getId() == taskId) {
-                this.taskStorage[i].addComment(comment);
-                break;
-            }
+        if (taskInTracker != null) {
+            taskInTracker.addComment(comment);
         }
 
         return task;
@@ -179,7 +177,7 @@ public class TaskTracker {
         for (int i = 0; i < this.nextTaskIndex; i++) {
             String taskName = this.taskStorage[i].getName();
 
-            if (key.equals(taskName)) {
+            if (taskName != null && taskName.contains(key)) {
                 temporaryArr[arrIndex++] = this.taskStorage[i];
             }
         }

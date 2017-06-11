@@ -389,6 +389,24 @@ public class TaskTrackerTest {
     }
 
     /**
+     * When try to find several tasks with same name using substring, then correct tasks are returned from tracker.
+     */
+    @Test
+    public void whenFindSeveralTasksBySubstringFromTrackerThenCorrectTasksReturned() {
+        TaskTracker taskTracker = new TaskTracker(1);
+        Task task1 = new Task();
+        Task task2 = new Task();
+        task1.setName("Task for Bender!");
+        task2.setName("Task for Bender!");
+
+        taskTracker.add(task1);
+        taskTracker.add(task2);
+
+        Assert.assertThat(taskTracker.findByName("Bender")[0], is(task1));
+        Assert.assertThat(taskTracker.findByName("Bender")[1], is(task2));
+    }
+
+    /**
      * When try to find by name task which is not in tracker then empty array of task is returned.
      */
     @Test
