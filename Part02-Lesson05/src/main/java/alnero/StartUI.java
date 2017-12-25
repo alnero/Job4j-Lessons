@@ -5,48 +5,30 @@ package alnero;
  */
 public class StartUI {
 
-    /**
-     * Some initial size of the tracker storage, will increase automatically if needed.
-     */
+    /** Some initial size of the tracker storage, will increase automatically if needed. */
     private static final int INITIAL_TASK_TRACKER_SIZE = 100;
 
-    /**
-     * Console constant for adding new task.
-     */
+    /** Console constant for adding new task. */
     private static final String ADD_NEW_TASK = "0";
-    /**
-     * Console constant for showing all tasks.
-     */
+    /** Console constant for showing all tasks. */
     private static final String SHOW_ALL_TASKS = "1";
-    /**
-     * Console constant for editing a task.
-     */
+    /** Console constant for editing a task. */
     private static final String EDIT_TASK = "2";
-    /**
-     * Console constant for deleting a task.
-     */
+    /** Console constant for deleting a task. */
     private static final String DELETE_TASK = "3";
-    /**
-     * Console constant for finding a task by id.
-     */
+    /** Console constant for finding a task by id. */
     private static final String FIND_TASK_BY_ID = "4";
-    /**
-     * Console constant for finding a task by name.
-     */
+    /** Console constant for finding a task by name. */
     private static final String FIND_TASK_BY_NAME = "5";
-    /**
-     * Console constant for adding a comment to a task.
-     */
+    /** Console constant for adding a comment to a task. */
     private static final String ADD_COMMENT_TO_TASK = "6";
-    /**
-     * Console constant for quitting app.
-     */
+    /** Console constant for quitting app. */
     private static final String EXIT = "7";
 
     /**
      * Print main menu in console.
      */
-    public static void showMenu() {
+    private static void showMenu() {
         StringBuilder menu = new StringBuilder();
 
         menu.append("Use MENU from 0 to 7:\n");
@@ -67,21 +49,20 @@ public class StartUI {
 
     /**
      * Console interaction and adding new task to tracker, name and description for new task to be entered.
-     *
      * @param taskTracker tracker in which new task will be added
-     * @param consoleInput object with methods for console inputs
+     * @param input object with methods for inputs
      */
-    private static void addNewTask(TaskTracker taskTracker, ConsoleInput consoleInput) {
+    private static void addNewTask(TaskTracker taskTracker, TrackerInput input) {
         System.out.println("0. Add new task\n");
 
         Task newTask = new Task();
 
         System.out.print("Enter Task NAME: ");
-        String taskName = consoleInput.readConsoleInputLine();
+        String taskName = input.readInputLine();
         newTask.setName(taskName);
 
         System.out.print("Enter Task DESCRIPTION: ");
-        String taskDescription = consoleInput.readConsoleInputLine();
+        String taskDescription = input.readInputLine();
         newTask.setDescription(taskDescription);
 
         System.out.println("\n" + newTask);
@@ -93,7 +74,6 @@ public class StartUI {
 
     /**
      * Show all tasks in tracker, could be zero and more tasks.
-     *
      * @param taskTracker tracker in which tasks are searched for
      */
     private static void showAllTasks(TaskTracker taskTracker) {
@@ -113,19 +93,18 @@ public class StartUI {
     /**
      * Console interaction and editing a task in tracker.
      * Task for editing is searched by id, if not found app returns to main menu.
-     *
      * @param taskTracker tracker in which a task will be edited
-     * @param consoleInput object with methods for console inputs
+     * @param input object with methods for inputs
      */
-    private static void editTask(TaskTracker taskTracker, ConsoleInput consoleInput) {
+    private static void editTask(TaskTracker taskTracker, TrackerInput input) {
         System.out.println("2. Edit task\n");
 
         System.out.println("Do you have ID of the task? (Y/N)");
-        boolean userHasIdToEdit = consoleInput.userAnsweredYes();
+        boolean userHasIdToEdit = input.positiveAnswerGiven();
 
         if (userHasIdToEdit) {
             System.out.println("Please enter task ID (e.g. 41731869482685287):");
-            Long editTaskId = consoleInput.readConsoleInputId();
+            Long editTaskId = input.readInputId();
 
             Task editTask = taskTracker.findById(editTaskId);
 
@@ -135,11 +114,11 @@ public class StartUI {
                 System.out.println(editTask);
 
                 System.out.print("Enter Task NAME: ");
-                String editName = consoleInput.readConsoleInputLine();
+                String editName = input.readInputLine();
                 editTask.setName(editName);
 
                 System.out.print("Enter Task DESCRIPTION: ");
-                String editDescription = consoleInput.readConsoleInputLine();
+                String editDescription = input.readInputLine();
                 editTask.setDescription(editDescription);
 
                 taskTracker.update(editTask);
@@ -157,19 +136,18 @@ public class StartUI {
      * Console interaction and deleting a task in tracker.
      * Task for deleting is searched by id, if not found app returns to main menu.
      * Deletion can be aborted.
-     *
      * @param taskTracker tracker in which a task will be deleted
-     * @param consoleInput object with methods for console inputs
+     * @param input object with methods for inputs
      */
-    private static void deleteTask(TaskTracker taskTracker, ConsoleInput consoleInput) {
+    private static void deleteTask(TaskTracker taskTracker, TrackerInput input) {
         System.out.println("3. Delete task\n");
 
         System.out.println("Do you have ID of the task? (Y/N)");
-        boolean userHasIdToDelete = consoleInput.userAnsweredYes();
+        boolean userHasIdToDelete = input.positiveAnswerGiven();
 
         if (userHasIdToDelete) {
             System.out.println("Please enter task ID (e.g. 41731869482685287):");
-            Long editTaskId = consoleInput.readConsoleInputId();
+            Long editTaskId = input.readInputId();
 
             Task deleteTask = taskTracker.findById(editTaskId);
 
@@ -179,7 +157,7 @@ public class StartUI {
                 System.out.println(deleteTask);
 
                 System.out.println("Are you sure to delete? (Y/N)");
-                boolean userSureToDelete = consoleInput.userAnsweredYes();
+                boolean userSureToDelete = input.positiveAnswerGiven();
 
                 if (userSureToDelete) {
                     taskTracker.delete(deleteTask);
@@ -196,15 +174,14 @@ public class StartUI {
     /**
      * Console interaction and finding a task in tracker by id.
      * One or zero tasks can be found.
-     *
      * @param taskTracker tracker in which a task will be searched by id
-     * @param consoleInput object with methods for console inputs
+     * @param input object with methods for inputs
      */
-    private static void findTaskById(TaskTracker taskTracker, ConsoleInput consoleInput) {
+    private static void findTaskById(TaskTracker taskTracker, TrackerInput input) {
         System.out.println("4. Find task by ID\n");
 
         System.out.println("Please enter task ID (e.g. 41731869482685287):");
-        long idToFind = consoleInput.readConsoleInputId();
+        long idToFind = input.readInputId();
 
         Task taskFoundById = taskTracker.findById(idToFind);
 
@@ -219,15 +196,14 @@ public class StartUI {
     /**
      * Console interaction and finding a task in tracker by name.
      * Zero and more tasks can be found.
-     *
      * @param taskTracker tracker in which a task will be searched by name
-     * @param consoleInput object with methods for console inputs
+     * @param input object with methods for inputs
      */
-    private static void findTaskByName(TaskTracker taskTracker, ConsoleInput consoleInput) {
+    private static void findTaskByName(TaskTracker taskTracker, TrackerInput input) {
         System.out.println("5. Find tasks by name\n");
 
         System.out.println("Please enter name to search for:");
-        String nameToFind = consoleInput.readConsoleInputLine();
+        String nameToFind = input.readInputLine();
 
         Task[] tasksFoundByName = taskTracker.findByName(nameToFind);
 
@@ -244,19 +220,18 @@ public class StartUI {
     /**
      * Console interaction and adding a comment to task in tracker.
      * Task for adding a comment is searched by id, if not found app returns to main menu.
-     *
      * @param taskTracker tracker in which a comment will be added to some task
-     * @param consoleInput object with methods for console inputs
+     * @param input object with methods for inputs
      */
-    private static void addCommentToTask(TaskTracker taskTracker, ConsoleInput consoleInput) {
+    private static void addCommentToTask(TaskTracker taskTracker, TrackerInput input) {
         System.out.println("6. Add comment to task\n");
 
         System.out.println("Do you have ID of the task? (Y/N)");
-        boolean userHasIdToAddComment = consoleInput.userAnsweredYes();
+        boolean userHasIdToAddComment = input.positiveAnswerGiven();
 
         if (userHasIdToAddComment) {
             System.out.println("Please enter task ID (e.g. 41731869482685287):");
-            long addCommentTaskId = consoleInput.readConsoleInputId();
+            long addCommentTaskId = input.readInputId();
 
             Task addCommentTask = taskTracker.findById(addCommentTaskId);
 
@@ -266,7 +241,7 @@ public class StartUI {
                 System.out.println(addCommentTask);
 
                 System.out.print("Enter your comment for the task: ");
-                String inputComment = consoleInput.readConsoleInputLine();
+                String inputComment = input.readInputLine();
                 Comment userComment = new Comment();
                 userComment.setContent(inputComment);
 
@@ -296,45 +271,44 @@ public class StartUI {
         System.out.println("Input Error, please choose menu item from 0 to 7.\n");
     }
 
+
     /**
-     * Main method with welcome message, initialization of tracker and object with methods for console inputs.
-     *
-     * @param args some parameters supplied when starting an app, not used for the moment
+     * Init method for user interface interaction.
+     * Method includes welcome message and main switch for menu items.
+     * @param taskTracker tracker app for task management
+     * @param trackerInput input system for task management app
      */
-    public static void main(String[] args) {
+    public static void init(TaskTracker taskTracker, TrackerInput trackerInput) {
         System.out.println("Welcome to Task Tracker!");
         System.out.println("Here you can manage your tasks: create, read, edit, delete.");
         System.out.println();
 
-        TaskTracker taskTracker = new TaskTracker(INITIAL_TASK_TRACKER_SIZE);
-        ConsoleInput consoleInput = new ConsoleInput();
-
         while (true) {
             showMenu();
 
-            String menuItem = consoleInput.readConsoleInputLine();
+            String menuItem = trackerInput.readInputLine();
 
             switch (menuItem) {
                 case ADD_NEW_TASK:
-                    addNewTask(taskTracker, consoleInput);
+                    addNewTask(taskTracker, trackerInput);
                     break;
                 case SHOW_ALL_TASKS:
                     showAllTasks(taskTracker);
                     break;
                 case EDIT_TASK:
-                    editTask(taskTracker, consoleInput);
+                    editTask(taskTracker, trackerInput);
                     break;
                 case DELETE_TASK:
-                    deleteTask(taskTracker, consoleInput);
+                    deleteTask(taskTracker, trackerInput);
                     break;
                 case FIND_TASK_BY_ID:
-                    findTaskById(taskTracker, consoleInput);
+                    findTaskById(taskTracker, trackerInput);
                     break;
                 case FIND_TASK_BY_NAME:
-                    findTaskByName(taskTracker, consoleInput);
+                    findTaskByName(taskTracker, trackerInput);
                     break;
                 case ADD_COMMENT_TO_TASK:
-                    addCommentToTask(taskTracker, consoleInput);
+                    addCommentToTask(taskTracker, trackerInput);
                     break;
                 case EXIT:
                     exit();
@@ -344,5 +318,16 @@ public class StartUI {
                     break;
             }
         }
+    }
+
+    /**
+     * Main method to start the tracker app with user interaction via console input.
+     * @param args args for main method
+     */
+    public static void main(String[] args) {
+        TaskTracker taskTracker = new TaskTracker(INITIAL_TASK_TRACKER_SIZE);
+        TrackerInput consoleInput = new ConsoleInput();
+
+        StartUI.init(taskTracker, consoleInput);
     }
 }
