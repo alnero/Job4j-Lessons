@@ -74,7 +74,7 @@ public class StartUIStubInputWithSystemOutputRedirectTest {
         this.stubInputDictionary.put("stubInputLine", new String[]{"1", "7"});
         this.stubInput = new StubInput(this.stubInputDictionary);
 
-        StartUI.init(this.taskTracker, this.stubInput);
+        new StartUI().init(this.taskTracker, this.stubInput);
 
         Assert.assertThat(outputContent.toString(), containsString(mockTaskOne.toString()));
         Assert.assertThat(outputContent.toString(), containsString(mockTaskTwo.toString()));
@@ -95,7 +95,7 @@ public class StartUIStubInputWithSystemOutputRedirectTest {
         this.stubInputDictionary.put("stubInputId", new String[]{Long.toString(testTaskId)});
         this.stubInput = new StubInput(this.stubInputDictionary);
 
-        StartUI.init(this.taskTracker, this.stubInput);
+        new StartUI().init(this.taskTracker, this.stubInput);
 
         Assert.assertThat(outputContent.toString(), not(containsString(mockTask.toString())));
     }
@@ -116,7 +116,7 @@ public class StartUIStubInputWithSystemOutputRedirectTest {
         this.stubInputDictionary.put("stubInputId", new String[]{Long.toString(testTaskId)});
         this.stubInput = new StubInput(this.stubInputDictionary);
 
-        StartUI.init(this.taskTracker, this.stubInput);
+        new StartUI().init(this.taskTracker, this.stubInput);
 
         Assert.assertThat(outputContent.toString(), containsString(mockTask.toString()));
     }
@@ -134,7 +134,7 @@ public class StartUIStubInputWithSystemOutputRedirectTest {
         this.stubInputDictionary.put("stubInputLine", new String[]{"5", "WRONG SEARCH STRING", "7"});
         this.stubInput = new StubInput(this.stubInputDictionary);
 
-        StartUI.init(this.taskTracker, this.stubInput);
+        new StartUI().init(this.taskTracker, this.stubInput);
 
         Assert.assertThat(outputContent.toString(), not(containsString(mockTask.toString())));
     }
@@ -152,7 +152,7 @@ public class StartUIStubInputWithSystemOutputRedirectTest {
         this.stubInputDictionary.put("stubInputLine", new String[]{"5", "Test", "7"});
         this.stubInput = new StubInput(this.stubInputDictionary);
 
-        StartUI.init(this.taskTracker, this.stubInput);
+        new StartUI().init(this.taskTracker, this.stubInput);
 
         Assert.assertThat(outputContent.toString(), containsString(mockTask.toString()));
     }
@@ -175,7 +175,7 @@ public class StartUIStubInputWithSystemOutputRedirectTest {
 
         this.stubInput = new StubInput(this.stubInputDictionary);
 
-        StartUI.init(this.taskTracker, this.stubInput);
+        new StartUI().init(this.taskTracker, this.stubInput);
 
         Assert.assertThat(outputContent.toString(), containsString(mockTask.toString()));
     }

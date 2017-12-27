@@ -28,7 +28,7 @@ public class StartUI {
     /**
      * Print main menu in console.
      */
-    private static void showMenu() {
+    private void showMenu() {
         StringBuilder menu = new StringBuilder();
 
         menu.append("Use MENU from 0 to 7:\n");
@@ -52,7 +52,7 @@ public class StartUI {
      * @param taskTracker tracker in which new task will be added
      * @param input object with methods for inputs
      */
-    private static void addNewTask(TaskTracker taskTracker, TrackerInput input) {
+    private void addNewTask(TaskTracker taskTracker, TrackerInput input) {
         System.out.println("0. Add new task\n");
 
         Task newTask = new Task();
@@ -76,7 +76,7 @@ public class StartUI {
      * Show all tasks in tracker, could be zero and more tasks.
      * @param taskTracker tracker in which tasks are searched for
      */
-    private static void showAllTasks(TaskTracker taskTracker) {
+    private void showAllTasks(TaskTracker taskTracker) {
         System.out.println("1. Show all tasks\n");
 
         Task[] allTasks = taskTracker.findAll();
@@ -96,7 +96,7 @@ public class StartUI {
      * @param taskTracker tracker in which a task will be edited
      * @param input object with methods for inputs
      */
-    private static void editTask(TaskTracker taskTracker, TrackerInput input) {
+    private void editTask(TaskTracker taskTracker, TrackerInput input) {
         System.out.println("2. Edit task\n");
 
         System.out.println("Do you have ID of the task? (Y/N)");
@@ -139,7 +139,7 @@ public class StartUI {
      * @param taskTracker tracker in which a task will be deleted
      * @param input object with methods for inputs
      */
-    private static void deleteTask(TaskTracker taskTracker, TrackerInput input) {
+    private void deleteTask(TaskTracker taskTracker, TrackerInput input) {
         System.out.println("3. Delete task\n");
 
         System.out.println("Do you have ID of the task? (Y/N)");
@@ -177,7 +177,7 @@ public class StartUI {
      * @param taskTracker tracker in which a task will be searched by id
      * @param input object with methods for inputs
      */
-    private static void findTaskById(TaskTracker taskTracker, TrackerInput input) {
+    private void findTaskById(TaskTracker taskTracker, TrackerInput input) {
         System.out.println("4. Find task by ID\n");
 
         System.out.println("Please enter task ID (e.g. 41731869482685287):");
@@ -199,7 +199,7 @@ public class StartUI {
      * @param taskTracker tracker in which a task will be searched by name
      * @param input object with methods for inputs
      */
-    private static void findTaskByName(TaskTracker taskTracker, TrackerInput input) {
+    private void findTaskByName(TaskTracker taskTracker, TrackerInput input) {
         System.out.println("5. Find tasks by name\n");
 
         System.out.println("Please enter name to search for:");
@@ -223,7 +223,7 @@ public class StartUI {
      * @param taskTracker tracker in which a comment will be added to some task
      * @param input object with methods for inputs
      */
-    private static void addCommentToTask(TaskTracker taskTracker, TrackerInput input) {
+    private void addCommentToTask(TaskTracker taskTracker, TrackerInput input) {
         System.out.println("6. Add comment to task\n");
 
         System.out.println("Do you have ID of the task? (Y/N)");
@@ -260,14 +260,14 @@ public class StartUI {
     /**
      * Exit method, final words or methods before quit the app.
      */
-    private static void exit() {
+    private void exit() {
         System.out.println("7. Exit Program\n");
     }
 
     /**
      * Message when input of menu constant is unknown, as a default for switch cases.
      */
-    private static void menuInputError() {
+    private void menuInputError() {
         System.out.println("Input Error, please choose menu item from 0 to 7.\n");
     }
 
@@ -278,7 +278,7 @@ public class StartUI {
      * @param taskTracker tracker app for task management
      * @param trackerInput input system for task management app
      */
-    public static void init(TaskTracker taskTracker, TrackerInput trackerInput) {
+    public void init(TaskTracker taskTracker, TrackerInput trackerInput) {
         System.out.println("Welcome to Task Tracker!");
         System.out.println("Here you can manage your tasks: create, read, edit, delete.");
         System.out.println();
@@ -328,6 +328,6 @@ public class StartUI {
         TaskTracker taskTracker = new TaskTracker(INITIAL_TASK_TRACKER_SIZE);
         TrackerInput consoleInput = new ConsoleInput();
 
-        StartUI.init(taskTracker, consoleInput);
+        new StartUI().init(taskTracker, consoleInput);
     }
 }
