@@ -50,7 +50,7 @@ public class PaintTest {
     public void whenDrawSquareViaPaintClassThenCorrectShapeIsDrawn() {
         new Paint().draw(new Square());
         assertThat(
-                new String(outputContent.toByteArray()),
+                outputContent.toString(),
                 is(
                         new StringBuilder()
                                 .append("+++++++\n")
@@ -70,7 +70,7 @@ public class PaintTest {
     public void whenDrawTriangleViaPaintClassThenCorrectShapeIsDrawn() {
         new Paint().draw(new Triangle());
         assertThat(
-                new String(outputContent.toByteArray()),
+                outputContent.toString(),
                 is(
                         new StringBuilder()
                                 .append("   +\n")
