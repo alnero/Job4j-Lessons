@@ -12,4 +12,19 @@
         <artifactId>Lessons</artifactId>
         <version>1.0.0</version>
     </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>Job4j</groupId>
+            <artifactId>Part02-Lesson04</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>Job4j</groupId>
+            <artifactId>Part02-Lesson05</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
 </project>

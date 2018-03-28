@@ -27,7 +27,7 @@ public class ConsoleInput implements TrackerInput {
         long result = -1;
 
         if (this.scanner.hasNextLong()) {
-            result = this.scanner.nextLong();
+            result = Long.parseLong(this.scanner.nextLine());
         }
 
         return result;

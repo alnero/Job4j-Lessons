@@ -144,7 +144,7 @@ public class StartUI {
     }
 
     /**
-     * Console interaction and deleting a task in tracker.
+     * Console interaction and deletion of a task in tracker.
      * Task for deleting is searched by id, if not found app returns to main menu.
      * Deletion can be aborted.
      */
