@@ -1,5 +1,6 @@
 package alnero;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -17,6 +18,24 @@ public class ConsoleInput implements TrackerInput {
      */
     public String readInputLine() {
         return this.scanner.nextLine();
+    }
+
+    /**
+     * Return line entered in console. Only predefined values accepted as input,
+     * for the rest method throws exception.
+     * @param inputRangeOfStringValues accepted for input range of values
+     * @return string line entered in console
+     */
+    @Override
+    public String readInputLine(String[] inputRangeOfStringValues) {
+        String userInput = this.scanner.nextLine();
+
+        if (Arrays.asList(inputRangeOfStringValues).contains(userInput)) {
+            return userInput;
+        }
+
+        // if user input is not within allowed values
+        throw new OutOfInputRangeValuesException("Out of input range values exception.");
     }
 
     /**

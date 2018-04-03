@@ -1,5 +1,6 @@
 package alnero;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -37,6 +38,24 @@ public class StubInput implements TrackerInput {
      */
     public String readInputLine() {
         return stubInputLine[stubInputLineCounter++];
+    }
+
+    /**
+     * Supply lines from relevant stub input array.
+     * Only predefined values accepted as input,
+     * for the rest method throws exception.
+     * @param inputRangeOfStringValues accepted for input range of values
+     * @return string line from stub input array
+     */
+    @Override
+    public String readInputLine(String[] inputRangeOfStringValues) {
+        String userInput = stubInputLine[stubInputLineCounter++];
+
+        if (Arrays.asList(inputRangeOfStringValues).contains(userInput)) {
+            return userInput;
+        }
+
+        throw new OutOfInputRangeValuesException("Out of input range values exception.");
     }
 
     /**

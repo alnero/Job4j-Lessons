@@ -1,6 +1,6 @@
-package alnero.innerClasses;
+package alnero.handlingExceptions;
 
-import alnero.ConsoleInput;
+import alnero.innerClasses.MenuTracker;
 import alnero.TaskTracker;
 import alnero.TrackerInput;
 
@@ -8,6 +8,7 @@ import alnero.TrackerInput;
  * Main start point for the Tracker App.
  * Menu implemented via separate class MenuTracker.
  * User actions are implemented via inner classes.
+ * Menu input flows through ValidateMenuInput class.
  */
 public class StartUI {
     /** Some initial size of the tracker storage, will increase automatically if needed. */
@@ -39,17 +40,19 @@ public class StartUI {
 
         MenuTracker menu = new MenuTracker(taskTracker, input);
 
+        // generate acceptable values for input in menu
+        String[] possibleMenuValues = new String[MenuTracker.MAX_NUMBER_OF_TASKS];
+        for (int i = 0; i < possibleMenuValues.length; i++) {
+            possibleMenuValues[i] = String.valueOf(i);
+        }
+
         while (true) {
             menu.showMenu();
 
-            // get key value from user input string
-            String userInput = this.input.readInputLine();
-            int menuItemKey;
-            try {
-                menuItemKey = Integer.parseInt(userInput);
-            } catch (NumberFormatException e) {
-                continue;
-            }
+            // user input for menu items is checked for allowed values from 0 to MenuTracker.MAX_NUMBER_OF_TASKS
+            // ArrayOutOfBoundException and NumberFormatException are not possible
+            String userInput = this.input.readInputLine(possibleMenuValues);
+            int menuItemKey = Integer.parseInt(userInput);
 
             menu.select(menuItemKey);
 
@@ -62,11 +65,12 @@ public class StartUI {
 
     /**
      * Main method to start the tracker app with user interaction via console input.
+     * User input for menu items is checked via ValidateMenuInput class.
      * @param args args for main method
      */
     public static void main(String[] args) {
         TaskTracker taskTracker = new TaskTracker(INITIAL_TASK_TRACKER_SIZE);
-        TrackerInput consoleInput = new ConsoleInput();
+        TrackerInput consoleInput = new ValidateMenuInput();
 
         new StartUI(taskTracker, consoleInput).init();
     }

@@ -11,6 +11,13 @@ public interface TrackerInput {
     String readInputLine();
 
     /**
+     * Read input line within only accepted range of values.
+     * @param inputRangeOfStringValues accepted for input range of values
+     * @return string representation of input line
+     */
+    String readInputLine(String[] inputRangeOfStringValues);
+
+    /**
      * Read input id. Id is a long number.
      * @return input id (long number) or any special values
      */
