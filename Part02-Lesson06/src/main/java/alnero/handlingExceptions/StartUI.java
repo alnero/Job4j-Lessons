@@ -53,7 +53,6 @@ public class StartUI {
             // ArrayOutOfBoundException and NumberFormatException are not possible
             String userInput = this.input.readInputLine(possibleMenuValues);
             int menuItemKey = Integer.parseInt(userInput);
-
             menu.select(menuItemKey);
 
             // last item of menu is "Exit", enumeration starts from 0

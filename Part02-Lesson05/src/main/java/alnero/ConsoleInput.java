@@ -29,13 +29,11 @@ public class ConsoleInput implements TrackerInput {
     @Override
     public String readInputLine(String[] inputRangeOfStringValues) {
         String userInput = this.scanner.nextLine();
-
         if (Arrays.asList(inputRangeOfStringValues).contains(userInput)) {
             return userInput;
+        } else {
+            throw new OutOfInputRangeValuesException("Out of input range values exception.");
         }
-
-        // if user input is not within allowed values
-        throw new OutOfInputRangeValuesException("Out of input range values exception.");
     }
 
     /**
