@@ -1,4 +1,4 @@
-package alnero.strategy_pattern;
+package alnero.strategyPattern;
 
 /**
  * Class for Square shape.

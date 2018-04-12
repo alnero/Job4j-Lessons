@@ -50,12 +50,10 @@ public class StubInput implements TrackerInput {
     @Override
     public String readInputLine(String[] inputRangeOfStringValues) {
         String userInput = stubInputLine[stubInputLineCounter++];
-
-        if (Arrays.asList(inputRangeOfStringValues).contains(userInput)) {
-            return userInput;
+        if (!Arrays.asList(inputRangeOfStringValues).contains(userInput)) {
+            throw new OutOfInputRangeValuesException("Out of input range values exception.");
         }
-
-        throw new OutOfInputRangeValuesException("Out of input range values exception.");
+        return userInput;
     }
 
     /**

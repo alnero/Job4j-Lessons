@@ -1,9 +1,9 @@
 package alnero.strategy_pattern_test;
 
-import alnero.strategy_pattern.Paint;
-import alnero.strategy_pattern.Square;
+import alnero.strategyPattern.Paint;
+import alnero.strategyPattern.Square;
 
-import alnero.strategy_pattern.Triangle;
+import alnero.strategyPattern.Triangle;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

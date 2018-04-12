@@ -20,7 +20,7 @@ import static org.hamcrest.CoreMatchers.not;
 /**
  * Testing methods of StartUI class of Tracker app with automatic stub input and
  * redirection of default system output to mock stream.
- * User actions are implemented via separate package private classes.
+ * User actions are implemented via separate inner classes.
  */
 public class StartUIStubInputWithSystemOutputRedirectTest {
     /** Common object for task tracker. */

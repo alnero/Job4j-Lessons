@@ -1,4 +1,4 @@
-package alnero.strategy_pattern;
+package alnero.strategyPattern;
 
 /**
  * Every shape will have a draw method.

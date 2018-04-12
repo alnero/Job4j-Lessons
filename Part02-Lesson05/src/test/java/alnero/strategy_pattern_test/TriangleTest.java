@@ -1,6 +1,6 @@
 package alnero.strategy_pattern_test;
 
-import alnero.strategy_pattern.Triangle;
+import alnero.strategyPattern.Triangle;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
