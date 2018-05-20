@@ -23,27 +23,10 @@ import alnero.innerClasses.MenuTracker;
  * ValidateMenuInput is implemented via decorator pattern.
  */
 public class ValidateMenuInputTest {
-    /** Common dictionary object for stub input strings. */
-    private HashMap<String, String[]> stubInputDictionary;
-    /** Common object for automatic stub inputs. */
-    private TrackerInput stubInput;
-    /** Common object for menu values allowable for input. */
-    private String[] possibleMenuValues;
-
     /** Object to save original default system output. */
     private PrintStream originalSystemOut;
     /** Mock output stream object for redirection of default system output. */
     private ByteArrayOutputStream outputContent;
-
-    /** Create common task tracker, stub input dictionary and allowed possible menu values for tests. */
-    @Before
-    public void createCommonTaskTrackerAndStubInputDictionaryObjectsForTesting() {
-        this.stubInputDictionary = new HashMap<>();
-        this.possibleMenuValues = new String[MenuTracker.MAX_NUMBER_OF_TASKS];
-        for (int i = 0; i < possibleMenuValues.length; i++) {
-            possibleMenuValues[i] = String.valueOf(i);
-        }
-    }
 
     /** Save original default system output and redirect to mock output stream. */
     @Before
@@ -64,14 +47,21 @@ public class ValidateMenuInputTest {
      */
     @Test
     public void whenValidMenuItemChosenThenValidatorReturnsValidString() {
-        // take random menu item from possible menu items
-        int randomMenuItemIndex = ThreadLocalRandom.current().nextInt(this.possibleMenuValues.length);
-        String randomPossibleMenuItem = this.possibleMenuValues[randomMenuItemIndex];
+        String[] possibleMenuItems = new String[MenuTracker.MAX_NUMBER_OF_TASKS];
+        for (int i = 0; i < possibleMenuItems.length; i++) {
+            possibleMenuItems[i] = String.valueOf(i);
+        }
 
-        this.stubInputDictionary.put("stubInputLine", new String[]{randomPossibleMenuItem});
-        this.stubInput = new StubInput(this.stubInputDictionary);
-        ValidateMenuInput validateInput = new ValidateMenuInput(this.stubInput);
-        Assert.assertThat(validateInput.readInputLine(this.possibleMenuValues), is(randomPossibleMenuItem));
+        // take random menu item from possible menu items
+        int randomMenuItemIndex = ThreadLocalRandom.current().nextInt(possibleMenuItems.length);
+        String randomPossibleMenuItem = possibleMenuItems[randomMenuItemIndex];
+
+        HashMap<String, String[]> stubInputDictionary = new HashMap<>();
+        stubInputDictionary.put("stubInputLine", new String[]{randomPossibleMenuItem});
+        TrackerInput stubInput = new StubInput(stubInputDictionary);
+
+        ValidateMenuInput validateInput = new ValidateMenuInput(stubInput);
+        Assert.assertThat(validateInput.readInputLine(possibleMenuItems), is(randomPossibleMenuItem));
     }
 
     /**
@@ -79,18 +69,25 @@ public class ValidateMenuInputTest {
      */
     @Test
     public void whenNegativeNumberEnteredAsMenuItemThenValidatorAsksToChooseMenuItemAgain() {
+        String[] possibleMenuItems = new String[MenuTracker.MAX_NUMBER_OF_TASKS];
+        for (int i = 0; i < possibleMenuItems.length; i++) {
+            possibleMenuItems[i] = String.valueOf(i);
+        }
+
+        // take random menu item from possible menu items
+        int randomMenuItemIndex = ThreadLocalRandom.current().nextInt(possibleMenuItems.length);
+        String randomPossibleMenuItem = possibleMenuItems[randomMenuItemIndex];
+
         // take random string value of negative number
         int randomNegativeNumber = ThreadLocalRandom.current().nextInt(Integer.MIN_VALUE, 0);
         String incorrectMenuItem = String.valueOf(randomNegativeNumber);
 
-        // take random menu item from possible menu items
-        int randomMenuItemIndex = ThreadLocalRandom.current().nextInt(this.possibleMenuValues.length);
-        String randomPossibleMenuItem = this.possibleMenuValues[randomMenuItemIndex];
+        HashMap<String, String[]> stubInputDictionary = new HashMap<>();
+        stubInputDictionary.put("stubInputLine", new String[]{incorrectMenuItem, randomPossibleMenuItem});
+        TrackerInput stubInput = new StubInput(stubInputDictionary);
 
-        this.stubInputDictionary.put("stubInputLine", new String[]{incorrectMenuItem, randomPossibleMenuItem});
-        this.stubInput = new StubInput(this.stubInputDictionary);
-        ValidateMenuInput validateInput = new ValidateMenuInput(this.stubInput);
-        validateInput.readInputLine(this.possibleMenuValues);
+        ValidateMenuInput validateInput = new ValidateMenuInput(stubInput);
+        validateInput.readInputLine(possibleMenuItems);
         Assert.assertThat(outputContent.toString(), containsString("Please select correct key from Menu."));
     }
 
@@ -99,19 +96,27 @@ public class ValidateMenuInputTest {
      */
     @Test
     public void whenAlphabetLetterEnteredAsMenuItemThenValidatorAsksToChooseMenuItemAgain() {
+        String[] possibleMenuItems = new String[MenuTracker.MAX_NUMBER_OF_TASKS];
+        for (int i = 0; i < possibleMenuItems.length; i++) {
+            possibleMenuItems[i] = String.valueOf(i);
+        }
+
+        // take random menu item from possible menu items
+        int randomMenuItemIndex = ThreadLocalRandom.current().nextInt(possibleMenuItems.length);
+        String randomPossibleMenuItem = possibleMenuItems[randomMenuItemIndex];
+
         // take random string letter
         char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         int randomAlphabetIndex = ThreadLocalRandom.current().nextInt(alphabet.length);
         String incorrectMenuItem = String.valueOf(alphabet[randomAlphabetIndex]);
 
-        // take random menu item from possible menu items
-        int randomMenuItemIndex = ThreadLocalRandom.current().nextInt(this.possibleMenuValues.length);
-        String randomPossibleMenuItem = this.possibleMenuValues[randomMenuItemIndex];
 
-        this.stubInputDictionary.put("stubInputLine", new String[]{incorrectMenuItem, randomPossibleMenuItem});
-        this.stubInput = new StubInput(this.stubInputDictionary);
-        ValidateMenuInput validateInput = new ValidateMenuInput(this.stubInput);
-        validateInput.readInputLine(this.possibleMenuValues);
+        HashMap<String, String[]> stubInputDictionary = new HashMap<>();
+        stubInputDictionary.put("stubInputLine", new String[]{incorrectMenuItem, randomPossibleMenuItem});
+        TrackerInput stubInput = new StubInput(stubInputDictionary);
+
+        ValidateMenuInput validateInput = new ValidateMenuInput(stubInput);
+        validateInput.readInputLine(possibleMenuItems);
         Assert.assertThat(outputContent.toString(), containsString("Please select correct key from Menu."));
     }
 }
