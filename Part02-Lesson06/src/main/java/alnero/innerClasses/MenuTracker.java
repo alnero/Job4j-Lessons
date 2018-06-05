@@ -4,6 +4,7 @@ import alnero.Comment;
 import alnero.Task;
 import alnero.TaskTracker;
 import alnero.TrackerInput;
+import alnero.abstractClasses.BaseAction;
 
 /**
  * Separate implementation of menu for Tracker app.
@@ -37,16 +38,16 @@ public class MenuTracker {
      */
     private void addUserActions() {
         // inner class
-        this.userActions[0] = this.new AddNewTask();
-        this.userActions[1] = this.new ShowAllTasks();
-        this.userActions[2] = this.new EditTask();
-        this.userActions[3] = this.new DeleteTask();
+        this.userActions[0] = this.new AddNewTask(0, "0. Add new task");
+        this.userActions[1] = this.new ShowAllTasks(1, "1. Show all tasks");
+        this.userActions[2] = this.new EditTask(2, "2. Edit task");
+        this.userActions[3] = this.new DeleteTask(3, "3. Delete task");
         // inner static class
-        this.userActions[4] = new MenuTracker.FindTaskById();
-        this.userActions[5] = new MenuTracker.FindTaskByName();
+        this.userActions[4] = new MenuTracker.FindTaskById(4, "4. Find task by ID");
+        this.userActions[5] = new MenuTracker.FindTaskByName(5, "5. Find tasks by name");
         // inner class in same file
-        this.userActions[6] = new AddCommentToTask();
-        this.userActions[7] = new Exit();
+        this.userActions[6] = new AddCommentToTask(6, "6. Add comment to task");
+        this.userActions[7] = new Exit(7, "7. Exit Program");
     }
 
     /**
@@ -78,15 +79,14 @@ public class MenuTracker {
      * Console interaction and adding new task to tracker,
      * name and description for new task to be entered.
      */
-    private class AddNewTask implements UserAction {
-        @Override
-        public int key() {
-            return 0;
-        }
-
-        @Override
-        public String info() {
-            return "0. Add new task";
+    private class AddNewTask extends BaseAction {
+        /**
+         * Send action key and action name to constructor in template class.
+         * @param key action key
+         * @param name action name
+         */
+        protected AddNewTask(final int key, final String name) {
+            super(key, name);
         }
 
         @Override
@@ -114,15 +114,14 @@ public class MenuTracker {
     /**
      * Show all tasks in tracker, could be zero and more tasks.
      */
-    private class ShowAllTasks implements UserAction {
-        @Override
-        public int key() {
-            return 1;
-        }
-
-        @Override
-        public String info() {
-            return "1. Show all tasks";
+    private class ShowAllTasks extends BaseAction {
+        /**
+         * Send action key and action name to constructor in template class.
+         * @param key action key
+         * @param name action name
+         */
+        protected ShowAllTasks(final int key, final String name) {
+            super(key, name);
         }
 
         @Override
@@ -145,15 +144,14 @@ public class MenuTracker {
      * Console interaction and editing a task in tracker.
      * Task for editing is searched by id, if not found app returns to main menu.
      */
-    private class EditTask implements UserAction {
-        @Override
-        public int key() {
-            return 2;
-        }
-
-        @Override
-        public String info() {
-            return "2. Edit task";
+    private class EditTask extends BaseAction {
+        /**
+         * Send action key and action name to constructor in template class.
+         * @param key action key
+         * @param name action name
+         */
+        protected EditTask(final int key, final String name) {
+            super(key, name);
         }
 
         @Override
@@ -199,15 +197,14 @@ public class MenuTracker {
      * Task for deleting is searched by id, if not found app returns to main menu.
      * Deletion can be aborted.
      */
-    private class DeleteTask implements UserAction {
-        @Override
-        public int key() {
-            return 3;
-        }
-
-        @Override
-        public String info() {
-            return "3. Delete task";
+    private class DeleteTask extends BaseAction {
+        /**
+         * Send action key and action name to constructor in template class.
+         * @param key action key
+         * @param name action name
+         */
+        protected DeleteTask(final int key, final String name) {
+            super(key, name);
         }
 
         @Override
@@ -250,15 +247,14 @@ public class MenuTracker {
      * Console interaction and finding a task in tracker by id.
      * One or zero tasks can be found.
      */
-    private static class FindTaskById implements UserAction {
-        @Override
-        public int key() {
-            return 4;
-        }
-
-        @Override
-        public String info() {
-            return "4. Find task by ID";
+    private static class FindTaskById extends BaseAction {
+        /**
+         * Send action key and action name to constructor in template class.
+         * @param key action key
+         * @param name action name
+         */
+        protected FindTaskById(final int key, final String name) {
+            super(key, name);
         }
 
         @Override
@@ -283,15 +279,14 @@ public class MenuTracker {
      * Console interaction and finding a task in tracker by name.
      * Zero and more tasks can be found.
      */
-    private static class FindTaskByName implements UserAction {
-        @Override
-        public int key() {
-            return 5;
-        }
-
-        @Override
-        public String info() {
-            return "5. Find tasks by name";
+    private static class FindTaskByName extends BaseAction {
+        /**
+         * Send action key and action name to constructor in template class.
+         * @param key action key
+         * @param name action name
+         */
+        protected FindTaskByName(final int key, final String name) {
+            super(key, name);
         }
 
         @Override
@@ -321,15 +316,14 @@ public class MenuTracker {
  * Console interaction and adding a comment to task in tracker.
  * Task for adding a comment is searched by id, if not found app returns to main menu.
  */
-class AddCommentToTask implements UserAction {
-    @Override
-    public int key() {
-        return 6;
-    }
-
-    @Override
-    public String info() {
-        return "6. Add comment to task";
+class AddCommentToTask extends BaseAction {
+    /**
+     * Send action key and action name to constructor in template class.
+     * @param key action key
+     * @param name action name
+     */
+    protected AddCommentToTask(final int key, final String name) {
+        super(key, name);
     }
 
     @Override
@@ -371,15 +365,14 @@ class AddCommentToTask implements UserAction {
 /**
  * Exit method, final words or methods before quit the app.
  */
-class Exit implements UserAction {
-    @Override
-    public int key() {
-        return 7;
-    }
-
-    @Override
-    public String info() {
-        return "7. Exit Program";
+class Exit extends BaseAction {
+    /**
+     * Send action key and action name to constructor in template class.
+     * @param key action key
+     * @param name action name
+     */
+    protected Exit(final int key, final String name) {
+        super(key, name);
     }
 
     @Override
