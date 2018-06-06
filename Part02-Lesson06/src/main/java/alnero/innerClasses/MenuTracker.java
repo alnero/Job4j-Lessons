@@ -103,11 +103,11 @@ public class MenuTracker {
             String taskDescription = input.readInputLine();
             newTask.setDescription(taskDescription);
 
-            System.out.println("\n" + newTask);
+            System.out.println(System.lineSeparator() + newTask);
 
             taskTracker.add(newTask);
 
-            System.out.println("Task added to tracker successfully!\n");
+            System.out.println("Task added to tracker successfully!" + System.lineSeparator());
         }
     }
 
@@ -130,13 +130,13 @@ public class MenuTracker {
 
             Task[] allTasks = taskTracker.findAll();
 
-            System.out.println("Total number of tasks in tracker: " + allTasks.length + "\n");
+            System.out.println("Total number of tasks in tracker: " + allTasks.length + System.lineSeparator());
 
             for (Task task : allTasks) {
                 System.out.println(task);
             }
 
-            System.out.println("That was list of all tasks in tracker!\n");
+            System.out.println("That was list of all tasks in tracker!" + System.lineSeparator());
         }
     }
 
@@ -168,7 +168,7 @@ public class MenuTracker {
                 Task editTask = taskTracker.findById(editTaskId);
 
                 if (editTask == null) {
-                    System.out.println("Sorry no task found!\n");
+                    System.out.println("Sorry no task found!" + System.lineSeparator());
                 } else {
                     System.out.println(editTask);
 
@@ -184,10 +184,10 @@ public class MenuTracker {
 
                     System.out.println(editTask);
 
-                    System.out.println("Task changed successfully!\n");
+                    System.out.println("Task changed successfully!" + System.lineSeparator());
                 }
             } else {
-                System.out.println("Please find task ID!\n");
+                System.out.println("Please find task ID!" + System.lineSeparator());
             }
         }
     }
@@ -221,7 +221,7 @@ public class MenuTracker {
                 Task deleteTask = taskTracker.findById(editTaskId);
 
                 if (deleteTask == null) {
-                    System.out.println("Sorry no task found!\n");
+                    System.out.println("Sorry no task found!" + System.lineSeparator());
                 } else {
                     System.out.println(deleteTask);
 
@@ -230,13 +230,13 @@ public class MenuTracker {
 
                     if (userSureToDelete) {
                         taskTracker.delete(deleteTask);
-                        System.out.println("Task deleted successfully!\n");
+                        System.out.println("Task deleted successfully!" + System.lineSeparator());
                     } else {
-                        System.out.println("Abort deletion, return back to MENU\n");
+                        System.out.println("Abort deletion, return back to MENU" + System.lineSeparator());
                     }
                 }
             } else {
-                System.out.println("Please find task ID!\n");
+                System.out.println("Please find task ID!" + System.lineSeparator());
             }
         }
     }
@@ -267,10 +267,10 @@ public class MenuTracker {
             Task taskFoundById = taskTracker.findById(idToFind);
 
             if (taskFoundById == null) {
-                System.out.println("Sorry no task found!\n");
+                System.out.println("Sorry no task found!" + System.lineSeparator());
             } else {
                 System.out.println(taskFoundById);
-                System.out.println("Task found!\n");
+                System.out.println("Task found!" + System.lineSeparator());
             }
         }
     }
@@ -299,12 +299,12 @@ public class MenuTracker {
             Task[] tasksFoundByName = taskTracker.findByName(nameToFind);
 
             if (tasksFoundByName.length == 0) {
-                System.out.println("Sorry no task found!\n");
+                System.out.println("Sorry no task found!" + System.lineSeparator());
             } else {
                 for (Task task : tasksFoundByName) {
                     System.out.println(task);
                 }
-                System.out.println("Tasks found!\n");
+                System.out.println("Tasks found!" + System.lineSeparator());
             }
         }
     }
@@ -340,7 +340,7 @@ class AddCommentToTask extends BaseAction {
             Task addCommentTask = taskTracker.findById(addCommentTaskId);
 
             if (addCommentTask == null) {
-                System.out.println("Sorry no task found!\n");
+                System.out.println("Sorry no task found!" + System.lineSeparator());
             } else {
                 System.out.println(addCommentTask);
 
@@ -354,10 +354,10 @@ class AddCommentToTask extends BaseAction {
                 taskTracker.update(addCommentTask);
                 System.out.println(addCommentTask);
 
-                System.out.println("Comment added to task successfully!\n");
+                System.out.println("Comment added to task successfully!" + System.lineSeparator());
             }
         } else {
-            System.out.println("Please find task ID\n");
+            System.out.println("Please find task ID" + System.lineSeparator());
         }
     }
 }
