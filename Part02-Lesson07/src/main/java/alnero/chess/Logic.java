@@ -34,7 +34,6 @@ public class Logic {
      * @throws OccupiedWayException if way is occupied by another figures
      */
     public boolean move(Cell source, Cell dest) throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
-        boolean rst = false;
         int index = this.findBy(source);
         if (index == -1) {
             throw new FigureNotFoundException("Figure not found.");
@@ -47,11 +46,9 @@ public class Logic {
             }
         }
 
-        if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-            rst = true;
-            this.figures[index] = this.figures[index].copy(dest);
-        }
-        return rst;
+        this.figures[index] = this.figures[index].copy(dest);
+
+        return true;
     }
 
     /**
