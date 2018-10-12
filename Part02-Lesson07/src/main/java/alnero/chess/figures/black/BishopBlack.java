@@ -40,43 +40,12 @@ public class BishopBlack implements Figure {
         int deltaY = Integer.compare(source.y, dest.y);
 
         for (int i = 0; i < numberOfSteps; i++) {
-            // move North-East
-            if (deltaX == -1 && deltaY == 1) {
-                for (Cell cell : Cell.values()) {
-                    if (cell.x == source.x + 1 + i && cell.y == source.y - 1 - i) {
-                        steps[i] = cell;
-                    }
-                }
-            }
-            // move South-East
-            if (deltaX == -1 && deltaY == -1) {
-                for (Cell cell : Cell.values()) {
-                    if (cell.x == source.x + 1 + i && cell.y == source.y + 1 + i) {
-                        steps[i] = cell;
-                    }
-                }
-            }
-            // move South-West
-            if (deltaX == 1 && deltaY == -1) {
-                for (Cell cell : Cell.values()) {
-                    if (cell.x == source.x - 1 - i && cell.y == source.y + 1 + i) {
-                        steps[i] = cell;
-                    }
-                }
-            }
-            // move North-West
-            if (deltaX == 1 && deltaY == 1) {
-                for (Cell cell : Cell.values()) {
-                    if (cell.x == source.x - 1 - i && cell.y == source.y - 1 - i) {
-                        steps[i] = cell;
-                    }
-                }
-            }
+            steps[i] = Cell.A1.find(source.x - deltaX * (1 + i),source.y - deltaY * (1 + i));
         }
 
-        if (steps.length > 0 && !steps[steps.length - 1].equals(dest)) {
-            throw new ImpossibleMoveException(this.getClass().getName() + " impossible move.");
-        }
+//        if (steps.length > 0 && !steps[steps.length - 1].equals(dest)) {
+//            throw new ImpossibleMoveException(this.getClass().getName() + " impossible move.");
+//        }
 
         return steps;
     }
