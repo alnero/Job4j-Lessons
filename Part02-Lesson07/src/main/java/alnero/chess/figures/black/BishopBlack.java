@@ -40,12 +40,8 @@ public class BishopBlack implements Figure {
         int deltaY = Integer.compare(source.y, dest.y);
 
         for (int i = 0; i < numberOfSteps; i++) {
-            steps[i] = Cell.A1.find(source.x - deltaX * (1 + i),source.y - deltaY * (1 + i));
+            steps[i] = Cell.find(source.x - deltaX * (1 + i), source.y - deltaY * (1 + i));
         }
-
-//        if (steps.length > 0 && !steps[steps.length - 1].equals(dest)) {
-//            throw new ImpossibleMoveException(this.getClass().getName() + " impossible move.");
-//        }
 
         return steps;
     }

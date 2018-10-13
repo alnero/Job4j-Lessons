@@ -24,6 +24,7 @@ public enum Cell {
 
     /**
      * Cell stores its coordinates x, y.
+     *
      * @param x coordinate x
      * @param y coordinate y
      */
@@ -32,18 +33,20 @@ public enum Cell {
         this.y = y;
     }
 
-     /**
-      * Find required cell according to coordinates.
-      * @param x coordinate x
-      * @param y coordinate y
-      * @return found cell or null if not found
-      */
-    public Cell find(int x, int y) {
+    /**
+     * Find required cell according to coordinates.
+     *
+     * @param x coordinate x
+     * @param y coordinate y
+     * @return found cell or null if not found
+     */
+    public static Cell find(int x, int y) {
+        Cell foundCell = null;
         for (Cell cell : Cell.values()) {
             if (cell.x == x && cell.y == y) {
-                return cell;
+                foundCell = cell;
             }
         }
-        return null;
+        return foundCell;
     }
 }
