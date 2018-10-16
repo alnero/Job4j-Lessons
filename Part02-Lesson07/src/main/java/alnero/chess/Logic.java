@@ -46,9 +46,12 @@ public class Logic {
             }
         }
 
-        this.figures[index] = this.figures[index].copy(dest);
-
-        return true;
+        boolean result = false;
+        if (steps.length > 0) {
+            this.figures[index] = this.figures[index].copy(dest);
+            result = true;
+        }
+        return result;
     }
 
     /**
