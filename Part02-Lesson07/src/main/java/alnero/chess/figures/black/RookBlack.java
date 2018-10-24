@@ -27,12 +27,12 @@ public class RookBlack implements Figure {
 
     @Override
     public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
-        if (source.x != dest.x && source.y != dest.y) {
-            throw new ImpossibleMoveException(this.getClass().getName() + " impossible move.");
-        }
-
         int deltaX = Integer.compare(source.x, dest.x);
         int deltaY = Integer.compare(source.y, dest.y);
+
+        if (deltaX != 0 && deltaY != 0) {
+            throw new ImpossibleMoveException(this.getClass().getName() + " impossible move.");
+        }
 
         int numberOfSteps = Math.abs(deltaX * (source.x - dest.x)) + Math.abs(deltaY * (source.y - dest.y));
         Cell[] steps = new Cell[numberOfSteps];

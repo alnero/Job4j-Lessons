@@ -104,7 +104,7 @@ public class KnightBlackTest {
     }
 
     /**
-     * Impossible move drops exception.
+     * Black knight impossible move drops exception.
      */
     @Test(expected = ImpossibleMoveException.class)
     public void whenBlackKnightMakesImpossibleMoveFromE5ThenThereIsImpossibleMoveException() {
