@@ -29,16 +29,16 @@ public class PawnBlack implements Figure {
     public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
         Cell[] steps = new Cell[0];
 
-        if (source.x == dest.x && source.y == 6 && source.y == dest.y + 2) {
+        if (source.getX() == dest.getX() && source.getY() == 6 && source.getY() == dest.getY() + 2) {
             steps = new Cell[2];
             for (Cell cell : Cell.values()) {
-                if (cell.x == source.x && cell.y == dest.y + 1) {
+                if (cell.getX() == source.getX() && cell.getY() == dest.getY() + 1) {
                     steps[0] = cell;
 
                 }
             }
             steps[1] = dest;
-        } else if (source.x == dest.x && source.y == dest.y + 1) {
+        } else if (source.getX() == dest.getX() && source.getY() == dest.getY() + 1) {
             steps = new Cell[] {dest};
         } else {
             throw new ImpossibleMoveException(this.getClass().getName() + " impossible move.");

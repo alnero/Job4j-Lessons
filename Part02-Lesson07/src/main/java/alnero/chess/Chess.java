@@ -217,8 +217,8 @@ public class Chess extends Application {
         Cell position = figure.position();
         grid.getChildren().add(
                 this.buildFigure(
-                        position.x * 40 + 5,
-                        position.y * 40 + 5,
+                        position.getX() * 40 + 5,
+                        position.getY() * 40 + 5,
                         30,
                         figure.icon()
                 )
@@ -236,7 +236,7 @@ public class Chess extends Application {
         int x = (int) graphX / 40;
         int y = (int) graphY / 40;
         for (Cell cell : Cell.values()) {
-            if (cell.x == x && cell.y == y) {
+            if (cell.getX() == x && cell.getY() == y) {
                 rst = cell;
                 break;
             }

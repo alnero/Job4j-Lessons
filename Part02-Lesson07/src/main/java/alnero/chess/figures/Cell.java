@@ -24,11 +24,11 @@ public enum Cell {
     /**
      * x coordinate.
      */
-    public final int x;
+    private final int x;
     /**
      * y coordinate.
      */
-    public final int y;
+    private final int y;
 
     /**
      * Cell stores its coordinates x, y.
@@ -56,5 +56,21 @@ public enum Cell {
             }
         }
         return foundCell;
+    }
+
+    /**
+     * Get x coordinate.
+     * @return coordinate x
+     */
+    public int getX() {
+        return x;
+    }
+
+    /**
+     * Get y coordinate.
+     * @return coordinate y
+     */
+    public int getY() {
+        return y;
     }
 }

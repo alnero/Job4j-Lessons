@@ -27,8 +27,8 @@ public class KnightBlack implements Figure {
 
     @Override
     public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
-        int deltaX = source.x - dest.x;
-        int deltaY = source.y - dest.y;
+        int deltaX = source.getX() - dest.getX();
+        int deltaY = source.getY() - dest.getY();
 
         if ((1 != Math.abs(deltaX) || 2 != Math.abs(deltaY))
             && (2 != Math.abs(deltaX) || 1 != Math.abs(deltaY))) {
@@ -36,7 +36,7 @@ public class KnightBlack implements Figure {
         }
 
         Cell[] steps = new Cell[1];
-        steps[0] = Cell.find(source.x - deltaX, source.y - deltaY);
+        steps[0] = Cell.find(source.getX() - deltaX, source.getY() - deltaY);
         return steps;
     }
 

@@ -27,16 +27,16 @@ public class KingBlack implements Figure {
 
     @Override
     public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
-        if (2 <= Math.abs(source.x - dest.x) || 2 <= Math.abs(source.y - dest.y)) {
+        if (2 <= Math.abs(source.getX() - dest.getX()) || 2 <= Math.abs(source.getY() - dest.getY())) {
             throw new ImpossibleMoveException(this.getClass().getName() + " impossible move.");
         }
 
         Cell[] steps = new Cell[1];
 
-        int deltaX = Integer.compare(source.x, dest.x);
-        int deltaY = Integer.compare(source.y, dest.y);
+        int deltaX = Integer.compare(source.getX(), dest.getX());
+        int deltaY = Integer.compare(source.getY(), dest.getY());
 
-        steps[0] = Cell.find(source.x - deltaX, source.y - deltaY);
+        steps[0] = Cell.find(source.getX() - deltaX, source.getY() - deltaY);
 
         return steps;
     }

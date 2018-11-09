@@ -29,18 +29,18 @@ public class BishopBlack implements Figure {
 
     @Override
     public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
-        if (Math.abs(source.x - dest.x) != Math.abs(source.y - dest.y)) {
+        if (Math.abs(source.getX() - dest.getX()) != Math.abs(source.getY() - dest.getY())) {
             throw new ImpossibleMoveException(this.getClass().getName() + " impossible move.");
         }
 
-        int numberOfSteps = Math.abs(source.x - dest.x);
+        int numberOfSteps = Math.abs(source.getX() - dest.getX());
         Cell[] steps = new Cell[numberOfSteps];
 
-        int deltaX = Integer.compare(source.x, dest.x);
-        int deltaY = Integer.compare(source.y, dest.y);
+        int deltaX = Integer.compare(source.getX(), dest.getX());
+        int deltaY = Integer.compare(source.getY(), dest.getY());
 
         for (int i = 0; i < numberOfSteps; i++) {
-            steps[i] = Cell.find(source.x - deltaX * (1 + i), source.y - deltaY * (1 + i));
+            steps[i] = Cell.find(source.getX() - deltaX * (1 + i), source.getY() - deltaY * (1 + i));
         }
 
         return steps;
