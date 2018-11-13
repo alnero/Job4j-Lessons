@@ -1,6 +1,6 @@
 package alnero.collectionsFramework.PriorityQueue;
 
-import java.util.Iterator;
+//import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -20,9 +20,10 @@ public class PriorityQueue {
         // Short solution
         int newTaskPriority = newTask.getPriority();
         int queueIndexForNewTask = 0;
-        for(Task task : this.tasks) {
+        int index = 0;
+        for (Task task : this.tasks) {
             int addedTaskPriority = task.getPriority();
-            int addedTaskIndex = this.tasks.indexOf(task);
+            int addedTaskIndex = index++;
             if (newTaskPriority > addedTaskPriority) {
                 queueIndexForNewTask = addedTaskIndex + 1;
             }
