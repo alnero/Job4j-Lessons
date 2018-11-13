@@ -17,9 +17,21 @@ public class PriorityQueue {
      * @param newTask task to add
      */
     public void put(Task newTask) {
+        // Short solution
         int newTaskPriority = newTask.getPriority();
         int queueIndexForNewTask = 0;
+        for(Task task : this.tasks) {
+            int addedTaskPriority = task.getPriority();
+            int addedTaskIndex = this.tasks.indexOf(task);
+            if (newTaskPriority > addedTaskPriority) {
+                queueIndexForNewTask = addedTaskIndex + 1;
+            }
+        }
+        this.tasks.add(queueIndexForNewTask, newTask);
 
+       /* // Long solution
+        int newTaskPriority = newTask.getPriority();
+        int queueIndexForNewTask = 0;
         if (0 == tasks.size()) {
             this.tasks.add(queueIndexForNewTask, newTask);
         } else {
@@ -27,13 +39,12 @@ public class PriorityQueue {
             while (tasksIterator.hasNext()) {
                 Task addedTask = tasksIterator.next();
                 int addedTaskPriority = addedTask.getPriority();
-                if (newTaskPriority < addedTaskPriority) {
-                    queueIndexForNewTask = this.tasks.indexOf(addedTask);
-                    break;
+                if (newTaskPriority > addedTaskPriority) {
+                    queueIndexForNewTask = this.tasks.indexOf(addedTask) + 1;
                 }
             }
             this.tasks.add(queueIndexForNewTask, newTask);
-        }
+        }*/
     }
 
     /**

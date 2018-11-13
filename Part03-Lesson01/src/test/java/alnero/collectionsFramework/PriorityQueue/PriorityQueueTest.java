@@ -36,14 +36,44 @@ public class PriorityQueueTest {
     }
 
     /**
-     * Get low priority task.
+     * Get low priority task, add low priority task first.
      */
     @Test
-    public void whenAddThreeTaskAndGetLowPriorityTaskThenCorrectTaskReturned() {
+    public void whenAddThreeTaskAndFirstAddLowAndGetLowPriorityTaskThenCorrectTaskReturned() {
         PriorityQueue queue = new PriorityQueue();
         queue.put(new Task("low", 5));
         queue.put(new Task("high", 1));
         queue.put(new Task("middle", 3));
+        Task result = queue.take();
+        result = queue.take();
+        result = queue.take();
+        assertThat(result.getDesc(), is("low"));
+    }
+
+    /**
+     * Get low priority task, add middle priority task first.
+     */
+    @Test
+    public void whenAddThreeTaskAndFirstAddMiddleAndGetLowPriorityTaskThenCorrectTaskReturned() {
+        PriorityQueue queue = new PriorityQueue();
+        queue.put(new Task("middle", 3));
+        queue.put(new Task("low", 5));
+        queue.put(new Task("high", 1));
+        Task result = queue.take();
+        result = queue.take();
+        result = queue.take();
+        assertThat(result.getDesc(), is("low"));
+    }
+
+    /**
+     * Get low priority task, add high priority task first.
+     */
+    @Test
+    public void whenAddThreeTaskAndFirstAddHighAndGetLowPriorityTaskThenCorrectTaskReturned() {
+        PriorityQueue queue = new PriorityQueue();
+        queue.put(new Task("high", 1));
+        queue.put(new Task("middle", 3));
+        queue.put(new Task("low", 5));
         Task result = queue.take();
         result = queue.take();
         result = queue.take();
