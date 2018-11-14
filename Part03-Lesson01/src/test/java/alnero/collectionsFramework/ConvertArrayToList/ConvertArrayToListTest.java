@@ -102,4 +102,57 @@ public class ConvertArrayToListTest {
         List<Integer> result = arrayConverter.toList(input);
         assertThat(result, is(expect));
     }
+
+    //--- Test combine list of arrays to one list ---
+
+    /**
+     * List with 3 arrays each having 2 cells -> common list with 6 elements.
+     */
+    @Test
+    public void whenListWithThreeArraysConvertToCommonListThenListWithAllArraysContentsReturned() {
+        ConvertArrayToList listOfArraysConverter = new ConvertArrayToList();
+        List<int[]> inputList = new ArrayList<>();
+        inputList.addAll(Arrays.asList(
+                new int[]{1, 2},
+                new int[]{3, 4},
+                new int[]{5, 6}
+        ));
+        List<Integer> result = listOfArraysConverter.convert(inputList);
+        List<Integer> expect = Arrays.asList(1, 2, 3, 4, 5, 6);
+        assertThat(result, is(expect));
+    }
+
+    /**
+     * List with 4 arrays of different length, total 10 cells -> common list with 10 elements.
+     */
+    @Test
+    public void whenListWithFourDifferentLengthArraysConvertToCommonListThenListWithAllArraysContentsReturned() {
+        ConvertArrayToList listOfArraysConverter = new ConvertArrayToList();
+        List<int[]> inputList = new ArrayList<>();
+        inputList.addAll(Arrays.asList(
+                new int[]{1, 2, 3, 4},
+                new int[]{5, 6, 7},
+                new int[]{8, 9},
+                new int[]{10}
+        ));
+        List<Integer> result = listOfArraysConverter.convert(inputList);
+        List<Integer> expect = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        assertThat(result, is(expect));
+    }
+
+    /**
+     * List with two empty arrays -> empty list.
+     */
+    @Test
+    public void whenListWithTwoEmptyArraysConvertToCommonListThenEmptyListReturned() {
+        ConvertArrayToList listOfArraysConverter = new ConvertArrayToList();
+        List<int[]> inputList = new ArrayList<>();
+        inputList.addAll(Arrays.asList(
+                new int[]{},
+                new int[]{}
+        ));
+        List<Integer> result = listOfArraysConverter.convert(inputList);
+        List<Integer> expect = new ArrayList<>();
+        assertThat(result, is(expect));
+    }
 }
