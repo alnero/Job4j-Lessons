@@ -51,16 +51,15 @@ public class UserConvertTest {
     }
 
     /**
-     * Three same users in list -> one user in map.
+     * Two same users in list -> one user in map.
      */
     @Test
-    public void whenConvertListOfThreeSameUsersToMapThenMapWithOneUserReturned() {
+    public void whenConvertListOfTwoSameUsersToMapThenMapWithOneUserReturned() {
         List<User> input = new ArrayList<>();
-        input.addAll(Arrays.asList(
-                new User("name1", "city1"),
-                new User("name1", "city1"),
-                new User("name1", "city1")
-        ));
+        User sameUser1 = new User("name1", "city1");
+        User.resetIdCounter();
+        User sameUser2 = new User("name1", "city1");
+        input.addAll(Arrays.asList(sameUser1, sameUser2));
         UserConvert userConvert = new UserConvert();
         Map<Integer, User> result = userConvert.process(input);
         assertThat(result.size(), is(1));

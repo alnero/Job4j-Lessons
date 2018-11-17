@@ -4,13 +4,21 @@ package alnero.generics.userConvert;
  * User for conversion to map.
  */
 public class User {
-    /** User ID counter. */
+    /**
+     * User ID counter.
+     */
     private static int idCounter;
-    /** User ID. */
+    /**
+     * User ID.
+     */
     private int id;
-    /** User name. */
+    /**
+     * User name.
+     */
     private String name;
-    /** User city. */
+    /**
+     * User city.
+     */
     private String city;
 
     /**
@@ -74,6 +82,9 @@ public class User {
 
         User user = (User) o;
 
+        if (getId() != user.getId()) {
+            return false;
+        }
         if (getName() != null ? !getName().equals(user.getName()) : user.getName() != null) {
             return false;
         }
