@@ -16,9 +16,7 @@ public class UserConvert {
         HashMap<Integer, User> map = new HashMap<>();
         for (User user : list) {
             int userId = user.getId();
-            if (!map.containsValue(user)) {
-                map.put(userId, user);
-            }
+            map.putIfAbsent(userId, user);
         }
         return map;
     }
