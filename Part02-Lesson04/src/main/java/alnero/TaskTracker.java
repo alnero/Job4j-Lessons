@@ -1,5 +1,7 @@
 package alnero;
 
+import java.util.ArrayList;
+
 /**
  * Class for tracking Task objects.
  */
@@ -7,15 +9,11 @@ public class TaskTracker {
     /**
      * Storage for all tasks.
      */
-    private Task[] taskStorage;
+    private ArrayList<Task> taskStorage;
     /**
      * Initial size of task storage.
      */
     private int initSize;
-    /**
-     * Indicates next empty space in storage.
-     */
-    private int nextTaskIndex;
 
     /**
      * Create new TaskTracker and initialize the size of storage.
@@ -29,13 +27,11 @@ public class TaskTracker {
         } else {
             this.initSize = initSize;
         }
-        this.taskStorage = new Task[this.initSize];
-        this.nextTaskIndex = 0;
+        this.taskStorage = new ArrayList<>(this.initSize);
     }
 
     /**
-     * Add new task to the tracker. If there is no space in array for the tasks,
-     * the size of the array becomes two times bigger. If null is added - nothing happens, null is returned.
+     * Add new task to the tracker. If null is added - nothing happens, null is returned.
      *
      * @param task object been added to tracker
      * @return the same task been added or null
@@ -45,16 +41,7 @@ public class TaskTracker {
             return null;
         }
 
-        if (this.nextTaskIndex == this.taskStorage.length) {
-            int newStorageSize = this.taskStorage.length * 2;
-            Task[] newStorage = new Task[newStorageSize];
-            System.arraycopy(this.taskStorage, 0,
-                    newStorage, 0,
-                    this.taskStorage.length);
-            this.taskStorage = newStorage;
-        }
-
-        this.taskStorage[this.nextTaskIndex++] = task;
+        this.taskStorage.add(task);
         return task;
     }
 
@@ -97,17 +84,18 @@ public class TaskTracker {
 
         long taskId = task.getId();
 
-        for (int i = 0; i < this.nextTaskIndex; i++) {
-            if (this.taskStorage[i].getId() == taskId) {
-                this.taskStorage[i] = task;
-                break;
+        for (int i = 0; i < this.taskStorage.size(); i++) {
+            Task addedTask = this.taskStorage.get(i);
+            if (addedTask.getId() == taskId) {
+                this.taskStorage.set(i, task);
             }
         }
     }
 
     /**
      * Delete a task from tracker. If the supplied task is in tracker it will be removed,
-     * id is used to find the task in tracker. If task is not found - nothing happens.
+     * id is used to find the task in tracker.
+     * If task is not found - nothing happens.
      * If null is used as argument - nothing happens.
      *
      * @param task a task which is need to be deleted
@@ -119,32 +107,12 @@ public class TaskTracker {
 
         long taskId = task.getId();
 
-        for (int i = 0; i < this.nextTaskIndex; i++) {
-            // find task to delete by id
-            if (this.taskStorage[i].getId() == taskId) {
-                // if there is only one task in storage and it is to be deleted
-                // create new empty storage and reset index of next task
-                if (this.nextTaskIndex == 1) {
-                    this.taskStorage = new Task[this.initSize];
-                    this.nextTaskIndex = 0;
-                } else if (this.nextTaskIndex != i + 1) {
-                    // if there is more than one task in storage and one to be deleted is NOT last one
-                    // make a copy of storage without deleted task,
-                    // null the last task in storage,
-                    // decrement index of next task
-                    System.arraycopy(this.taskStorage, i + 1,
-                            this.taskStorage, i,
-                            this.nextTaskIndex - i - 1);
-                    this.taskStorage[--nextTaskIndex] = null;
-                } else {
-                    // if there is more than one task in storage and one to be deleted is last one
-                    // just make it null and decrement index of next task
-                    this.taskStorage[i] = null;
-                    this.nextTaskIndex--;
-                }
+        for (int i = 0; i < this.taskStorage.size(); i++) {
+            Task addedTask = this.taskStorage.get(i);
+            if (addedTask.getId() == taskId) {
+                this.taskStorage.remove(i);
             }
         }
-
     }
 
     /**
@@ -152,42 +120,33 @@ public class TaskTracker {
      *
      * @return copy of task storage
      */
-    public Task[] findAll() {
-        Task[] arr = new Task[this.nextTaskIndex];
-        System.arraycopy(this.taskStorage, 0,
-                arr, 0,
-                arr.length);
-        return arr;
+    public ArrayList<Task> findAll() {
+        ArrayList<Task> list = new ArrayList<>(this.taskStorage.size());
+        for (Task addedTask : this.taskStorage) {
+            list.add(addedTask);
+        }
+        return list;
     }
 
     /**
      * Get tasks by name. Only tasks with exact match in name are returned.
      *
      * @param key name of the task
-     * @return array containing tasks with the same name
+     * @return list containing tasks with the same name
      */
-    public Task[] findByName(String key) {
+    public ArrayList<Task> findByName(String key) {
         if (key == null) {
             return null;
         }
 
-        Task[] temporaryArr = new Task[this.nextTaskIndex];
-        int arrIndex = 0;
-
-        for (int i = 0; i < this.nextTaskIndex; i++) {
-            String taskName = this.taskStorage[i].getName();
-
+        ArrayList<Task> list = new ArrayList<>();
+        for (Task addedTask : this.taskStorage) {
+            String taskName = addedTask.getName();
             if (taskName != null && taskName.contains(key)) {
-                temporaryArr[arrIndex++] = this.taskStorage[i];
+                list.add(addedTask);
             }
         }
-
-        Task[] resultArr = new Task[arrIndex];
-        System.arraycopy(temporaryArr, 0,
-                resultArr, 0,
-                arrIndex);
-
-        return resultArr;
+        return list;
     }
 
     /**
@@ -197,9 +156,9 @@ public class TaskTracker {
      * @return the found task or null if otherwise
      */
     public Task findById(long id) {
-        for (int i = 0; i < this.nextTaskIndex; i++) {
-            if (this.taskStorage[i].getId() == id) {
-                return this.taskStorage[i];
+        for (Task addedTask : this.taskStorage) {
+            if (addedTask.getId() == id) {
+                return addedTask;
             }
         }
 

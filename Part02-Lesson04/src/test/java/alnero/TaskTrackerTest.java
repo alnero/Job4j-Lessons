@@ -4,9 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static org.hamcrest.core.Is.is;
@@ -28,8 +25,8 @@ public class TaskTrackerTest {
         Task task = new Task();
         taskTracker.add(task);
 
-        Assert.assertThat(taskTracker.findAll().length, is(1));
-        Assert.assertThat(taskTracker.findAll()[0], is(task));
+        Assert.assertThat(taskTracker.findAll().size(), is(1));
+        Assert.assertThat(taskTracker.findAll().get(0), is(task));
     }
 
     /**
@@ -41,17 +38,16 @@ public class TaskTrackerTest {
         int numOfTasks = ThreadLocalRandom.current().nextInt(11); // get ints from 0 to 10 inclusive
 
         TaskTracker taskTracker = new TaskTracker(numOfTasks);
-        Task[] testArrOfTasks = new Task[numOfTasks];
+        ArrayList<Task> testListOfTasks = new ArrayList<>(numOfTasks);
 
         for (int i = 0; i < numOfTasks; i++) {
             Task task = new Task();
-
             taskTracker.add(task);
-            testArrOfTasks[i] = task;
+            testListOfTasks.add(task);
         }
 
-        Assert.assertThat(taskTracker.findAll().length, is(testArrOfTasks.length));
-        Assert.assertThat(taskTracker.findAll(), is(testArrOfTasks));
+        Assert.assertThat(taskTracker.findAll().size(), is(testListOfTasks.size()));
+        Assert.assertThat(taskTracker.findAll(), is(testListOfTasks));
     }
 
     /**
@@ -62,17 +58,16 @@ public class TaskTrackerTest {
         int numOfTasks = ThreadLocalRandom.current().nextInt(11); // ints from 0 to 10 inclusive
 
         TaskTracker taskTracker = new TaskTracker(numOfTasks / 3); // initial size < numOfTasks
-        Task[] testArrOfTasks = new Task[numOfTasks];
+        ArrayList<Task> testListOfTasks = new ArrayList<>(numOfTasks);
 
         for (int i = 0; i < numOfTasks; i++) {
             Task task = new Task();
-
             taskTracker.add(task);
-            testArrOfTasks[i] = task;
+            testListOfTasks.add(task);
         }
 
-        Assert.assertThat(taskTracker.findAll().length, is(testArrOfTasks.length));
-        Assert.assertThat(taskTracker.findAll(), is(testArrOfTasks));
+        Assert.assertThat(taskTracker.findAll().size(), is(testListOfTasks.size()));
+        Assert.assertThat(taskTracker.findAll(), is(testListOfTasks));
     }
 
     /**
@@ -84,7 +79,7 @@ public class TaskTrackerTest {
         Task task = taskTracker.add(null);
 
         Assert.assertThat(task, is(nullValue()));
-        Assert.assertThat(taskTracker.findAll().length, is(0));
+        Assert.assertThat(taskTracker.findAll().size(), is(0));
     }
 
     /**
@@ -100,7 +95,7 @@ public class TaskTrackerTest {
         taskTracker.add(task);
         taskTracker.addComment(task, comment);
 
-        Assert.assertThat(taskTracker.findAll()[0].getComments()[0], is(comment));
+        Assert.assertThat(taskTracker.findAll().get(0).getComments()[0], is(comment));
     }
 
     /**
@@ -116,7 +111,7 @@ public class TaskTrackerTest {
         Task unchangedTask = taskTracker.addComment(task, comment);
 
         Assert.assertThat(unchangedTask, is(task));
-        Assert.assertThat(taskTracker.findAll().length, is(0));
+        Assert.assertThat(taskTracker.findAll().size(), is(0));
     }
 
     /**
@@ -133,8 +128,8 @@ public class TaskTrackerTest {
         taskTracker.addComment(task, comment);
         taskTracker.addComment(task, comment);
 
-        Assert.assertThat(taskTracker.findAll()[0].getComments()[0], is(comment));
-        Assert.assertThat(taskTracker.findAll()[0].getComments()[1], is(comment));
+        Assert.assertThat(taskTracker.findAll().get(0).getComments()[0], is(comment));
+        Assert.assertThat(taskTracker.findAll().get(0).getComments()[1], is(comment));
     }
 
     /**
@@ -155,7 +150,7 @@ public class TaskTrackerTest {
         Assert.assertThat(taskWhenCommentNull, is(nullValue()));
         Assert.assertThat(taskWhenTaskNull, is(nullValue()));
         Assert.assertThat(taskWhenBothArgsNull, is(nullValue()));
-        Assert.assertThat(taskTracker.findAll()[0].getComments().length, is(0));
+        Assert.assertThat(taskTracker.findAll().get(0).getComments().length, is(0));
     }
 
     /**
@@ -173,8 +168,8 @@ public class TaskTrackerTest {
         taskTracker.update(task); // update task in tracker
 
         // task in tracker is updated and has a comment
-        Assert.assertThat(taskTracker.findAll()[0], is(task));
-        Assert.assertThat(taskTracker.findAll()[0].getComments()[0], is(comment));
+        Assert.assertThat(taskTracker.findAll().get(0), is(task));
+        Assert.assertThat(taskTracker.findAll().get(0).getComments()[0], is(comment));
     }
 
     /**
@@ -186,12 +181,11 @@ public class TaskTrackerTest {
         Task taskInTracker = new Task();
         Task taskNotInTracker = new Task();
 
-
         taskTracker.add(taskInTracker);
         taskTracker.update(taskNotInTracker);
 
-        Assert.assertThat(taskTracker.findAll().length, is(1));
-        Assert.assertThat(taskTracker.findAll()[0], is(taskInTracker));
+        Assert.assertThat(taskTracker.findAll().size(), is(1));
+        Assert.assertThat(taskTracker.findAll().get(0), is(taskInTracker));
     }
 
     /**
@@ -205,8 +199,8 @@ public class TaskTrackerTest {
         taskTracker.add(taskInTracker);
         taskTracker.update(null);
 
-        Assert.assertThat(taskTracker.findAll().length, is(1));
-        Assert.assertThat(taskTracker.findAll()[0], is(taskInTracker));
+        Assert.assertThat(taskTracker.findAll().size(), is(1));
+        Assert.assertThat(taskTracker.findAll().get(0), is(taskInTracker));
     }
 
     /**
@@ -220,7 +214,7 @@ public class TaskTrackerTest {
         taskTracker.add(task);
         taskTracker.delete(task);
 
-        Assert.assertThat(taskTracker.findAll().length, is(0));
+        Assert.assertThat(taskTracker.findAll().size(), is(0));
     }
 
     /**
@@ -240,15 +234,15 @@ public class TaskTrackerTest {
 
         taskTracker.delete(taskToDelete);
 
-        Task[] tasksInTracker = taskTracker.findAll();
-        int numOfTasksInTracker = tasksInTracker.length;
+        ArrayList<Task> tasksInTracker = taskTracker.findAll();
+        int numOfTasksInTracker = tasksInTracker.size();
 
         for (int i = 0; i < numOfTasksInTracker; i++) {
-            Assert.assertThat(tasksInTracker[i], not(taskToDelete));
+            Assert.assertThat(tasksInTracker.get(i), not(taskToDelete));
         }
 
-        Assert.assertThat(taskTracker.findAll()[0], is(taskToKeep1));
-        Assert.assertThat(taskTracker.findAll()[1], is(taskToKeep2));
+        Assert.assertThat(taskTracker.findAll().get(0), is(taskToKeep1));
+        Assert.assertThat(taskTracker.findAll().get(1), is(taskToKeep2));
     }
 
     /**
@@ -265,8 +259,8 @@ public class TaskTrackerTest {
         Task taskToDelete = new Task();
         taskTracker.delete(taskToDelete);
 
-        Assert.assertThat(taskTracker.findAll().length, is(1));
-        Assert.assertThat(taskTracker.findAll()[0], is(taskToKeep));
+        Assert.assertThat(taskTracker.findAll().size(), is(1));
+        Assert.assertThat(taskTracker.findAll().get(0), is(taskToKeep));
     }
 
     /**
@@ -280,8 +274,8 @@ public class TaskTrackerTest {
 
         taskTracker.delete(null);
 
-        Assert.assertThat(taskTracker.findAll().length, is(1));
-        Assert.assertThat(taskTracker.findAll()[0], is(task));
+        Assert.assertThat(taskTracker.findAll().size(), is(1));
+        Assert.assertThat(taskTracker.findAll().get(0), is(task));
     }
 
     /**
@@ -303,11 +297,11 @@ public class TaskTrackerTest {
         taskTracker.delete(taskToDelete1);
         taskTracker.delete(taskToDelete2);
 
-        Task[] tasksInTracker = taskTracker.findAll();
-        int numOfTasksInTracker = tasksInTracker.length;
+        ArrayList<Task> tasksInTracker = taskTracker.findAll();
+        int numOfTasksInTracker = tasksInTracker.size();
 
         for (int i = 0; i < numOfTasksInTracker; i++) {
-            Assert.assertThat(tasksInTracker[i], not(nullValue()));
+            Assert.assertThat(tasksInTracker.get(i), not(nullValue()));
         }
     }
 
@@ -319,31 +313,24 @@ public class TaskTrackerTest {
         int numOfTasks = ThreadLocalRandom.current().nextInt(51); // ints [0 to 50]
 
         TaskTracker taskTracker = new TaskTracker(numOfTasks);
-        Task[] testArrOfTasks = new Task[numOfTasks];
+        ArrayList<Task> testListOfTasks = new ArrayList<>(numOfTasks);
 
         // add tasks
         for (int i = 0; i < numOfTasks; i++) {
             Task task = new Task();
-
             taskTracker.add(task);
-            testArrOfTasks[i] = task;
+            testListOfTasks.add(task);
         }
 
         // randomly delete half of tasks
         for (int i = 0; i < numOfTasks / 2; i++) {
-            int indexOfTask = ThreadLocalRandom.current().nextInt(numOfTasks); // [0 to numOfTasks-1]
-            Task taskToDelete = testArrOfTasks[indexOfTask];
-
+            int indexOfTask = ThreadLocalRandom.current().nextInt(testListOfTasks.size()); // [0 to testListOfTasks.size()-1]
+            Task taskToDelete = testListOfTasks.get(indexOfTask);
             taskTracker.delete(taskToDelete);
-            testArrOfTasks[indexOfTask] = null;
+            testListOfTasks.remove(indexOfTask);
         }
 
-        // remove null from test array
-        List<Task> list = new ArrayList<>(Arrays.asList(testArrOfTasks));
-        list.removeAll(Collections.singleton(null));
-        testArrOfTasks = list.toArray(new Task[list.size()]);
-
-        Assert.assertThat(taskTracker.findAll(), is(testArrOfTasks));
+        Assert.assertThat(taskTracker.findAll(), is(testListOfTasks));
     }
 
     /**
@@ -353,7 +340,7 @@ public class TaskTrackerTest {
     public void whenNothingIsAddedToTrackerThenEmptyArrayOfTasksIsReturnedFromTracker() {
         TaskTracker taskTracker = new TaskTracker(1);
 
-        Assert.assertThat(taskTracker.findAll().length, is(0));
+        Assert.assertThat(taskTracker.findAll().size(), is(0));
     }
 
     /**
@@ -367,7 +354,7 @@ public class TaskTrackerTest {
 
         taskTracker.add(task);
 
-        Assert.assertThat(taskTracker.findByName("Task for Bender!")[0], is(task));
+        Assert.assertThat(taskTracker.findByName("Task for Bender!").get(0), is(task));
     }
 
     /**
@@ -384,8 +371,8 @@ public class TaskTrackerTest {
         taskTracker.add(task1);
         taskTracker.add(task2);
 
-        Assert.assertThat(taskTracker.findByName("Task for Bender!")[0], is(task1));
-        Assert.assertThat(taskTracker.findByName("Task for Bender!")[1], is(task2));
+        Assert.assertThat(taskTracker.findByName("Task for Bender!").get(0), is(task1));
+        Assert.assertThat(taskTracker.findByName("Task for Bender!").get(1), is(task2));
     }
 
     /**
@@ -402,8 +389,8 @@ public class TaskTrackerTest {
         taskTracker.add(task1);
         taskTracker.add(task2);
 
-        Assert.assertThat(taskTracker.findByName("Bender")[0], is(task1));
-        Assert.assertThat(taskTracker.findByName("Bender")[1], is(task2));
+        Assert.assertThat(taskTracker.findByName("Bender").get(0), is(task1));
+        Assert.assertThat(taskTracker.findByName("Bender").get(1), is(task2));
     }
 
     /**
@@ -419,7 +406,7 @@ public class TaskTrackerTest {
         Task taskInTracker = new Task();
         taskTracker.add(taskInTracker);
 
-        Assert.assertThat(taskTracker.findByName("Task NOT in tracker.").length, is(0));
+        Assert.assertThat(taskTracker.findByName("Task NOT in tracker.").size(), is(0));
     }
 
     /**
@@ -458,6 +445,4 @@ public class TaskTrackerTest {
 
         Assert.assertThat(taskTracker.findById(taskId), is(nullValue()));
     }
-
-
 }
