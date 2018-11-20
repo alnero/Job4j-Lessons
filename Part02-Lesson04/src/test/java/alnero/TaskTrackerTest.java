@@ -39,7 +39,7 @@ public class TaskTrackerTest {
         int numOfTasks = ThreadLocalRandom.current().nextInt(11); // get ints from 0 to 10 inclusive
 
         TaskTracker taskTracker = new TaskTracker(numOfTasks);
-        ArrayList<Task> testListOfTasks = new ArrayList<>(numOfTasks);
+        List<Task> testListOfTasks = new ArrayList<>(numOfTasks);
 
         for (int i = 0; i < numOfTasks; i++) {
             Task task = new Task();
@@ -59,7 +59,7 @@ public class TaskTrackerTest {
         int numOfTasks = ThreadLocalRandom.current().nextInt(11); // ints from 0 to 10 inclusive
 
         TaskTracker taskTracker = new TaskTracker(numOfTasks / 3); // initial size < numOfTasks
-        ArrayList<Task> testListOfTasks = new ArrayList<>(numOfTasks);
+        List<Task> testListOfTasks = new ArrayList<>(numOfTasks);
 
         for (int i = 0; i < numOfTasks; i++) {
             Task task = new Task();
@@ -314,7 +314,7 @@ public class TaskTrackerTest {
         int numOfTasks = ThreadLocalRandom.current().nextInt(51); // ints [0 to 50]
 
         TaskTracker taskTracker = new TaskTracker(numOfTasks);
-        ArrayList<Task> testListOfTasks = new ArrayList<>(numOfTasks);
+        List<Task> testListOfTasks = new ArrayList<>(numOfTasks);
 
         // add tasks
         for (int i = 0; i < numOfTasks; i++) {
