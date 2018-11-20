@@ -3,6 +3,7 @@ package alnero;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -234,7 +235,7 @@ public class TaskTrackerTest {
 
         taskTracker.delete(taskToDelete);
 
-        ArrayList<Task> tasksInTracker = taskTracker.findAll();
+        List<Task> tasksInTracker = taskTracker.findAll();
         int numOfTasksInTracker = tasksInTracker.size();
 
         for (int i = 0; i < numOfTasksInTracker; i++) {
@@ -297,7 +298,7 @@ public class TaskTrackerTest {
         taskTracker.delete(taskToDelete1);
         taskTracker.delete(taskToDelete2);
 
-        ArrayList<Task> tasksInTracker = taskTracker.findAll();
+        List<Task> tasksInTracker = taskTracker.findAll();
         int numOfTasksInTracker = tasksInTracker.size();
 
         for (int i = 0; i < numOfTasksInTracker; i++) {

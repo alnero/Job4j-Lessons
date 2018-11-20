@@ -1,5 +1,6 @@
 package alnero;
 
+import java.util.List;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +10,7 @@ public class TaskTracker {
     /**
      * Storage for all tasks.
      */
-    private ArrayList<Task> taskStorage;
+    private List<Task> taskStorage;
     /**
      * Initial size of task storage.
      */
@@ -120,8 +121,8 @@ public class TaskTracker {
      *
      * @return copy of task storage
      */
-    public ArrayList<Task> findAll() {
-        ArrayList<Task> list = new ArrayList<>(this.taskStorage.size());
+    public List<Task> findAll() {
+        List<Task> list = new ArrayList<>(this.taskStorage.size());
         for (Task addedTask : this.taskStorage) {
             list.add(addedTask);
         }
@@ -134,12 +135,12 @@ public class TaskTracker {
      * @param key name of the task
      * @return list containing tasks with the same name
      */
-    public ArrayList<Task> findByName(String key) {
+    public List<Task> findByName(String key) {
         if (key == null) {
             return null;
         }
 
-        ArrayList<Task> list = new ArrayList<>();
+        List<Task> list = new ArrayList<>();
         for (Task addedTask : this.taskStorage) {
             String taskName = addedTask.getName();
             if (taskName != null && taskName.contains(key)) {
