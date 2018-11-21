@@ -1,5 +1,7 @@
 package alnero;
 
+import java.util.List;
+
 /**
  * Main start point for the Tracker App including console interaction.
  */
@@ -92,9 +94,9 @@ public class StartUI {
     private void showAllTasks() {
         System.out.println("1. Show all tasks\n");
 
-        Task[] allTasks = this.taskTracker.findAll();
+        List<Task> allTasks = this.taskTracker.findAll();
 
-        System.out.println("Total number of tasks in tracker: " + allTasks.length + "\n");
+        System.out.println("Total number of tasks in tracker: " + allTasks.size() + "\n");
 
         for (Task task : allTasks) {
             System.out.println(task);
@@ -210,9 +212,9 @@ public class StartUI {
         System.out.println("Please enter name to search for:");
         String nameToFind = this.input.readInputLine();
 
-        Task[] tasksFoundByName = this.taskTracker.findByName(nameToFind);
+        List<Task> tasksFoundByName = this.taskTracker.findByName(nameToFind);
 
-        if (tasksFoundByName.length == 0) {
+        if (tasksFoundByName.size() == 0) {
             System.out.println("Sorry no task found!\n");
         } else {
             for (Task task : tasksFoundByName) {

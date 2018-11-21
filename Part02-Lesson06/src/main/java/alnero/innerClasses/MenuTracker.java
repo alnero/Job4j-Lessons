@@ -6,6 +6,8 @@ import alnero.TaskTracker;
 import alnero.TrackerInput;
 import alnero.abstractClasses.BaseAction;
 
+import java.util.List;
+
 /**
  * Separate implementation of menu for Tracker app.
  */
@@ -128,9 +130,9 @@ public class MenuTracker {
         public void execute(TaskTracker taskTracker, TrackerInput input) {
             System.out.println(this.info());
 
-            Task[] allTasks = taskTracker.findAll();
+            List<Task> allTasks = taskTracker.findAll();
 
-            System.out.println("Total number of tasks in tracker: " + allTasks.length + System.lineSeparator());
+            System.out.println("Total number of tasks in tracker: " + allTasks.size() + System.lineSeparator());
 
             for (Task task : allTasks) {
                 System.out.println(task);
@@ -296,9 +298,9 @@ public class MenuTracker {
             System.out.println("Please enter name to search for:");
             String nameToFind = input.readInputLine();
 
-            Task[] tasksFoundByName = taskTracker.findByName(nameToFind);
+            List<Task> tasksFoundByName = taskTracker.findByName(nameToFind);
 
-            if (tasksFoundByName.length == 0) {
+            if (tasksFoundByName.size() == 0) {
                 System.out.println("Sorry no task found!" + System.lineSeparator());
             } else {
                 for (Task task : tasksFoundByName) {
