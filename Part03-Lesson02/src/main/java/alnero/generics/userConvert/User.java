@@ -22,7 +22,7 @@ public class User {
     private String city;
 
     /**
-     * Main constructor, name and city to initialized. ID sets automatically.
+     * Main constructor, name and city to be initialized. ID sets automatically.
      * @param name User name
      * @param city User city
      */
@@ -52,7 +52,7 @@ public class User {
      * @return User ID
      */
     public int getId() {
-        return id;
+        return this.id;
     }
 
     /**
@@ -60,7 +60,7 @@ public class User {
      * @return User name
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -68,7 +68,7 @@ public class User {
      * @return User city
      */
     public String getCity() {
-        return city;
+        return this.city;
     }
 
     @Override
@@ -101,9 +101,9 @@ public class User {
     @Override
     public String toString() {
         return "User{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", city='" + city + '\''
+                + "id=" + this.id
+                + ", name='" + this.name + '\''
+                + ", city='" + this.city + '\''
                 + '}';
     }
 }
