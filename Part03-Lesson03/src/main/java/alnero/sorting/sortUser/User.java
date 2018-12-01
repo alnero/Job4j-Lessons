@@ -80,7 +80,7 @@ public class User implements Comparable<User> {
             throw new NullPointerException("Other user is null.");
         }
 
-        int i = this.age < other.getAge() ? -1 : (this.age == other.getAge() ? 0 : 1);
+        int i = new Integer(this.age).compareTo(other.age);
         if (i != 0) {
             return i;
         }
