@@ -1,0 +1,4 @@
+/**
+ *
+ */
+package alnero.sorting.stringCompare;
