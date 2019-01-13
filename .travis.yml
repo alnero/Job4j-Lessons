@@ -1,0 +1,16 @@
+# Java in use
+language: java
+# Regular user
+sudo: false
+
+# Collect JaCoCo statistics via https://codecov.io/
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+# If failure inform via e-mail
+notifications:
+  email:
+    recipients:
+      -kimosicheg@yandex.ru
+    on_success: never # default: change
+    on_failure: always # default: always
