@@ -107,16 +107,35 @@ public class Bank {
     }
 
     /**
+     * Find user account by user passport and account requisites.
+     * If account not found or null is used as one of arguments null is returned.
+     * @param passport user passport
+     * @param requisites account requisites
+     * @return user account or null
+     */
+    public Account findUserAccount(String passport, String requisites) {
+        if (passport == null || requisites == null) {
+            return null;
+        }
+        Account userAccount = null;
+        for (Account account : this.getUserAccounts(passport)) {
+            if (requisites == account.getRequisites()) {
+                userAccount = account;
+            }
+        }
+        return userAccount;
+    }
+
+    /**
      * Transfer amounts from one account to other one.
      * Transfer can happen between accounts of one user.
-     * Accounts are searched by user passports and accounts requisites.
+     * Accounts are searched by user passports and account's requisites.
      * Transfer not done and false is returned when:
      * - null is used as any of parameters
      * - negative or zero amount is transferred
-     * - source of destination account is not found
+     * - source or destination account is not found
      * - amount of source account is not enough for transfer
-     * To overcome float arithmetic tricks value of source account and amount of transfer
-     * are rounded to 3 decimal places, thus minimum value to transfer is 0.0005.
+     * Minimum value to transfer is 0.0005.
      * @param srcPassport source user passport
      * @param srcRequisite source account requisites
      * @param destPassport destination user passport
@@ -133,39 +152,14 @@ public class Bank {
         if (srcPassport == null
             || srcRequisite == null
             || destPassport == null
-            || destRequisite == null
-            || amount <= 0) {
+            || destRequisite == null) {
             return false;
         }
-
-        Account srcAccount = null;
-        for (Account account : this.getUserAccounts(srcPassport)) {
-            if (srcRequisite == account.getRequisites()) {
-                srcAccount = account;
-            }
-        }
-        if (srcAccount == null) {
+        Account srcAccount = findUserAccount(srcPassport, srcRequisite);
+        Account destAccount = findUserAccount(destPassport, destRequisite);
+        if (srcAccount == null || destAccount == null) {
             return false;
         }
-
-        Account destAccount = null;
-        for (Account account : this.getUserAccounts(destPassport)) {
-            if (destRequisite == account.getRequisites()) {
-                destAccount = account;
-            }
-        }
-        if (destAccount == null) {
-            return false;
-        }
-
-        double srcAccountValue = srcAccount.getValue();
-        if (Math.round(srcAccountValue * 1000.0) / 1000.0 - Math.round(amount * 1000.0) / 1000.0 < 0) {
-            return false;
-        }
-
-        srcAccount.setValue(Math.round(srcAccountValue * 1000.0) / 1000.0 - Math.round(amount * 1000.0) / 1000.0);
-        double destAccountValue = destAccount.getValue();
-        destAccount.setValue(Math.round(destAccountValue * 1000.0) / 1000.0 + Math.round(amount * 1000.0) / 1000.0);
-        return true;
+        return srcAccount.withdrawMoney(amount) && destAccount.addMoney(amount);
     }
 }

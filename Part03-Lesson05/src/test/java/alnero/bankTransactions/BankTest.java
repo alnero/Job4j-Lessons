@@ -1,11 +1,9 @@
 package alnero.bankTransactions;
 
 import org.junit.Test;
-
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
-
 
 import java.util.List;
 
@@ -230,6 +228,67 @@ public class BankTest {
     }
 
     /**
+     * When account is added to user it is found by user passport and requisites.
+     */
+    @Test
+    public void whenFindUserAccountThenCorrectUserAccountReturned() {
+        Bank bank = new Bank();
+        User user = new User("Alan", "1234567890");
+        Account account = new Account("00111111111111", 1.0);
+        bank.addUser(user);
+        bank.addAccountToUser("1234567890", account);
+        Account userAccount = bank.findUserAccount("1234567890", "00111111111111");
+        assertThat(userAccount, is(account));
+    }
+
+    /**
+     * When user does not have a required account, null is returned.
+     */
+    @Test
+    public void whenFindAccountNotAddedToUserThenNullReturned() {
+        Bank bank = new Bank();
+        User user = new User("Alan", "1234567890");
+        Account account = new Account("00111111111111", 1.0);
+        bank.addUser(user);
+        Account userAccount = bank.findUserAccount("1234567890", "00111111111111");
+        assertThat(userAccount, nullValue());
+    }
+
+    /**
+     * Find user account among multiple accounts.
+     */
+    @Test
+    public void whenAddThreeAccountsToUserThenCorrectAccountFound() {
+        Bank bank = new Bank();
+        User user = new User("Alan", "1234567890");
+        Account accountOne = new Account("00111111111111", 1.0);
+        Account accountTwo = new Account("00222222222222", 1.0);
+        Account accountThree = new Account("00333333333333", 1.0);
+        bank.addUser(user);
+        bank.addAccountToUser("1234567890", accountOne);
+        bank.addAccountToUser("1234567890", accountTwo);
+        bank.addAccountToUser("1234567890", accountThree);
+        Account userAccountTwo = bank.findUserAccount("1234567890", "00222222222222");
+        assertThat(userAccountTwo, is(accountTwo));
+    }
+
+    /**
+     * When using null as arguments to find user account null is returned.
+     */
+    @Test
+    public void whenUseNullAsPassportOrRequisitesToFindUserAccountThenNullReturned() {
+        Bank bank = new Bank();
+        User user = new User("Alan", "1234567890");
+        Account account = new Account("00111111111111", 1.0);
+        bank.addUser(user);
+        bank.addAccountToUser("1234567890", account);
+        Account userAccountWithNullPassport = bank.findUserAccount(null, "00111111111111");
+        assertThat(userAccountWithNullPassport, nullValue());
+        Account userAccountWithNullRequisites = bank.findUserAccount("1234567890", null);
+        assertThat(userAccountWithNullRequisites, nullValue());
+    }
+
+    /**
      * When using null as arguments to transfer amounts false is returned.
      */
     @Test
@@ -388,7 +447,7 @@ public class BankTest {
      * When trying to transfer less amount than possible true is returned and no transfer happens.
      */
     @Test
-    public void whenAmountIsLessThenMinTransferValueWhileTransferMoneyThenTrueReturned() {
+    public void whenAmountIsLessThenMinTransferValueWhileTransferMoneyThenFalseReturnedAndNoTransferHappens() {
         Bank bank = new Bank();
         User srcUser = new User("Source", "1234567890");
         Account srcAccount = new Account("11223344556677889900", 1.0);
@@ -404,7 +463,7 @@ public class BankTest {
                 "0987654321",
                 "00998877665544332211",
                 0.0004);
-        assertThat(resultWhenSrcValueLessThenAmount, is(true));
+        assertThat(resultWhenSrcValueLessThenAmount, is(false));
         double srcAccountValue = bank.getUserAccounts("1234567890").get(0).getValue();
         assertThat(srcAccountValue, is(1.0));
     }
