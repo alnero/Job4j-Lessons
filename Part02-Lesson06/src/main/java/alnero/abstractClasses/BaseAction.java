@@ -4,6 +4,8 @@ import alnero.TaskTracker;
 import alnero.TrackerInput;
 import alnero.innerClasses.UserAction;
 
+import java.util.function.Consumer;
+
 /**
  * Template class for user actions in Tracker App.
  */
@@ -24,7 +26,7 @@ public abstract class BaseAction implements UserAction {
     }
 
     @Override
-    public abstract void execute(TaskTracker taskTracker, TrackerInput input);
+    public abstract void execute(TaskTracker taskTracker, TrackerInput input, Consumer<String> output);
 
     @Override
     public int key() {

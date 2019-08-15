@@ -6,6 +6,8 @@ import alnero.TaskTracker;
 import alnero.TrackerInput;
 import alnero.abstractClasses.BaseAction;
 
+import java.util.function.Consumer;
+
 /**
  * Separate implementation of menu for Tracker app.
  */
@@ -20,15 +22,19 @@ public class MenuTracker {
     private TaskTracker taskTracker;
     /** Input used in menu and for user actions. */
     private TrackerInput input;
+    /** Output used in menu and for user actions. */
+    private Consumer<String> output;
 
     /**
      * For menu to work we need task tracker, input and to initialize user actions.
      * @param taskTracker tracker for tasks
      * @param input input for menu and user actions
+     * @param output output for menu and user actions
      */
-    public MenuTracker(TaskTracker taskTracker, TrackerInput input) {
+    public MenuTracker(TaskTracker taskTracker, TrackerInput input, Consumer<String> output) {
         this.input = input;
         this.taskTracker = taskTracker;
+        this.output = output;
 
         this.addUserActions();
     }
@@ -54,15 +60,15 @@ public class MenuTracker {
      * Show menu to user.
      */
     public void showMenu() {
-        System.out.println(String.format("Use MENU from 0 to %s :", userActions.length - 1));
-        System.out.println("-----------------------");
+        output.accept(String.format("Use MENU from 0 to %s :", userActions.length - 1));
+        output.accept("-----------------------");
 
         for (UserAction action : userActions) {
-            System.out.println(action.info());
+            output.accept(action.info());
         }
 
-        System.out.println("-----------------------");
-        System.out.println("Select:");
+        output.accept("-----------------------");
+        output.accept("Select:");
     }
 
     /**
@@ -70,7 +76,7 @@ public class MenuTracker {
      * @param key numeric key of user action
      */
     public void select(int key) {
-        userActions[key].execute(this.taskTracker, this.input);
+        userActions[key].execute(this.taskTracker, this.input, this.output);
     }
 
     // INNER CLASSES
@@ -90,8 +96,8 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(TaskTracker taskTracker, TrackerInput input) {
-            System.out.println(this.info());
+        public void execute(TaskTracker taskTracker, TrackerInput input, Consumer<String> output) {
+            output.accept(this.info());
 
             Task newTask = new Task();
 
@@ -103,11 +109,11 @@ public class MenuTracker {
             String taskDescription = input.readInputLine();
             newTask.setDescription(taskDescription);
 
-            System.out.println(System.lineSeparator() + newTask);
+            output.accept(System.lineSeparator() + newTask);
 
             taskTracker.add(newTask);
 
-            System.out.println("Task added to tracker successfully!" + System.lineSeparator());
+            output.accept("Task added to tracker successfully!" + System.lineSeparator());
         }
     }
 
@@ -125,18 +131,18 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(TaskTracker taskTracker, TrackerInput input) {
-            System.out.println(this.info());
+        public void execute(TaskTracker taskTracker, TrackerInput input, Consumer<String> output) {
+            output.accept(this.info());
 
             Task[] allTasks = taskTracker.findAll();
 
-            System.out.println("Total number of tasks in tracker: " + allTasks.length + System.lineSeparator());
+            output.accept("Total number of tasks in tracker: " + allTasks.length + System.lineSeparator());
 
             for (Task task : allTasks) {
-                System.out.println(task);
+                output.accept(task.toString());
             }
 
-            System.out.println("That was list of all tasks in tracker!" + System.lineSeparator());
+            output.accept("That was list of all tasks in tracker!" + System.lineSeparator());
         }
     }
 
@@ -155,22 +161,22 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(TaskTracker taskTracker, TrackerInput input) {
-            System.out.println(this.info());
+        public void execute(TaskTracker taskTracker, TrackerInput input, Consumer<String> output) {
+            output.accept(this.info());
 
-            System.out.println("Do you have ID of the task? (Y/N)");
+            output.accept("Do you have ID of the task? (Y/N)");
             boolean userHasIdToEdit = input.positiveAnswerGiven();
 
             if (userHasIdToEdit) {
-                System.out.println("Please enter task ID (e.g. 41731869482685287):");
+                output.accept("Please enter task ID (e.g. 41731869482685287):");
                 Long editTaskId = input.readInputId();
 
                 Task editTask = taskTracker.findById(editTaskId);
 
                 if (editTask == null) {
-                    System.out.println("Sorry no task found!" + System.lineSeparator());
+                    output.accept("Sorry no task found!" + System.lineSeparator());
                 } else {
-                    System.out.println(editTask);
+                    output.accept(editTask.toString());
 
                     System.out.print("Enter Task NAME: ");
                     String editName = input.readInputLine();
@@ -182,12 +188,12 @@ public class MenuTracker {
 
                     taskTracker.update(editTask);
 
-                    System.out.println(editTask);
+                    output.accept(editTask.toString());
 
-                    System.out.println("Task changed successfully!" + System.lineSeparator());
+                    output.accept("Task changed successfully!" + System.lineSeparator());
                 }
             } else {
-                System.out.println("Please find task ID!" + System.lineSeparator());
+                output.accept("Please find task ID!" + System.lineSeparator());
             }
         }
     }
@@ -208,35 +214,35 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(TaskTracker taskTracker, TrackerInput input) {
-            System.out.println(this.info());
+        public void execute(TaskTracker taskTracker, TrackerInput input, Consumer<String> output) {
+            output.accept(this.info());
 
-            System.out.println("Do you have ID of the task? (Y/N)");
+            output.accept("Do you have ID of the task? (Y/N)");
             boolean userHasIdToDelete = input.positiveAnswerGiven();
 
             if (userHasIdToDelete) {
-                System.out.println("Please enter task ID (e.g. 41731869482685287):");
+                output.accept("Please enter task ID (e.g. 41731869482685287):");
                 Long editTaskId = input.readInputId();
 
                 Task deleteTask = taskTracker.findById(editTaskId);
 
                 if (deleteTask == null) {
-                    System.out.println("Sorry no task found!" + System.lineSeparator());
+                    output.accept("Sorry no task found!" + System.lineSeparator());
                 } else {
-                    System.out.println(deleteTask);
+                    output.accept(deleteTask.toString());
 
-                    System.out.println("Are you sure to delete? (Y/N)");
+                    output.accept("Are you sure to delete? (Y/N)");
                     boolean userSureToDelete = input.positiveAnswerGiven();
 
                     if (userSureToDelete) {
                         taskTracker.delete(deleteTask);
-                        System.out.println("Task deleted successfully!" + System.lineSeparator());
+                        output.accept("Task deleted successfully!" + System.lineSeparator());
                     } else {
-                        System.out.println("Abort deletion, return back to MENU" + System.lineSeparator());
+                        output.accept("Abort deletion, return back to MENU" + System.lineSeparator());
                     }
                 }
             } else {
-                System.out.println("Please find task ID!" + System.lineSeparator());
+                output.accept("Please find task ID!" + System.lineSeparator());
             }
         }
     }
@@ -258,19 +264,19 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(TaskTracker taskTracker, TrackerInput input) {
-            System.out.println(this.info());
+        public void execute(TaskTracker taskTracker, TrackerInput input, Consumer<String> output) {
+            output.accept(this.info());
 
-            System.out.println("Please enter task ID (e.g. 41731869482685287):");
+            output.accept("Please enter task ID (e.g. 41731869482685287):");
             long idToFind = input.readInputId();
 
             Task taskFoundById = taskTracker.findById(idToFind);
 
             if (taskFoundById == null) {
-                System.out.println("Sorry no task found!" + System.lineSeparator());
+                output.accept("Sorry no task found!" + System.lineSeparator());
             } else {
-                System.out.println(taskFoundById);
-                System.out.println("Task found!" + System.lineSeparator());
+                output.accept(taskFoundById.toString());
+                output.accept("Task found!" + System.lineSeparator());
             }
         }
     }
@@ -290,21 +296,21 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(TaskTracker taskTracker, TrackerInput input) {
-            System.out.println(this.info());
+        public void execute(TaskTracker taskTracker, TrackerInput input, Consumer<String> output) {
+            output.accept(this.info());
 
-            System.out.println("Please enter name to search for:");
+            output.accept("Please enter name to search for:");
             String nameToFind = input.readInputLine();
 
             Task[] tasksFoundByName = taskTracker.findByName(nameToFind);
 
             if (tasksFoundByName.length == 0) {
-                System.out.println("Sorry no task found!" + System.lineSeparator());
+                output.accept("Sorry no task found!" + System.lineSeparator());
             } else {
                 for (Task task : tasksFoundByName) {
-                    System.out.println(task);
+                    output.accept(task.toString());
                 }
-                System.out.println("Tasks found!" + System.lineSeparator());
+                output.accept("Tasks found!" + System.lineSeparator());
             }
         }
     }
@@ -327,22 +333,22 @@ class AddCommentToTask extends BaseAction {
     }
 
     @Override
-    public void execute(TaskTracker taskTracker, TrackerInput input) {
-        System.out.println(this.info());
+    public void execute(TaskTracker taskTracker, TrackerInput input, Consumer<String> output) {
+        output.accept(this.info());
 
-        System.out.println("Do you have ID of the task? (Y/N)");
+        output.accept("Do you have ID of the task? (Y/N)");
         boolean userHasIdToAddComment = input.positiveAnswerGiven();
 
         if (userHasIdToAddComment) {
-            System.out.println("Please enter task ID (e.g. 41731869482685287):");
+            output.accept("Please enter task ID (e.g. 41731869482685287):");
             long addCommentTaskId = input.readInputId();
 
             Task addCommentTask = taskTracker.findById(addCommentTaskId);
 
             if (addCommentTask == null) {
-                System.out.println("Sorry no task found!" + System.lineSeparator());
+                output.accept("Sorry no task found!" + System.lineSeparator());
             } else {
-                System.out.println(addCommentTask);
+                output.accept(addCommentTask.toString());
 
                 System.out.print("Enter your comment for the task: ");
                 String inputComment = input.readInputLine();
@@ -352,12 +358,12 @@ class AddCommentToTask extends BaseAction {
                 addCommentTask.addComment(userComment);
 
                 taskTracker.update(addCommentTask);
-                System.out.println(addCommentTask);
+                output.accept(addCommentTask.toString());
 
-                System.out.println("Comment added to task successfully!" + System.lineSeparator());
+                output.accept("Comment added to task successfully!" + System.lineSeparator());
             }
         } else {
-            System.out.println("Please find task ID" + System.lineSeparator());
+            output.accept("Please find task ID" + System.lineSeparator());
         }
     }
 }
@@ -376,7 +382,7 @@ class Exit extends BaseAction {
     }
 
     @Override
-    public void execute(TaskTracker taskTracker, TrackerInput input) {
-        System.out.println(this.info());
+    public void execute(TaskTracker taskTracker, TrackerInput input, Consumer<String> output) {
+        output.accept(this.info());
     }
 }

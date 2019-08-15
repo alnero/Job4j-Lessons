@@ -5,7 +5,7 @@ import alnero.TaskTracker;
 import alnero.TrackerInput;
 import alnero.StubInput;
 
-import org.junit.After;
+//import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +13,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
+import java.util.function.Consumer;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.not;
@@ -35,6 +36,8 @@ public class StartUIStubInputWithSystemOutputRedirectTest {
     private PrintStream originalSystemOut;
     /** Mock output stream object for redirection of default system output. */
     private ByteArrayOutputStream outputContent;
+    /** Common consumer to output strings. */
+    private Consumer<String> output;
 
     /** Create common task tracker and stub input dictionary objects before tests. */
     @Before
@@ -46,16 +49,24 @@ public class StartUIStubInputWithSystemOutputRedirectTest {
     /** Save original default system output and redirect to mock output stream. */
     @Before
     public void redirectSystemOutputToSeparateStream() {
-        this.originalSystemOut = System.out;
         this.outputContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(this.outputContent));
+        PrintStream stdOut = new PrintStream(this.outputContent);
+        this.output = new Consumer<String>() {
+            @Override
+            public void accept(String s) {
+                stdOut.println(s);
+            }
+        };
+
+//        System.setOut(new PrintStream(this.outputContent));
+//        this.originalSystemOut = System.out;
     }
 
-    /** Reinstate original default system output. */
-    @After
-    public void reinstateSystemOutputToDefault() {
-        System.setOut(this.originalSystemOut);
-    }
+//    /** Reinstate original default system output. */
+//    @After
+//    public void reinstateSystemOutputToDefault() {
+//        System.setOut(this.originalSystemOut);
+//    }
 
     /** Test item "1. Show all tasks" of UI menu, all tasks from tracker are printed to output. */
     @Test
@@ -79,7 +90,7 @@ public class StartUIStubInputWithSystemOutputRedirectTest {
         this.stubInputDictionary.put("stubInputLine", new String[]{"1", "7"});
         this.stubInput = new StubInput(this.stubInputDictionary);
 
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Assert.assertThat(outputContent.toString(), containsString(mockTaskOne.toString()));
         Assert.assertThat(outputContent.toString(), containsString(mockTaskTwo.toString()));
@@ -100,7 +111,7 @@ public class StartUIStubInputWithSystemOutputRedirectTest {
         this.stubInputDictionary.put("stubInputId", new String[]{Long.toString(testTaskId)});
         this.stubInput = new StubInput(this.stubInputDictionary);
 
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Assert.assertThat(outputContent.toString(), not(containsString(mockTask.toString())));
     }
@@ -121,7 +132,7 @@ public class StartUIStubInputWithSystemOutputRedirectTest {
         this.stubInputDictionary.put("stubInputId", new String[]{Long.toString(testTaskId)});
         this.stubInput = new StubInput(this.stubInputDictionary);
 
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Assert.assertThat(outputContent.toString(), containsString(mockTask.toString()));
     }
@@ -139,7 +150,7 @@ public class StartUIStubInputWithSystemOutputRedirectTest {
         this.stubInputDictionary.put("stubInputLine", new String[]{"5", "WRONG SEARCH STRING", "7"});
         this.stubInput = new StubInput(this.stubInputDictionary);
 
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Assert.assertThat(outputContent.toString(), not(containsString(mockTask.toString())));
     }
@@ -157,7 +168,7 @@ public class StartUIStubInputWithSystemOutputRedirectTest {
         this.stubInputDictionary.put("stubInputLine", new String[]{"5", "Test", "7"});
         this.stubInput = new StubInput(this.stubInputDictionary);
 
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Assert.assertThat(outputContent.toString(), containsString(mockTask.toString()));
     }
@@ -180,7 +191,7 @@ public class StartUIStubInputWithSystemOutputRedirectTest {
 
         this.stubInput = new StubInput(this.stubInputDictionary);
 
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Assert.assertThat(outputContent.toString(), containsString(mockTask.toString()));
     }

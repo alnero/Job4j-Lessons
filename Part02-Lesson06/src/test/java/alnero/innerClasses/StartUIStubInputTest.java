@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.function.Consumer;
 
 import static org.hamcrest.core.Is.is;
 
@@ -26,12 +27,15 @@ public class StartUIStubInputTest {
     private final int initialTaskTrackerSize = 10;
     /** Common object for automatic stub inputs. */
     private TrackerInput stubInput;
+    /** Common consumer to output strings. */
+    private Consumer<String> output;
 
     /** Create common task tracker and stub input dictionary objects before tests. */
     @Before
     public void createCommonTaskTrackerAndStubInputDictionaryObjectsForTesting() {
         this.taskTracker = new TaskTracker(initialTaskTrackerSize);
         this.stubInputDictionary = new HashMap<>();
+        this.output = str -> System.out.println(str);
     }
 
     /** Test item "0. Add new task" of UI menu, one task created and stored in tracker. */
@@ -39,7 +43,7 @@ public class StartUIStubInputTest {
     public void whenAddOneTaskThenOnlyOneTaskStoredInTracker() {
         this.stubInputDictionary.put("stubInputLine", new String[]{"0", "", "", "7"});
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Assert.assertThat(this.taskTracker.findAll().length, is(1));
     }
@@ -55,7 +59,7 @@ public class StartUIStubInputTest {
                 }
         );
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Assert.assertThat(this.taskTracker.findAll().length, is(3));
     }
@@ -66,7 +70,7 @@ public class StartUIStubInputTest {
     public void whenAddTaskWithNameAndDescriptionThenTaskInTrackerHasProperNameAndDescription() {
         this.stubInputDictionary.put("stubInputLine", new String[]{"0", "Test task", "Test description", "7"});
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Task taskFromTracker = this.taskTracker.findAll()[0];
         Assert.assertThat(taskFromTracker.getName(), is("Test task"));
@@ -87,7 +91,7 @@ public class StartUIStubInputTest {
         this.stubInputDictionary.put("stubYesNoAnswer", new String[]{"N"});
 
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Task taskFromTracker = this.taskTracker.findAll()[0];
         Assert.assertThat(taskFromTracker.getName(), is("Test task"));
@@ -109,7 +113,7 @@ public class StartUIStubInputTest {
         this.stubInputDictionary.put("stubInputId", new String[]{Long.toString(testTaskId)});
 
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Assert.assertThat(this.taskTracker.findAll().length, is(0));
     }
@@ -132,7 +136,7 @@ public class StartUIStubInputTest {
 
 
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Task taskFromTracker = this.taskTracker.findAll()[0];
         Assert.assertThat(taskFromTracker.getName(), is("Test task"));
@@ -156,7 +160,7 @@ public class StartUIStubInputTest {
         this.stubInputDictionary.put("stubInputId", new String[]{Long.toString(testTaskId)});
 
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Task taskFromTracker = this.taskTracker.findAll()[0];
         Assert.assertThat(taskFromTracker.getName(), is("EDITED Test task"));
@@ -177,7 +181,7 @@ public class StartUIStubInputTest {
         this.stubInputDictionary.put("stubYesNoAnswer", new String[]{"N"});
 
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         // Test task is not deleted from Tracker
         Assert.assertThat(this.taskTracker.findAll().length, is(1));
@@ -203,7 +207,7 @@ public class StartUIStubInputTest {
         this.stubInputDictionary.put("stubInputId", new String[]{Long.toString(testTaskId)});
 
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Assert.assertThat(this.taskTracker.findAll().length, is(0));
     }
@@ -226,7 +230,7 @@ public class StartUIStubInputTest {
 
 
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         // Test task is not deleted from Tracker
         Assert.assertThat(this.taskTracker.findAll().length, is(1));
@@ -255,7 +259,7 @@ public class StartUIStubInputTest {
 
 
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         // Test task is not deleted from Tracker
         Assert.assertThat(this.taskTracker.findAll().length, is(1));
@@ -284,7 +288,7 @@ public class StartUIStubInputTest {
 
 
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         // Test task is deleted, Tracker is empty
         Assert.assertThat(this.taskTracker.findAll().length, is(0));
@@ -304,7 +308,7 @@ public class StartUIStubInputTest {
         this.stubInputDictionary.put("stubYesNoAnswer", new String[]{"N"});
 
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         // Test task is not changed
         Task taskFromTracker = this.taskTracker.findAll()[0];
@@ -328,7 +332,7 @@ public class StartUIStubInputTest {
         this.stubInputDictionary.put("stubInputId", new String[]{Long.toString(falseTestTaskId)});
 
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         // Test task is not changed
         Task taskFromTracker = this.taskTracker.findAll()[0];
@@ -352,7 +356,7 @@ public class StartUIStubInputTest {
         this.stubInputDictionary.put("stubInputId", new String[]{Long.toString(testTaskId)});
 
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Task taskFromTracker = this.taskTracker.findAll()[0];
         Assert.assertThat(taskFromTracker.getComments().length, is(1));
@@ -365,7 +369,7 @@ public class StartUIStubInputTest {
     public void whenWithEmptyTrackerOnlyExitIsChosenInUIMenuThenTrackerIsEmpty() {
         this.stubInputDictionary.put("stubInputLine", new String[]{"7"});
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Assert.assertThat(this.taskTracker.findAll().length, is(0));
     }
@@ -375,7 +379,7 @@ public class StartUIStubInputTest {
     public void whenWithEmptyTrackerUIMenuConstantsNotChosenProperlyThenTrackerIsEmpty() {
         this.stubInputDictionary.put("stubInputLine", new String[]{"A", "B", "C", "7"});
         this.stubInput = new StubInput(this.stubInputDictionary);
-        new StartUI(this.taskTracker, this.stubInput).init();
+        new StartUI(this.taskTracker, this.stubInput, this.output).init();
 
         Assert.assertThat(this.taskTracker.findAll().length, is(0));
     }

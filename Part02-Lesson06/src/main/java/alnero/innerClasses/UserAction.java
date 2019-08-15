@@ -3,6 +3,8 @@ package alnero.innerClasses;
 import alnero.TaskTracker;
 import alnero.TrackerInput;
 
+import java.util.function.Consumer;
+
 /**
  * Common methods for all user actions in Tracker app.
  */
@@ -23,6 +25,7 @@ public interface UserAction {
      * Execution of user action. Task tracker and input to be supplied.
      * @param taskTracker tracker for tasks
      * @param input input used in user action
+     * @param output output used in user action
      */
-    void execute(TaskTracker taskTracker, TrackerInput input);
+    void execute(TaskTracker taskTracker, TrackerInput input, Consumer<String> output);
 }

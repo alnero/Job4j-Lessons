@@ -4,6 +4,8 @@ import alnero.innerClasses.MenuTracker;
 import alnero.TaskTracker;
 import alnero.TrackerInput;
 
+import java.util.function.Consumer;
+
 /**
  * Main start point for the Tracker App.
  * Menu implemented via separate class MenuTracker.
@@ -18,15 +20,19 @@ public class StartUI {
     private TaskTracker taskTracker;
     /** Input used in UI interaction. */
     private TrackerInput input;
+    /** Output used in UI interaction. */
+    private Consumer<String> output;
 
     /**
      * Setting main objects - tracker and input used in UI interaction.
      * @param taskTracker main tracker of tasks
      * @param input main input used for interaction
+     * @param output main output used for interaction
      */
-    public StartUI(TaskTracker taskTracker, TrackerInput input) {
+    public StartUI(TaskTracker taskTracker, TrackerInput input, Consumer<String> output) {
         this.taskTracker = taskTracker;
         this.input = input;
+        this.output = output;
     }
 
     /**
@@ -38,7 +44,7 @@ public class StartUI {
         System.out.println("Here you can manage your tasks: create, read, edit, delete.");
         System.out.println();
 
-        MenuTracker menu = new MenuTracker(taskTracker, input);
+        MenuTracker menu = new MenuTracker(this.taskTracker, this.input, this.output);
 
         // generate acceptable values for input in menu
         String[] possibleMenuValues = new String[MenuTracker.MAX_NUMBER_OF_TASKS];
@@ -70,7 +76,13 @@ public class StartUI {
     public static void main(String[] args) {
         TaskTracker taskTracker = new TaskTracker(INITIAL_TASK_TRACKER_SIZE);
         TrackerInput consoleInput = new ValidateMenuInput();
+        Consumer<String> output = new Consumer<String>() {
+            @Override
+            public void accept(String str) {
+                System.out.println(str);
+            }
+        };
 
-        new StartUI(taskTracker, consoleInput).init();
+        new StartUI(taskTracker, consoleInput, output).init();
     }
 }

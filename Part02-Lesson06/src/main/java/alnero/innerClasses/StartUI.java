@@ -4,6 +4,8 @@ import alnero.ConsoleInput;
 import alnero.TaskTracker;
 import alnero.TrackerInput;
 
+import java.util.function.Consumer;
+
 /**
  * Main start point for the Tracker App.
  * Menu implemented via separate class MenuTracker.
@@ -17,15 +19,19 @@ public class StartUI {
     private TaskTracker taskTracker;
     /** Input used in UI interaction. */
     private TrackerInput input;
+    /** Output used in UI interaction. */
+    private Consumer<String> output;
 
     /**
      * Setting main objects - tracker and input used in UI interaction.
      * @param taskTracker main tracker of tasks
      * @param input main input used for interaction
+     * @param output main output used for interaction
      */
-    public StartUI(TaskTracker taskTracker, TrackerInput input) {
+    public StartUI(TaskTracker taskTracker, TrackerInput input, Consumer<String> output) {
         this.taskTracker = taskTracker;
         this.input = input;
+        this.output = output;
     }
 
     /**
@@ -33,11 +39,11 @@ public class StartUI {
      * Method includes welcome message and starts menu presentation.
      */
     public void init() {
-        System.out.println("Welcome to Task Tracker!");
-        System.out.println("Here you can manage your tasks: create, read, edit, delete.");
-        System.out.println();
+        output.accept("Welcome to Task Tracker!");
+        output.accept("Here you can manage your tasks: create, read, edit, delete.");
+        output.accept("");
 
-        MenuTracker menu = new MenuTracker(taskTracker, input);
+        MenuTracker menu = new MenuTracker(taskTracker, input, output);
 
         while (true) {
             menu.showMenu();
@@ -67,7 +73,13 @@ public class StartUI {
     public static void main(String[] args) {
         TaskTracker taskTracker = new TaskTracker(INITIAL_TASK_TRACKER_SIZE);
         TrackerInput consoleInput = new ConsoleInput();
+        Consumer<String> output = new Consumer<String>() {
+            @Override
+            public void accept(String str) {
+                System.out.println(str);
+            }
+        };
 
-        new StartUI(taskTracker, consoleInput).init();
+        new StartUI(taskTracker, consoleInput, output).init();
     }
 }
