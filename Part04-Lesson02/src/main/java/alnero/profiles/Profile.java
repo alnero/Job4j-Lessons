@@ -40,8 +40,8 @@ public class Profile {
         List<Address> result = profiles
                 .stream()
                 .map(profile -> profile.getAddress())
-                .distinct()
                 .sorted(Comparator.comparing(address -> address.getCity()))
+                .distinct()
                 .collect(Collectors.toList());
         return result;
     }
