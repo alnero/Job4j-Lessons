@@ -37,6 +37,14 @@ public class Address {
         this.apartment = apartment;
     }
 
+    /**
+     * Get name of the city.
+     * @return name of the city
+     */
+    public String getCity() {
+        return city;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

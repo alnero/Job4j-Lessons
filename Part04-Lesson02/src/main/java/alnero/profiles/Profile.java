@@ -1,5 +1,6 @@
 package alnero.profiles;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,21 @@ public class Profile {
      */
     public List<Address> collect(List<Profile> profiles) {
         List<Address> result = profiles.stream().map(profile -> profile.getAddress()).collect(Collectors.toList());
+        return result;
+    }
+
+    /**
+     * Generate distinct and sorted list of addresses from list of profiles.
+     * @param profiles list of profiles
+     * @return distinct and sorted list of addresses
+     */
+    public List<Address> collectDistinctAndSorted(List<Profile> profiles) {
+        List<Address> result = profiles
+                .stream()
+                .map(profile -> profile.getAddress())
+                .distinct()
+                .sorted(Comparator.comparing(address -> address.getCity()))
+                .collect(Collectors.toList());
         return result;
     }
 
