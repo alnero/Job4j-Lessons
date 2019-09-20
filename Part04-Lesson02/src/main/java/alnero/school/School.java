@@ -21,13 +21,13 @@ public class School {
     }
 
     /**
-     * Transform list of students to map <surname: student>.
+     * Transform list of students to map <surname: student>. In case of key collisions only first created pair survives.
      * @param students list of students
      * @return map of students <surname: student>
      */
     public Map<String, Student> toMap(List<Student> students) {
-        Map<String, Student> result = students.stream().distinct().collect(Collectors.toMap(
-                student -> student.getSurname(), student -> student
+        Map<String, Student> result = students.stream().collect(Collectors.toMap(
+                student -> student.getSurname(), student -> student, (s1, s2) -> s1
         ));
         return result;
     }
