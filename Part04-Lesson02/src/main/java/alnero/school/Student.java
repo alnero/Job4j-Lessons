@@ -12,10 +12,16 @@ public class Student {
     private int score;
 
     /**
+     * Surname of student.
+     */
+    private String surname;
+
+    /**
      * Student is created with a score. Score is checked to be in range [0,100].
      * @param score score is in range [0, 100]
+     * @param surname student surname
      */
-    public Student(int score) {
+    public Student(int score, String surname) {
         if (score < 0) {
             score = 0;
         }
@@ -23,6 +29,7 @@ public class Student {
             score = 100;
         }
         this.score = score;
+        this.surname = surname;
     }
 
     /**
@@ -33,6 +40,14 @@ public class Student {
         return this.score;
     }
 
+    /** Get student surname.
+     * @return student surname
+     */
+    public String getSurname() {
+        return this.surname;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -42,11 +57,11 @@ public class Student {
             return false;
         }
         Student student = (Student) o;
-        return score == student.score;
+        return score == student.score && surname.equals(student.surname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(score);
+        return Objects.hash(score, surname);
     }
 }

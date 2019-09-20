@@ -18,7 +18,7 @@ public class StudentTest {
     @Test
     public void whenCreateStudentWithScoreInRangeFrom0To100ThenStudentWithCorrectScoreCreated() {
         int randomScore = ThreadLocalRandom.current().nextInt(0, 101);
-        Student student = new Student(randomScore);
+        Student student = new Student(randomScore, "blank");
         int studentScore = student.getScore();
         assertTrue(0 <= studentScore && studentScore <= 100);
         assertEquals(studentScore, randomScore);
@@ -30,7 +30,7 @@ public class StudentTest {
     @Test
     public void whenCreateStudentWithScoreLessThanZeroThenStudentWithZeroScoreCreated() {
         int negativeRandomScore = ThreadLocalRandom.current().nextInt(1, Integer.MAX_VALUE) * (-1);
-        Student student = new Student(negativeRandomScore);
+        Student student = new Student(negativeRandomScore, "blank");
         int studentScore = student.getScore();
         assertEquals(studentScore, 0);
     }
@@ -41,7 +41,7 @@ public class StudentTest {
     @Test
     public void whenCreateStudentWithScoreMoreThanOneHundredThenStudentWithOneHundredScoreCreated() {
         int randomMoreThanOneHundredScore = ThreadLocalRandom.current().nextInt(101, Integer.MAX_VALUE);
-        Student student = new Student(randomMoreThanOneHundredScore);
+        Student student = new Student(randomMoreThanOneHundredScore, "blank");
         int studentScore = student.getScore();
         assertEquals(studentScore, 100);
     }
