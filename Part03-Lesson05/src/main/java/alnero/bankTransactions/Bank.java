@@ -56,21 +56,20 @@ public class Bank {
         if (passport == null || account == null) {
             return;
         }
-        List<Account> userAccounts = null;
-        for (User user : this.deposits.keySet()) {
-            if (passport.equals(user.getPassport())) {
-                userAccounts = this.deposits.get(user);
-            }
-        }
-        if (userAccounts == null || userAccounts.contains(account)) {
+        Map.Entry<User, List<Account>> userWithAccounts = this.deposits.entrySet()
+                .stream()
+                .filter(entry -> passport.equals(entry.getKey().getPassport()))
+                .findFirst()
+                .orElse(null);
+        if (userWithAccounts == null || userWithAccounts.getValue().contains(account)) {
             return;
         }
-        userAccounts.add(account);
+        userWithAccounts.getValue().add(account);
     }
 
     /**
      * Deleting account from user. User is searched by passport.
-     * If no user not found no deletion happens.
+     * If user not found no deletion happens.
      * If null is used as any of arguments no deletion happens.
      * @param passport user passport
      * @param account user account
@@ -79,10 +78,13 @@ public class Bank {
         if (passport == null || account == null) {
             return;
         }
-        for (User user : this.deposits.keySet()) {
-            if (passport.equals(user.getPassport())) {
-                this.deposits.get(user).remove(account);
-            }
+        Map.Entry<User, List<Account>> userWithAccounts = this.deposits.entrySet()
+                .stream()
+                .filter(entry -> passport.equals(entry.getKey().getPassport()))
+                .findFirst()
+                .orElse(null);
+        if (userWithAccounts != null) {
+            userWithAccounts.getValue().remove(account);
         }
     }
 
@@ -96,14 +98,16 @@ public class Bank {
         if (passport == null) {
             return null;
         }
-        List<Account> userAccounts = null;
-        for (User user : this.deposits.keySet()) {
-            if (passport.equals(user.getPassport())) {
-                userAccounts = new ArrayList<>();
-                userAccounts.addAll(this.deposits.get(user));
-            }
+        Map.Entry<User, List<Account>> userWithAccounts = this.deposits.entrySet()
+                .stream()
+                .filter(entry -> passport.equals(entry.getKey().getPassport()))
+                .findFirst()
+                .orElse(null);
+        List<Account> listOfUserAccounts = null;
+        if (userWithAccounts != null) {
+            listOfUserAccounts = new ArrayList<>(userWithAccounts.getValue());
         }
-        return userAccounts;
+        return listOfUserAccounts;
     }
 
     /**
@@ -117,12 +121,11 @@ public class Bank {
         if (passport == null || requisites == null) {
             return null;
         }
-        Account userAccount = null;
-        for (Account account : this.getUserAccounts(passport)) {
-            if (requisites == account.getRequisites()) {
-                userAccount = account;
-            }
-        }
+        Account userAccount = this.getUserAccounts(passport)
+                .stream()
+                .filter(account -> requisites.equals(account.getRequisites()))
+                .findFirst()
+                .orElse(null);
         return userAccount;
     }
 
