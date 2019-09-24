@@ -90,22 +90,22 @@ public class Bank {
 
     /**
      * Get copy of list of user accounts. User is searched by passport.
-     * If user not found or null is used as argument null is returned.
+     * If user not found or null is used as argument empty list is returned.
      * @param passport user passport
-     * @return copy of list of user account or null
+     * @return copy of list of user account or empty list
      */
     public List<Account> getUserAccounts(String passport) {
+        List<Account> listOfUserAccounts = new ArrayList<>();
         if (passport == null) {
-            return null;
+            return listOfUserAccounts;
         }
         Map.Entry<User, List<Account>> userWithAccounts = this.deposits.entrySet()
                 .stream()
                 .filter(entry -> passport.equals(entry.getKey().getPassport()))
                 .findFirst()
                 .orElse(null);
-        List<Account> listOfUserAccounts = null;
         if (userWithAccounts != null) {
-            listOfUserAccounts = new ArrayList<>(userWithAccounts.getValue());
+            listOfUserAccounts.addAll(userWithAccounts.getValue());
         }
         return listOfUserAccounts;
     }

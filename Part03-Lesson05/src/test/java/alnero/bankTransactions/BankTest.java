@@ -3,6 +3,7 @@ package alnero.bankTransactions;
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.List;
@@ -24,14 +25,14 @@ public class BankTest {
     }
 
     /**
-     * When adding null instead of user, no user added and his list of account is null.
+     * When adding null instead of user, no user added and his list of account is empty.
      */
     @Test
-    public void whenAddNullInsteadOfUserThenHisListOfAccountsIsNull() {
+    public void whenAddNullInsteadOfUserThenHisListOfAccountsIsEmpty() {
         Bank bank = new Bank();
         bank.addUser(null);
         List<Account> userAccounts = bank.getUserAccounts("1234567890");
-        assertThat(userAccounts, nullValue());
+        assertEquals(userAccounts.size(), 0);
     }
 
     /**
@@ -54,13 +55,13 @@ public class BankTest {
      * When deleting user from bank his list of accounts become null.
      */
     @Test
-    public void whenDeleteUserThenHisListOfAccountsIsNull() {
+    public void whenDeleteUserThenHisListOfAccountsIsEmpty() {
         Bank bank = new Bank();
         User user = new User("Alan", "1234567890");
         bank.addUser(user);
         bank.deleteUser(user);
         List<Account> userAccounts = bank.getUserAccounts("1234567890");
-        assertThat(userAccounts, nullValue());
+        assertEquals(userAccounts.size(), 0);
     }
 
     /**
@@ -80,12 +81,12 @@ public class BankTest {
      * When trying to delete user who is not added to bank nothing happens.
      */
     @Test
-    public void whenDeleteUserWhichIsNotInBankThenHisListOfAccountsIsNull() {
+    public void whenDeleteUserWhichIsNotInBankThenHisListOfAccountsIsEmpty() {
         Bank bank = new Bank();
         User user = new User("Alan", "1234567890");
         bank.deleteUser(user);
         List<Account> userAccounts = bank.getUserAccounts("1234567890");
-        assertThat(userAccounts, nullValue());
+        assertEquals(userAccounts.size(), 0);
     }
 
     /**
@@ -214,17 +215,17 @@ public class BankTest {
     }
 
     /**
-     * When using null as passport to get user accounts, null is returned.
+     * When using null as passport to get user accounts, empty list is returned.
      */
     @Test
-    public void whenUseNullAsPassportToGetUserAccountsThenNullIsReturned() {
+    public void whenUseNullAsPassportToGetUserAccountsThenEmptyListIsReturned() {
         Bank bank = new Bank();
         User user = new User("Alan", "1234567890");
         Account account = new Account("00111111111111", 1.0);
         bank.addUser(user);
         bank.addAccountToUser("1234567890", account);
         List<Account> userAccounts = bank.getUserAccounts(null);
-        assertThat(userAccounts, nullValue());
+        assertEquals(userAccounts.size(), 0);
     }
 
     /**
