@@ -1,7 +1,5 @@
 package alnero;
 
-import com.sun.glass.ui.Pixels;
-
 /**
  * Class for the profession of Engineer.
  */
@@ -44,8 +42,8 @@ public class Engineer {
      * @param thing this object if to be drawn
      * @return new array of Pixels
      */
-    public Pixels[] makeDrawing(Object thing) {
-        return new Pixels[1000];
+    public Drawing makeDrawing(Object thing) {
+        return new Drawing();
     }
 
     /**
