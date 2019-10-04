@@ -1,18 +1,21 @@
 package alnero.school;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Set;
+import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.ArrayList;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Testing collect method in School class.
@@ -123,5 +126,44 @@ public class SchoolTest {
         Set<Student> studentSet = studentMap.values().stream().collect(Collectors.toSet());
         Set<Student> expectedStudentSet = unfilteredStudents.stream().collect(Collectors.toSet());
         assertEquals(studentSet, expectedStudentSet);
+    }
+
+    /**
+     * Test that list of students with scores more than bound is received.
+     */
+    @Test
+    public void whenCollectStudentsWithScoreMoreThan60ThenReturnedListIsClassAOfStudents() {
+        School school = new School();
+        List<Student> studentsWithScoreMoreThan60 = school.levelOf(unfilteredStudents, 60);
+        assertEquals(studentsWithScoreMoreThan60.size(), correctClassA.size());
+        assertTrue(studentsWithScoreMoreThan60.containsAll(correctClassA));
+    }
+
+    /**
+     * Test that list of students with scores more than bound is sorted.
+     */
+    @Test
+    public void whenCollectStudentsWithScoreMoreThan69ThenReturnedListIsSorted() {
+        School school = new School();
+        List<Student> studentsWithScoreMoreThan60 = school.levelOf(unfilteredStudents, 60);
+        // reverse received list to be in ascending order, as correctClassA
+        Collections.reverse(studentsWithScoreMoreThan60);
+        Assert.assertEquals(studentsWithScoreMoreThan60, correctClassA);
+    }
+
+    /**
+     * Test that list of students with scores more than bound does not contain null even if supplied list has them.
+     */
+    @Test
+    public void whenStudentListHasNullsAndWeCollectStudentsWithScoreMoreThan60ThenReturnedListDoesNotHaveNulls() {
+        // add nulls to unfiltered list of students
+        List<Student> unfilteredStudentsWithNulls = unfilteredStudents
+                .stream()
+                .map(student -> Arrays.asList(student, null))
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+        School school = new School();
+        List<Student> studentsWithScoreMoreThan60 = school.levelOf(unfilteredStudentsWithNulls, 60);
+        assertTrue(!studentsWithScoreMoreThan60.contains(null));
     }
 }
