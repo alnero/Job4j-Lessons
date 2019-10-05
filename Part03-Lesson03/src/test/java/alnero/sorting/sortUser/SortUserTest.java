@@ -18,20 +18,19 @@ public class SortUserTest {
      */
     @Test
     public void whenThreeUsersInListInRandomOrderThenSetWithSortedUsersReturned() {
-        List<User> inputList = new ArrayList<>();
-        inputList.addAll(Arrays.asList(
+        List<User> inputList = List.of(
            new User("Betta", 2),
            new User("Alpha", 1),
            new User("Gamma", 3)
-        ));
+        );
         SortUser sorter = new SortUser();
         Set<User> resultSet = sorter.sort(inputList);
-        User[] expected = new User[] {
+        Set<User> expected = Set.of(
                 new User("Alpha", 1),
                 new User("Betta", 2),
                 new User("Gamma", 3)
-        };
-        assertThat(resultSet.toArray(), is(expected));
+        );
+        assertThat(resultSet, is(expected));
     }
 
     /**
@@ -39,20 +38,19 @@ public class SortUserTest {
      */
     @Test
     public void whenThreeUsersInListInAscendingOrderThenSetWithSortedUsersReturned() {
-        List<User> inputList = new ArrayList<>();
-        inputList.addAll(Arrays.asList(
+        List<User> inputList = List.of(
                 new User("Alpha", 1),
                 new User("Betta", 2),
                 new User("Gamma", 3)
-        ));
+        );
         SortUser sorter = new SortUser();
         Set<User> resultSet = sorter.sort(inputList);
-        User[] expected = new User[] {
+        Set<User> expected = Set.of(
                 new User("Alpha", 1),
                 new User("Betta", 2),
                 new User("Gamma", 3)
-        };
-        assertThat(resultSet.toArray(), is(expected));
+        );
+        assertThat(resultSet, is(expected));
     }
 
     /**
@@ -60,20 +58,19 @@ public class SortUserTest {
      */
     @Test
     public void whenThreeUsersInListInDescendingOrderThenSetWithSortedUsersReturned() {
-        List<User> inputList = new ArrayList<>();
-        inputList.addAll(Arrays.asList(
+        List<User> inputList = List.of(
                 new User("Gamma", 3),
                 new User("Betta", 2),
                 new User("Alpha", 1)
-        ));
+        );
         SortUser sorter = new SortUser();
         Set<User> resultSet = sorter.sort(inputList);
-        User[] expected = new User[] {
+        Set<User> expected = Set.of(
                 new User("Alpha", 1),
                 new User("Betta", 2),
                 new User("Gamma", 3)
-        };
-        assertThat(resultSet.toArray(), is(expected));
+        );
+        assertThat(resultSet, is(expected));
     }
 
     /**
@@ -81,19 +78,18 @@ public class SortUserTest {
      */
     @Test
     public void whenThreeUsersInListButTwoHaveSameAgeThenSetWithSortedUsersReturned() {
-        List<User> inputList = new ArrayList<>();
-        inputList.addAll(Arrays.asList(
+        List<User> inputList = List.of(
                 new User("Gamma", 3),
                 new User("Betta1", 2),
                 new User("Betta2", 2)
-        ));
+        );
         SortUser sorter = new SortUser();
         Set<User> resultSet = sorter.sort(inputList);
-        User[] expected = new User[] {
+        Set<User> expected = Set.of(
                 new User("Betta1", 2),
                 new User("Betta2", 2),
                 new User("Gamma", 3)
-        };
-        assertThat(resultSet.toArray(), is(expected));
+        );
+        assertThat(resultSet, is(expected));
     }
 }

@@ -19,7 +19,7 @@ public class SortByAllFieldsTest {
     @Test
     public void whenSortListOfUsersWithDifNameAndAgeThenListWithSortedUsersReturned() {
         List<User> inputList = new ArrayList<>();
-        inputList.addAll(Arrays.asList(
+        inputList.addAll(List.of(
                 new User("Anton", 5),
                 new User("Fred", 8),
                 new User("Daria", 6),
@@ -28,7 +28,7 @@ public class SortByAllFieldsTest {
         SortUser sorter = new SortUser();
         List<User> resultList = sorter.sortByAllFields(inputList);
         List<User> expected = new ArrayList<>();
-        expected.addAll(Arrays.asList(
+        expected.addAll(List.of(
                 new User("Anton", 5),
                 new User("Boris", 7),
                 new User("Daria", 6),
@@ -43,7 +43,7 @@ public class SortByAllFieldsTest {
     @Test
     public void whenSortListOfUsersWithDifNameAndEqualAgeThenListWithSortedUsersReturned() {
         List<User> inputList = new ArrayList<>();
-        inputList.addAll(Arrays.asList(
+        inputList.addAll(List.of(
                 new User("Anton", 5),
                 new User("Fred", 5),
                 new User("Daria", 5),
@@ -52,7 +52,7 @@ public class SortByAllFieldsTest {
         SortUser sorter = new SortUser();
         List<User> resultList = sorter.sortByAllFields(inputList);
         List<User> expected = new ArrayList<>();
-        expected.addAll(Arrays.asList(
+        expected.addAll(List.of(
                 new User("Anton", 5),
                 new User("Boris", 5),
                 new User("Daria", 5),
@@ -67,7 +67,7 @@ public class SortByAllFieldsTest {
     @Test
     public void whenSortListOfUsersWithEqualNameAndDifAgeThenListWithSortedUsersReturned() {
         List<User> inputList = new ArrayList<>();
-        inputList.addAll(Arrays.asList(
+        inputList.addAll(List.of(
                 new User("Anna", 5),
                 new User("Anna", 7),
                 new User("Anna", 6),
@@ -76,7 +76,7 @@ public class SortByAllFieldsTest {
         SortUser sorter = new SortUser();
         List<User> resultList = sorter.sortByAllFields(inputList);
         List<User> expected = new ArrayList<>();
-        expected.addAll(Arrays.asList(
+        expected.addAll(List.of(
                 new User("Anna", 4),
                 new User("Anna", 5),
                 new User("Anna", 6),
@@ -91,7 +91,7 @@ public class SortByAllFieldsTest {
     @Test
     public void whenSortListOfUsersWithPairsOfEqualNameAndDifAgeThenListWithSortedUsersReturned() {
         List<User> inputList = new ArrayList<>();
-        inputList.addAll(Arrays.asList(
+        inputList.addAll(List.of(
                 new User("Fred", 15),
                 new User("Anna", 5),
                 new User("Fred", 10),
@@ -100,7 +100,7 @@ public class SortByAllFieldsTest {
         SortUser sorter = new SortUser();
         List<User> resultList = sorter.sortByAllFields(inputList);
         List<User> expected = new ArrayList<>();
-        expected.addAll(Arrays.asList(
+        expected.addAll(List.of(
                 new User("Anna", 5),
                 new User("Anna", 8),
                 new User("Fred", 10),
@@ -115,7 +115,7 @@ public class SortByAllFieldsTest {
     @Test
     public void whenSortListOfUsersWithPairsOfEqualAgeAndDifNameThenListWithSortedUsersReturned() {
         List<User> inputList = new ArrayList<>();
-        inputList.addAll(Arrays.asList(
+        inputList.addAll(List.of(
                 new User("Fred", 10),
                 new User("Anna", 5),
                 new User("Eva", 10),
@@ -124,7 +124,7 @@ public class SortByAllFieldsTest {
         SortUser sorter = new SortUser();
         List<User> resultList = sorter.sortByAllFields(inputList);
         List<User> expected = new ArrayList<>();
-        expected.addAll(Arrays.asList(
+        expected.addAll(List.of(
                 new User("Anna", 5),
                 new User("Eva", 10),
                 new User("Fred", 10),

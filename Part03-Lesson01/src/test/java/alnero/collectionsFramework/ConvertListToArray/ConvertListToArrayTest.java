@@ -2,6 +2,7 @@ package alnero.collectionsFramework.ConvertListToArray;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -19,7 +20,7 @@ public class ConvertListToArrayTest {
     public void whenConvert7ElementsListTo3RowsArrayThen3by3ArrayReturned() {
         ConvertListToArray listConverter = new ConvertListToArray();
         int[][] result = listConverter.toArray(
-                Arrays.asList(1, 2, 3, 4, 5, 6, 7),
+                List.of(1, 2, 3, 4, 5, 6, 7),
                 3
         );
         int[][] expect = {
@@ -37,7 +38,7 @@ public class ConvertListToArrayTest {
     public void whenConvert10ElementsListTo5RowsArrayThen5by2ArrayReturned() {
         ConvertListToArray listConverter = new ConvertListToArray();
         int[][] result = listConverter.toArray(
-                Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+                List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
                 5
         );
         int[][] expect = {
@@ -57,7 +58,7 @@ public class ConvertListToArrayTest {
     public void whenConvert10ElementsListTo2RowsArrayThen2by5ArrayReturned() {
         ConvertListToArray listConverter = new ConvertListToArray();
         int[][] result = listConverter.toArray(
-                Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+                List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
                 2
         );
         int[][] expect = {
@@ -74,7 +75,7 @@ public class ConvertListToArrayTest {
     public void whenConvert13ElementsListTo4RowsArrayThen4by4ArrayReturned() {
         ConvertListToArray listConverter = new ConvertListToArray();
         int[][] result = listConverter.toArray(
-                Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13),
+                List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13),
                 4
         );
         int[][] expect = {
@@ -93,7 +94,7 @@ public class ConvertListToArrayTest {
     public void whenConvert13ElementsListTo1RowArrayThen1by13ArrayReturned() {
         ConvertListToArray listConverter = new ConvertListToArray();
         int[][] result = listConverter.toArray(
-                Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13),
+                List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13),
                 1
         );
         int[][] expect = {
@@ -109,7 +110,7 @@ public class ConvertListToArrayTest {
     public void whenConvert3ElementsListTo3RowsArrayThen3by1ArrayReturned() {
         ConvertListToArray listConverter = new ConvertListToArray();
         int[][] result = listConverter.toArray(
-                Arrays.asList(1, 2, 3),
+                List.of(1, 2, 3),
                 3
         );
         int[][] expect = {
@@ -127,7 +128,7 @@ public class ConvertListToArrayTest {
     public void whenConvert3ElementsListTo6RowsArrayThen6by1ArrayReturned() {
         ConvertListToArray listConverter = new ConvertListToArray();
         int[][] result = listConverter.toArray(
-                Arrays.asList(1, 2, 3),
+                List.of(1, 2, 3),
                 6
         );
         int[][] expect = {
@@ -148,7 +149,7 @@ public class ConvertListToArrayTest {
     public void whenConvert1ElementListTo2RowsArrayThen2by1ArrayReturned() {
         ConvertListToArray listConverter = new ConvertListToArray();
         int[][] result = listConverter.toArray(
-                Arrays.asList(1),
+                List.of(1),
                 2
         );
         int[][] expect = {

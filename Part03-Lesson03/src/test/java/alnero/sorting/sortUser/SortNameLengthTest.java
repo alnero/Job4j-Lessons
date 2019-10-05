@@ -19,7 +19,7 @@ public class SortNameLengthTest {
     @Test
     public void whenSortListOfUsersWithDifLengthNamesThenListWithSortedUsersReturned() {
         List<User> inputList = new ArrayList<>();
-        inputList.addAll(Arrays.asList(
+        inputList.addAll(List.of(
                 new User("Anton", 5),
                 new User("Alexander", 9),
                 new User("Anna", 4)
@@ -27,7 +27,7 @@ public class SortNameLengthTest {
         SortUser sorter = new SortUser();
         List<User> resultList = sorter.sortNameLength(inputList);
         List<User> expected = new ArrayList<>();
-        expected.addAll(Arrays.asList(
+        expected.addAll(List.of(
                 new User("Anna", 4),
                 new User("Anton", 5),
                 new User("Alexander", 9)
@@ -41,7 +41,7 @@ public class SortNameLengthTest {
     @Test
     public void whenSortListOfUsersAndTwoNamesAreEqualThenListWithSortedUsersReturned() {
         List<User> inputList = new ArrayList<>();
-        inputList.addAll(Arrays.asList(
+        inputList.addAll(List.of(
                 new User("Alex", 4),
                 new User("Anton", 5),
                 new User("Anna", 4)
@@ -49,7 +49,7 @@ public class SortNameLengthTest {
         SortUser sorter = new SortUser();
         List<User> resultList = sorter.sortNameLength(inputList);
         List<User> expected = new ArrayList<>();
-        expected.addAll(Arrays.asList(
+        expected.addAll(List.of(
                 new User("Alex", 4),
                 new User("Anna", 4),
                 new User("Anton", 5)
@@ -63,7 +63,7 @@ public class SortNameLengthTest {
     @Test
     public void whenSortListOfUsersAndThreeNamesAreEqualThenSameListOfUsersReturned() {
         List<User> inputList = new ArrayList<>();
-        inputList.addAll(Arrays.asList(
+        inputList.addAll(List.of(
                 new User("Alex", 4),
                 new User("Dana", 4),
                 new User("Anna", 4)
@@ -71,7 +71,7 @@ public class SortNameLengthTest {
         SortUser sorter = new SortUser();
         List<User> resultList = sorter.sortNameLength(inputList);
         List<User> expected = new ArrayList<>();
-        expected.addAll(Arrays.asList(
+        expected.addAll(List.of(
                 new User("Alex", 4),
                 new User("Dana", 4),
                 new User("Anna", 4)

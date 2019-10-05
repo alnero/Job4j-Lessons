@@ -27,8 +27,7 @@ public class UserConvertTest {
      */
     @Test
     public void whenConvertListOfOneUserToMapThenCorrectMapReturned() {
-        List<User> input = new ArrayList<>();
-        input.add(new User("name1", "city1"));
+        List<User> input = List.of(new User("name1", "city1"));
         UserConvert userConvert = new UserConvert();
         Map<Integer, User> result = userConvert.process(input);
         assertThat(result.get(1).getName(), is("name1"));
@@ -39,12 +38,11 @@ public class UserConvertTest {
      */
     @Test
     public void whenConvertListOfThreeDifferentUserToMapThenCorrectMapReturned() {
-        List<User> input = new ArrayList<>();
-        input.addAll(Arrays.asList(
+        List<User> input = List.of(
            new User("name1", "city1"),
            new User("name2", "city2"),
            new User("name3", "city3")
-        ));
+        );
         UserConvert userConvert = new UserConvert();
         Map<Integer, User> result = userConvert.process(input);
         assertThat(result.get(2).getName(), is("name2"));
@@ -55,11 +53,10 @@ public class UserConvertTest {
      */
     @Test
     public void whenConvertListOfTwoSameUsersToMapThenMapWithOneUserReturned() {
-        List<User> input = new ArrayList<>();
         User sameUser1 = new User("name1", "city1");
         User.resetIdCounter();
         User sameUser2 = new User("name1", "city1");
-        input.addAll(Arrays.asList(sameUser1, sameUser2));
+        List<User> input = List.of(sameUser1, sameUser2);
         UserConvert userConvert = new UserConvert();
         Map<Integer, User> result = userConvert.process(input);
         assertThat(result.size(), is(1));
