@@ -2,7 +2,6 @@ package alnero.collectionsFramework.ConvertArrayToList;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
 
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;

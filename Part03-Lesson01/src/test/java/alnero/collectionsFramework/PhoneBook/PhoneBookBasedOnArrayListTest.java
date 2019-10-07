@@ -15,8 +15,8 @@ public class PhoneBookBasedOnArrayListTest {
      */
     @Test
     public void whenFindByNameAndPhoneBookIsEmptyThenNothingFound() {
-        PhoneBookBasedOnArrayList phoneBook = new PhoneBookBasedOnArrayList();
-        List<Person> foundPersons = phoneBook.find("Thomas");
+        var phoneBook = new PhoneBookBasedOnArrayList();
+        var foundPersons = phoneBook.find("Thomas");
         assertThat(foundPersons.size(), is(0));
     }
 
@@ -25,9 +25,9 @@ public class PhoneBookBasedOnArrayListTest {
      */
     @Test
     public void whenFindByNameThenCorrectPersonReturned() {
-        PhoneBookBasedOnArrayList phoneBook = new PhoneBookBasedOnArrayList();
+        var phoneBook = new PhoneBookBasedOnArrayList();
         phoneBook.add(new Person("Thomas", "Anderson", "+1628749", "Capital City"));
-        List<Person> foundPersons = phoneBook.find("Thomas");
+        var foundPersons = phoneBook.find("Thomas");
         assertThat(foundPersons.iterator().next().getSurname(), is("Anderson"));
     }
 
@@ -36,9 +36,9 @@ public class PhoneBookBasedOnArrayListTest {
      */
     @Test
     public void whenFindBySurnameThenCorrectPersonReturned() {
-        PhoneBookBasedOnArrayList phoneBook = new PhoneBookBasedOnArrayList();
+        var phoneBook = new PhoneBookBasedOnArrayList();
         phoneBook.add(new Person("Thomas", "Anderson", "+1628749", "Capital City"));
-        List<Person> foundPersons = phoneBook.find("Anderson");
+        var foundPersons = phoneBook.find("Anderson");
         assertThat(foundPersons.iterator().next().getName(), is("Thomas"));
     }
 
@@ -47,9 +47,9 @@ public class PhoneBookBasedOnArrayListTest {
      */
     @Test
     public void whenFindByPhoneNumberThenCorrectPersonReturned() {
-        PhoneBookBasedOnArrayList phoneBook = new PhoneBookBasedOnArrayList();
+        var phoneBook = new PhoneBookBasedOnArrayList();
         phoneBook.add(new Person("Thomas", "Anderson", "+1628749", "Capital City"));
-        List<Person> foundPersons = phoneBook.find("1628749");
+        var foundPersons = phoneBook.find("1628749");
         assertThat(foundPersons.iterator().next().getName(), is("Thomas"));
     }
 
@@ -58,9 +58,9 @@ public class PhoneBookBasedOnArrayListTest {
      */
     @Test
     public void whenFindByAddressThenCorrectPersonReturned() {
-        PhoneBookBasedOnArrayList phoneBook = new PhoneBookBasedOnArrayList();
+        var phoneBook = new PhoneBookBasedOnArrayList();
         phoneBook.add(new Person("Thomas", "Anderson", "+1628749", "Capital City"));
-        List<Person> foundPersons = phoneBook.find("Capital");
+        var foundPersons = phoneBook.find("Capital");
         assertThat(foundPersons.iterator().next().getName(), is("Thomas"));
     }
 
@@ -69,9 +69,9 @@ public class PhoneBookBasedOnArrayListTest {
      */
     @Test
     public void whenFindByPartOfStringThenCorrectPersonReturned() {
-        PhoneBookBasedOnArrayList phoneBook = new PhoneBookBasedOnArrayList();
+        var phoneBook = new PhoneBookBasedOnArrayList();
         phoneBook.add(new Person("Thomas", "Anderson", "+1628749", "Capital City"));
-        List<Person> foundPersons = phoneBook.find("nde");
+        var foundPersons = phoneBook.find("nde");
         assertThat(foundPersons.iterator().next().getName(), is("Thomas"));
     }
 
@@ -80,9 +80,9 @@ public class PhoneBookBasedOnArrayListTest {
      */
     @Test
     public void whenFindByPartOfStringContainedInSeveralFieldsThenOnlyOnePersonReturned() {
-        PhoneBookBasedOnArrayList phoneBook = new PhoneBookBasedOnArrayList();
+        var phoneBook = new PhoneBookBasedOnArrayList();
         phoneBook.add(new Person("Thomas", "Thomason", "+1628749", "Flomaster City"));
-        List<Person> foundPersons = phoneBook.find("mas");
+        var foundPersons = phoneBook.find("mas");
         assertThat(foundPersons.size(), is(1));
     }
 }

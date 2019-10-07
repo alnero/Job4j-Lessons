@@ -13,11 +13,11 @@ public class PriorityQueueTest {
      */
     @Test
     public void whenAddThreeTaskAndGetHighPriorityTaskThenCorrectTaskReturned() {
-        PriorityQueue queue = new PriorityQueue();
+        var queue = new PriorityQueue();
         queue.put(new Task("low", 5));
         queue.put(new Task("high", 1));
         queue.put(new Task("middle", 3));
-        Task result = queue.take();
+        var result = queue.take();
         assertThat(result.getDesc(), is("high"));
     }
 
@@ -26,11 +26,11 @@ public class PriorityQueueTest {
      */
     @Test
     public void whenAddThreeTaskAndGetMiddlePriorityTaskThenCorrectTaskReturned() {
-        PriorityQueue queue = new PriorityQueue();
+        var queue = new PriorityQueue();
         queue.put(new Task("low", 5));
         queue.put(new Task("high", 1));
         queue.put(new Task("middle", 3));
-        Task result = queue.take();
+        var result = queue.take();
         result = queue.take();
         assertThat(result.getDesc(), is("middle"));
     }
@@ -40,11 +40,11 @@ public class PriorityQueueTest {
      */
     @Test
     public void whenAddThreeTaskAndFirstAddLowAndGetLowPriorityTaskThenCorrectTaskReturned() {
-        PriorityQueue queue = new PriorityQueue();
+        var queue = new PriorityQueue();
         queue.put(new Task("low", 5));
         queue.put(new Task("high", 1));
         queue.put(new Task("middle", 3));
-        Task result = queue.take();
+        var result = queue.take();
         result = queue.take();
         result = queue.take();
         assertThat(result.getDesc(), is("low"));
@@ -55,11 +55,11 @@ public class PriorityQueueTest {
      */
     @Test
     public void whenAddThreeTaskAndFirstAddMiddleAndGetLowPriorityTaskThenCorrectTaskReturned() {
-        PriorityQueue queue = new PriorityQueue();
+        var queue = new PriorityQueue();
         queue.put(new Task("middle", 3));
         queue.put(new Task("low", 5));
         queue.put(new Task("high", 1));
-        Task result = queue.take();
+        var result = queue.take();
         result = queue.take();
         result = queue.take();
         assertThat(result.getDesc(), is("low"));
@@ -70,11 +70,11 @@ public class PriorityQueueTest {
      */
     @Test
     public void whenAddThreeTaskAndFirstAddHighAndGetLowPriorityTaskThenCorrectTaskReturned() {
-        PriorityQueue queue = new PriorityQueue();
+        var queue = new PriorityQueue();
         queue.put(new Task("high", 1));
         queue.put(new Task("middle", 3));
         queue.put(new Task("low", 5));
-        Task result = queue.take();
+        var result = queue.take();
         result = queue.take();
         result = queue.take();
         assertThat(result.getDesc(), is("low"));
@@ -85,11 +85,11 @@ public class PriorityQueueTest {
      */
     @Test
     public void whenAddThreeTasksWithSamePriorityThenLastAddedTaskReturned() {
-        PriorityQueue queue = new PriorityQueue();
+        var queue = new PriorityQueue();
         queue.put(new Task("middle - first added", 3));
         queue.put(new Task("middle - second added", 3));
         queue.put(new Task("middle - third added", 3));
-        Task result = queue.take();
+        var result = queue.take();
         assertThat(result.getDesc(), is("middle - third added"));
     }
 }

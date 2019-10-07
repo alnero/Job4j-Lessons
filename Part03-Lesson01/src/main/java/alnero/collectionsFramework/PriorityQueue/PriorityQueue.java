@@ -18,12 +18,12 @@ public class PriorityQueue {
      */
     public void put(Task newTask) {
         // Short solution
-        int newTaskPriority = newTask.getPriority();
-        int queueIndexForNewTask = 0;
-        int index = 0;
-        for (Task task : this.tasks) {
-            int addedTaskPriority = task.getPriority();
-            int addedTaskIndex = index++;
+        var newTaskPriority = newTask.getPriority();
+        var queueIndexForNewTask = 0;
+        var index = 0;
+        for (var task : this.tasks) {
+            var addedTaskPriority = task.getPriority();
+            var addedTaskIndex = index++;
             if (newTaskPriority > addedTaskPriority) {
                 queueIndexForNewTask = addedTaskIndex + 1;
             }
