@@ -30,6 +30,7 @@
 
 		<module>Part04-Lesson01</module>
 		<module>Part04-Lesson02</module>
+		<module>Part04-Lesson03</module>
 	</modules>
 
 	<properties>
@@ -58,7 +59,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
+				<version>3.8.1</version>
 				<configuration>
 					<compilerVersion>1.8</compilerVersion>
 				</configuration>
@@ -84,6 +85,9 @@
 							</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<excludes>**/module-info.java</excludes>
+				</configuration>
 			</plugin>
 
 			<plugin>

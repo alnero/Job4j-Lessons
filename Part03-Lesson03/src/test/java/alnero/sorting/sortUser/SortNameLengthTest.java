@@ -2,7 +2,6 @@ package alnero.sorting.sortUser;
 
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 

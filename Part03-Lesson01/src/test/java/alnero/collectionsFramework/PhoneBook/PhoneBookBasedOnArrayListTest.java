@@ -1,7 +1,5 @@
 package alnero.collectionsFramework.PhoneBook;
 
-import java.util.List;
-
 import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
