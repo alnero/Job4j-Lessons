@@ -31,6 +31,8 @@
 		<module>Part04-Lesson01</module>
 		<module>Part04-Lesson02</module>
 		<module>Part04-Lesson03</module>
+
+		<module>Part05-Lesson01</module>
 	</modules>
 
 	<properties>
