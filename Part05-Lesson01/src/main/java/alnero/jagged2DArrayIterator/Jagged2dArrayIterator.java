@@ -14,8 +14,6 @@ public class Jagged2dArrayIterator<T> implements Iterator<T> {
     private int row = 0;
     /** Current index of column. */
     private int column = 0;
-    /** Auxiliary array with length of rows. */
-    private int[] numberOfColumnsPerRow;
 
     /**
      * Constructor to initialize main 2D array and auxiliary array.
@@ -23,16 +21,12 @@ public class Jagged2dArrayIterator<T> implements Iterator<T> {
      */
     public Jagged2dArrayIterator(int[][] jagged2dArray) {
         this.jagged2dArray = jagged2dArray;
-        this.numberOfColumnsPerRow = new int[jagged2dArray.length];
-        for (int i = 0; i < jagged2dArray.length; i++) {
-            numberOfColumnsPerRow[i] = jagged2dArray[i].length;
-        }
     }
 
     @Override
     public boolean hasNext() {
         boolean result = false;
-        if (this.row < this.jagged2dArray.length && this.column < this.numberOfColumnsPerRow[this.row]) {
+        if (this.row < this.jagged2dArray.length && this.column < this.jagged2dArray[this.row].length) {
             result = true;
         } else {
             result = false;
@@ -46,7 +40,7 @@ public class Jagged2dArrayIterator<T> implements Iterator<T> {
             throw new NoSuchElementException();
         }
         Integer value = this.jagged2dArray[row][column++];
-        if (column == numberOfColumnsPerRow[this.row]) {
+        if (column == this.jagged2dArray[this.row].length) {
             column = 0;
             row++;
         }
