@@ -16,7 +16,7 @@ public class Jagged2dArrayIterator<T> implements Iterator<T> {
     private int column = 0;
 
     /**
-     * Constructor to initialize main 2D array and auxiliary array.
+     * Constructor to initialize main 2D array.
      * @param jagged2dArray 2D array
      */
     public Jagged2dArrayIterator(int[][] jagged2dArray) {
