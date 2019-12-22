@@ -1,6 +1,5 @@
 package alnero.evenNumbersIterator;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -9,24 +8,27 @@ import java.util.NoSuchElementException;
  * @param <T> int or Integer
  */
 public class EvenNumbersIterator<T> implements Iterator<T> {
-    /** Even numbers array. */
-    private int[] evenNumbersArray;
+    /** Mixed numbers array. */
+    private int[] mixedNumbersArray;
     /** Current index. */
     private int index = 0;
 
     /**
-     * Constructor to initialize main array. Only even numbers will remain after initialisation.
+     * Constructor to initialize main array.
      * @param mixedNumbersArray array of even and odd numbers
      */
     public EvenNumbersIterator(int[] mixedNumbersArray) {
-        this.evenNumbersArray = Arrays.stream(mixedNumbersArray).filter(value -> value % 2 == 0).toArray();
+        this.mixedNumbersArray = mixedNumbersArray;
     }
 
     @Override
     public boolean hasNext() {
         boolean result = false;
-        if (index != this.evenNumbersArray.length) {
-            result = true;
+        for (int i = index; i < this.mixedNumbersArray.length; i++) {
+            if (this.mixedNumbersArray[i] % 2 == 0) {
+                result = true;
+                break;
+            }
         }
         return result;
     }
@@ -36,7 +38,10 @@ public class EvenNumbersIterator<T> implements Iterator<T> {
         if (!this.hasNext()) {
             throw new NoSuchElementException();
         }
-        Integer result = this.evenNumbersArray[this.index++];
+        Integer result = this.mixedNumbersArray[this.index++];
+        while (result % 2 != 0) {
+            result = this.mixedNumbersArray[this.index++];
+        }
         return (T) result;
     }
 }
