@@ -9,23 +9,24 @@ import java.util.NoSuchElementException;
  */
 public class EvenNumbersIterator<T> implements Iterator<T> {
     /** Mixed numbers array. */
-    private int[] mixedNumbersArray;
+    private int[] numbers;
     /** Current index. */
     private int index = 0;
 
     /**
      * Constructor to initialize main array.
-     * @param mixedNumbersArray array of even and odd numbers
+     * @param numbers array of even and odd numbers
      */
-    public EvenNumbersIterator(int[] mixedNumbersArray) {
-        this.mixedNumbersArray = mixedNumbersArray;
+    public EvenNumbersIterator(int[] numbers) {
+        this.numbers = numbers;
     }
 
     @Override
     public boolean hasNext() {
         boolean result = false;
-        for (int i = index; i < this.mixedNumbersArray.length; i++) {
-            if (this.mixedNumbersArray[i] % 2 == 0) {
+        for (int i = index; i < this.numbers.length; i++) {
+            if (this.numbers[i] % 2 == 0) {
+                index = i;
                 result = true;
                 break;
             }
@@ -38,10 +39,7 @@ public class EvenNumbersIterator<T> implements Iterator<T> {
         if (!this.hasNext()) {
             throw new NoSuchElementException();
         }
-        Integer result = this.mixedNumbersArray[this.index++];
-        while (result % 2 != 0) {
-            result = this.mixedNumbersArray[this.index++];
-        }
+        Integer result = this.numbers[this.index++];
         return (T) result;
     }
 }
