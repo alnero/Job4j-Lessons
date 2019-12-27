@@ -24,6 +24,9 @@ public class IteratorConverter {
                 boolean result = false;
                 if (currentIterator.hasNext()) {
                     result = true;
+                } else if (globalIterator.hasNext()) {
+                    currentIterator = globalIterator.next();
+                    return this.hasNext();
                 }
                 return result;
             }

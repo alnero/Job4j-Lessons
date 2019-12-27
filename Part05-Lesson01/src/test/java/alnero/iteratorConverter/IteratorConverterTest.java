@@ -121,4 +121,18 @@ public class IteratorConverterTest {
         assertThat(it.next(), is(3));
         it.next();
     }
+
+    /**
+     * If last iterator not empty hasNext() should return true.
+     */
+    @Test
+    public void hasNextShouldReturnTrueInCaseOfLastNotEmptyIterator() {
+        Iterator<Integer> it1 = (new ArrayList<Integer>()).iterator();
+        Iterator<Integer> it2 = (new ArrayList<Integer>()).iterator();
+        Iterator<Integer> it3 = (Arrays.asList(1, 2, 3)).iterator();
+        Iterator<Iterator<Integer>> its = Arrays.asList(it1, it2, it3).iterator();
+        IteratorConverter iteratorConverter = new IteratorConverter();
+        it = iteratorConverter.convert(its);
+        assertThat(it.hasNext(), is(true));
+    }
 }
