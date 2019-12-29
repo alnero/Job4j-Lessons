@@ -22,11 +22,13 @@ public class IteratorConverter {
             @Override
             public boolean hasNext() {
                 boolean result = false;
-                if (currentIterator.hasNext()) {
+                while (currentIterator.hasNext() || globalIterator.hasNext()) {
+                    if (!currentIterator.hasNext()) {
+                        currentIterator = globalIterator.next();
+                        continue;
+                    }
                     result = true;
-                } else if (globalIterator.hasNext()) {
-                    currentIterator = globalIterator.next();
-                    return this.hasNext();
+                    break;
                 }
                 return result;
             }
@@ -36,11 +38,7 @@ public class IteratorConverter {
                 if (!this.hasNext()) {
                     throw new NoSuchElementException();
                 }
-                Integer result = currentIterator.next();
-                if (!currentIterator.hasNext() && globalIterator.hasNext()) {
-                    currentIterator = globalIterator.next();
-                }
-                return result;
+                return currentIterator.next();
             }
         };
     }
