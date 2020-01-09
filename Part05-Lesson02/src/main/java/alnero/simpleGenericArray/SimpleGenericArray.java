@@ -61,6 +61,7 @@ public class SimpleGenericArray<T> implements Iterable<T> {
      */
     public void remove(int index) {
         this.checkIndex(index);
+        this.storage[index] = null;
         System.arraycopy(this.storage, index + 1, this.storage, index, this.lastAvailablePosition - index - 1);
         this.lastAvailablePosition--;
     }
