@@ -1,0 +1,4 @@
+/**
+ *
+ */
+package alnero.genericStore.model;
