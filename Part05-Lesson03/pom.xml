@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>Job4j</groupId>
+    <artifactId>Part05-Lesson03</artifactId>
+    <version>1.0.0</version>
+
+    <parent>
+        <groupId>Job4j</groupId>
+        <artifactId>Lessons</artifactId>
+        <version>1.0.0</version>
+    </parent>
+</project>
