@@ -34,13 +34,20 @@ public class SimpleArrayList<E> implements Iterable<E> {
      */
     public void add(E value) {
         if (this.containerIndex == this.container.length) {
-            Object[] newContainer = new Object[this.container.length * 2];
-            System.arraycopy(this.container, 0, newContainer, 0, this.container.length);
-            this.container = newContainer;
+            this.extend();
         }
         this.container[this.containerIndex] = value;
         this.containerIndex++;
         this.modCount++;
+    }
+
+    /**
+     * Double the size of inner storage.
+     */
+    private void extend() {
+        Object[] newContainer = new Object[this.container.length * 2];
+        System.arraycopy(this.container, 0, newContainer, 0, this.container.length);
+        this.container = newContainer;
     }
 
     /**
