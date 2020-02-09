@@ -68,7 +68,7 @@ public class SimpleLinkedListWithoutDelete<E> implements Iterable<E> {
     public Iterator<E> iterator() {
         return new Iterator<E>() {
             private int expectedModCount = modCount;
-            private int iteratorIndex = 0;
+            private Node currentNode = first;
 
             @Override
             public boolean hasNext() {
@@ -76,7 +76,7 @@ public class SimpleLinkedListWithoutDelete<E> implements Iterable<E> {
                     throw new ConcurrentModificationException();
                 }
                 boolean result = false;
-                if (iteratorIndex < size) {
+                if (currentNode != null) {
                     result = true;
                 }
                 return result;
@@ -90,7 +90,9 @@ public class SimpleLinkedListWithoutDelete<E> implements Iterable<E> {
                 if (!this.hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return (E) get(iteratorIndex++);
+                E result = (E) currentNode.data;
+                currentNode = currentNode.next;
+                return result;
             }
         };
     }
