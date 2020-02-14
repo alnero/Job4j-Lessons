@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 
 /**
  * Simple stack, Last in/First out.
- * @param <T> stack support generics
+ * @param <T> stack supports generics
  */
 public class SimpleStack<T> implements Iterable<T> {
     /** Stack size. */
@@ -37,8 +37,16 @@ public class SimpleStack<T> implements Iterable<T> {
         if (size > 0) {
             result = (T) first.data;
             first = first.next;
+            size--;
         }
         return result;
+    }
+    /**
+     * Get size of the stack.
+     * @return size of stack
+     */
+    public int getSize() {
+        return this.size;
     }
 
     /**
