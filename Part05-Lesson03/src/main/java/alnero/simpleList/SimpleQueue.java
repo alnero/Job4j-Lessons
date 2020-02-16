@@ -16,26 +16,12 @@ public class SimpleQueue<T> {
      * @return element or null if queue is empty
      */
     public T poll() {
-        if (outputStack.getSize() <= 0) {
+        if (outputStack.getSize() == 0) {
             while (inputStack.getSize() > 0) {
                 outputStack.push(inputStack.poll());
             }
         }
         return outputStack.poll();
-        /*
-        T result = outputStack.poll();
-        if (result == null) {
-            while (true) {
-                T add = inputStack.poll();
-                if (add == null) {
-                    break;
-                }
-                outputStack.push(add);
-            }
-            result = outputStack.poll();
-        }
-        return result;
-        */
     }
 
     /**
