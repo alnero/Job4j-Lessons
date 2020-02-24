@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 
 /**
  * Simple array list.
- * @param <E> list support generics
+ * @param <E> list supports generics
  */
 public class SimpleArrayList<E> implements Iterable<E> {
     /** Inner storage. */
