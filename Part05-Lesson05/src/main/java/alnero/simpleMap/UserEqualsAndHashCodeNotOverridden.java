@@ -5,7 +5,7 @@ import java.util.Calendar;
 /**
  * User class for Map storage.
  */
-public class User {
+public class UserEqualsAndHashCodeNotOverridden {
     /** User name. **/
     private String name;
     /** Number of children. **/
@@ -19,7 +19,7 @@ public class User {
      * @param children number of children
      * @param birthday birth date
      */
-    public User(String name, int children, Calendar birthday) {
+    public UserEqualsAndHashCodeNotOverridden(String name, int children, Calendar birthday) {
         this.name = name;
         this.children = children;
         this.birthday = birthday;
