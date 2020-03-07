@@ -32,4 +32,27 @@ public class EqualsHashCodeOverridingTest {
         System.out.println(storageMap);
         assertThat(storageMap.size(), is(2));
     }
+
+    /**
+     * If only hashCode() is overridden then class Object default method equals() is used.
+     * According to default implementation of equals() User objects are not equal but have the same hash codes.
+     * HashMap to store and find entities first of all calculates hash codes of the keys
+     * to find equal elements and to assign them places in internal storage.
+     * When hash codes are the same HashMap puts entities in one storage chain but after that
+     * to check the equality of entities in that chain HashMap call equals() method and if it returns false
+     * HashMap treats entities as not equal thus we have two "logically equal" entities stored in HashMap.
+     */
+    @Test
+    public void whenOnlyHashCodeOverriddenThenTwoLogicallyEqualUsersAreStoredInMap() {
+        Calendar dateOfBirth = Calendar.getInstance();
+        dateOfBirth.set(2001, 1, 1);
+        UserOnlyHashCodeOverridden cloneOne = new UserOnlyHashCodeOverridden("Clone", 1, dateOfBirth);
+        UserOnlyHashCodeOverridden cloneTwo = new UserOnlyHashCodeOverridden("Clone", 1, dateOfBirth);
+        HashMap<UserOnlyHashCodeOverridden, Object> storageMap = new HashMap<>();
+        storageMap.put(cloneOne, new Object());
+        storageMap.put(cloneTwo, new Object());
+
+        System.out.println(storageMap);
+        assertThat(storageMap.size(), is(2));
+    }
 }
