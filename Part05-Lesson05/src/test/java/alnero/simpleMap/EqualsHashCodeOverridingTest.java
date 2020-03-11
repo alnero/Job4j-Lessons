@@ -34,7 +34,7 @@ public class EqualsHashCodeOverridingTest {
     }
 
     /**
-     * If only hashCode() is overridden then class Object default method equals() is used.
+     * If only hashCode() is overridden then class Object default equals() method is used.
      * According to default implementation of equals() User objects are not equal but have the same hash codes.
      * HashMap to store and find entities first of all calculates hash codes of the keys
      * to find equal elements and to assign them places in internal storage.
@@ -52,6 +52,31 @@ public class EqualsHashCodeOverridingTest {
         storageMap.put(cloneOne, new Object());
         storageMap.put(cloneTwo, new Object());
 
+        assertThat(cloneOne.hashCode() == cloneTwo.hashCode(), is(true));
+        System.out.println(storageMap);
+        assertThat(storageMap.size(), is(2));
+    }
+
+    /**
+     * If only equals() is overridden then class Object default hashCode() method is used.
+     * According to default implementation of hashCode() User objects will have different hash codes but will be equal.
+     * HashMap to store and find entities first of all calculates hash codes of the keys
+     * to find equal elements and to assign them places in internal storage.
+     * When hash codes are different HashMap puts entities in different storage chains and
+     * treats them as not equal. Even if equals() returns true, HashMap when having different hash codes
+     * does not even call equals() thus we have two "logically equal" entities stored in HashMap.
+     */
+    @Test
+    public void whenOnlyEqualsOverriddenThenTwoLogicallyEqualUsersAreStoredInMap() {
+        Calendar dateOfBirth = Calendar.getInstance();
+        dateOfBirth.set(2001, 1, 1);
+        UserOnlyEqualsOverridden cloneOne = new UserOnlyEqualsOverridden("Clone", 1, dateOfBirth);
+        UserOnlyEqualsOverridden cloneTwo = new UserOnlyEqualsOverridden("Clone", 1, dateOfBirth);
+        HashMap<UserOnlyEqualsOverridden, Object> storageMap = new HashMap<>();
+        storageMap.put(cloneOne, new Object());
+        storageMap.put(cloneTwo, new Object());
+
+        assertThat(cloneOne.equals(cloneTwo), is(true));
         System.out.println(storageMap);
         assertThat(storageMap.size(), is(2));
     }

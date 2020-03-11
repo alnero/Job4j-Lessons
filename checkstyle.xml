@@ -126,7 +126,9 @@
         <!-- See http://checkstyle.sf.net/config_coding.html -->
         <!--<module name="AvoidInlineConditionals"/>-->
         <module name="EmptyStatement"/>
-        <module name="EqualsHashCode"/>
+        <module name="EqualsHashCode">
+            <property name="severity" value="warning"/>
+        </module>
         <!--<module name="HiddenField"/>-->
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
@@ -149,6 +151,8 @@
         <!--<module name="FinalParameters"/>-->
         <module name="TodoComment"/>
         <module name="UpperEll"/>
+
+        <module name="SuppressionCommentFilter"/>
 
     </module>
 
