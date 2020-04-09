@@ -1,4 +1,4 @@
-package alnero.simpleMap;
+package alnero.simpleMap.user;
 
 import java.util.Calendar;
 

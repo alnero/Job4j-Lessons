@@ -1,4 +1,4 @@
-package alnero.simpleMap;
+package alnero.simpleMap.user;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * User class for Map storage.
  */
-public class User {
+public class UserOnlyEqualsOverridden {
     /** User name. **/
     private String name;
     /** Number of children. **/
@@ -20,7 +20,7 @@ public class User {
      * @param children number of children
      * @param birthday birth date
      */
-    public User(String name, int children, Calendar birthday) {
+    public UserOnlyEqualsOverridden(String name, int children, Calendar birthday) {
         this.name = name;
         this.children = children;
         this.birthday = birthday;
@@ -31,17 +31,12 @@ public class User {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof User)) {
+        if (!(o instanceof UserOnlyEqualsOverridden)) {
             return false;
         }
-        User user = (User) o;
-        return children == user.children
-            && Objects.equals(name, user.name)
-            && Objects.equals(birthday, user.birthday);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, children, birthday);
+        UserOnlyEqualsOverridden that = (UserOnlyEqualsOverridden) o;
+        return    children == that.children
+               && Objects.equals(name, that.name)
+               && Objects.equals(birthday, that.birthday);
     }
 }

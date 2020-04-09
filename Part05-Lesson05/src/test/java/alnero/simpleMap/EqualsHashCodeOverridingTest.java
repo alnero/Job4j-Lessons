@@ -2,6 +2,11 @@ package alnero.simpleMap;
 
 import java.util.HashMap;
 import java.util.Calendar;
+
+import alnero.simpleMap.user.User;
+import alnero.simpleMap.user.UserEqualsAndHashCodeNotOverridden;
+import alnero.simpleMap.user.UserOnlyEqualsOverridden;
+import alnero.simpleMap.user.UserOnlyHashCodeOverridden;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
