@@ -1,8 +1,10 @@
 package alnero.simpleMap;
 
+import alnero.simpleMap.user.UserOnlyHashCodeOverridden;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Calendar;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -66,6 +68,87 @@ public class SimpleHashMapTest {
         assertThat(insert1, is(true));
         assertThat(size, is(1));
         assertThat(value, is("one"));
+    }
+
+    /**
+     * Inserting two entries with equal keys changes size to one and value inserted last returned.
+     */
+    @Test
+    public void whenInsertTwoEntriesWithEqualKeysThenSizeIsOneAndLatestEntrySaved() {
+        boolean insert1 = hashMap.insert(1, "one");
+        boolean insert2 = hashMap.insert(1, "oneClone");
+        int size = hashMap.getSize();
+        String value = hashMap.get(1);
+        assertThat(insert1, is(true));
+        assertThat(insert2, is(true));
+        assertThat(size, is(1));
+        assertThat(value, is("oneClone"));
+    }
+
+    /**
+     * Inserting two entries with colliding but not equal keys saves only first entry.
+     */
+    @Test
+    public void whenInsertTwoEntriesWithCollidingButNotEqualKeysThenSizeIsOneAndFirstEntrySaved() {
+        SimpleHashMap<UserOnlyHashCodeOverridden, String> userStringHashMap =  new SimpleHashMap<>();
+        Calendar dateOfBirth = Calendar.getInstance();
+        dateOfBirth.set(2001, 1, 1);
+        UserOnlyHashCodeOverridden cloneOne = new UserOnlyHashCodeOverridden("Clone", 1, dateOfBirth);
+        UserOnlyHashCodeOverridden cloneTwo = new UserOnlyHashCodeOverridden("Clone", 1, dateOfBirth);
+        boolean insert1 = userStringHashMap.insert(cloneOne, "cloneOne");
+        boolean insert2 = userStringHashMap.insert(cloneTwo, "cloneTwo");
+        int size = userStringHashMap.getSize();
+        String value1 = userStringHashMap.get(cloneOne);
+        String value2 = userStringHashMap.get(cloneTwo);
+        assertThat(cloneOne.hashCode() == cloneTwo.hashCode(), is(true));
+        assertThat(cloneOne.equals(cloneTwo), is(false));
+        assertThat(insert1, is(true));
+        assertThat(insert2, is(false));
+        assertThat(size, is(1));
+        assertThat(value1, is("cloneOne"));
+        assertNull(value2);
+    }
+
+    /**
+     * Deleting entry using colliding but not equal key returns false and entry not deleted.
+     */
+    @Test
+    public void whenDeleteOneEntryWithCollidingButNotEqualKeyThenSizeIsOneAndEntryNotDeleted() {
+        SimpleHashMap<UserOnlyHashCodeOverridden, String> userStringHashMap =  new SimpleHashMap<>();
+        Calendar dateOfBirth = Calendar.getInstance();
+        dateOfBirth.set(2001, 1, 1);
+        UserOnlyHashCodeOverridden cloneOne = new UserOnlyHashCodeOverridden("Clone", 1, dateOfBirth);
+        UserOnlyHashCodeOverridden cloneTwo = new UserOnlyHashCodeOverridden("Clone", 1, dateOfBirth);
+        boolean insert = userStringHashMap.insert(cloneOne, "cloneOne");
+        boolean delete = userStringHashMap.delete(cloneTwo);
+        int size = userStringHashMap.getSize();
+        String value = userStringHashMap.get(cloneOne);
+        assertThat(cloneOne.hashCode() == cloneTwo.hashCode(), is(true));
+        assertThat(cloneOne.equals(cloneTwo), is(false));
+        assertThat(insert, is(true));
+        assertThat(delete, is(false));
+        assertThat(size, is(1));
+        assertThat(value, is("cloneOne"));
+    }
+
+    /**
+     * Getting entry using colliding but not equal key returns null.
+     */
+    @Test
+    public void whenGetEntryWithCollidingButNotEqualKeyThenNullReturned() {
+        SimpleHashMap<UserOnlyHashCodeOverridden, String> userStringHashMap =  new SimpleHashMap<>();
+        Calendar dateOfBirth = Calendar.getInstance();
+        dateOfBirth.set(2001, 1, 1);
+        UserOnlyHashCodeOverridden cloneOne = new UserOnlyHashCodeOverridden("Clone", 1, dateOfBirth);
+        UserOnlyHashCodeOverridden cloneTwo = new UserOnlyHashCodeOverridden("Clone", 1, dateOfBirth);
+        boolean insert = userStringHashMap.insert(cloneOne, "cloneOne");
+        int size = userStringHashMap.getSize();
+        String value = userStringHashMap.get(cloneTwo);
+        assertThat(cloneOne.hashCode() == cloneTwo.hashCode(), is(true));
+        assertThat(cloneOne.equals(cloneTwo), is(false));
+        assertThat(insert, is(true));
+        assertThat(size, is(1));
+        assertNull(value);
     }
 
     /**
@@ -188,28 +271,24 @@ public class SimpleHashMapTest {
     }
 
     /**
-     * Inserting three entries using null as a key properly affects size and only first entry saved.
+     * Inserting three entries using null as a key properly affects size and last value returned.
      */
     @Test
-    public void whenInsertThreeTimesUsingNullAsKeyThenCorrectValueReturnedAndOtherInsertsReturnFalse() {
+    public void whenInsertThreeEntriesUsingNullAsKeyThenLatestValueReturnedAndInsertsReturnTrue() {
         boolean insert1 = hashMap.insert(null, "firstNull");
         boolean insert2 = hashMap.insert(null, "secondNull");
         boolean insert3 = hashMap.insert(null, "thirdNull");
         int size = hashMap.getSize();
-        String value1 = hashMap.get(null);
-        String value2 = hashMap.get(null);
-        String value3 = hashMap.get(null);
+        String value = hashMap.get(null);
         assertThat(insert1, is(true));
-        assertThat(insert2, is(false));
-        assertThat(insert3, is(false));
+        assertThat(insert2, is(true));
+        assertThat(insert3, is(true));
         assertThat(size, is(1));
-        assertThat(value1, is("firstNull"));
-        assertThat(value2, is("firstNull"));
-        assertThat(value3, is("firstNull"));
+        assertThat(value, is("thirdNull"));
     }
 
     /**
-     * When inserting three entries with the same hash code only first one saved.
+     * When inserting three entries with the same hash code only last one saved.
      */
     @Test
     public void whenInsertEntriesWithSameHashCodeThenOnlyOneSaved() {
@@ -217,20 +296,16 @@ public class SimpleHashMapTest {
         boolean insert2 = hashMap.insert(1, "secondOne");
         boolean insert3 = hashMap.insert(1, "thirdOne");
         int size = hashMap.getSize();
-        String value1 = hashMap.get(1);
-        String value2 = hashMap.get(1);
-        String value3 = hashMap.get(1);
+        String value = hashMap.get(1);
         assertThat(insert1, is(true));
-        assertThat(insert2, is(false));
-        assertThat(insert3, is(false));
+        assertThat(insert2, is(true));
+        assertThat(insert3, is(true));
         assertThat(size, is(1));
-        assertThat(value1, is("firstOne"));
-        assertThat(value2, is("firstOne"));
-        assertThat(value3, is("firstOne"));
+        assertThat(value, is("thirdOne"));
     }
 
     /**
-     * Sequential insert and delete of entries with the same hash code saves only last entry.
+     * Sequential insert and delete of equal entries with the same hash code saves only last entry.
      */
     @Test
     public void whenInsertAndDeleteEntriesWithSameHashCodeThenOnlyLastOneSaved() {
@@ -242,10 +317,7 @@ public class SimpleHashMapTest {
         boolean delete3 = hashMap.delete(1);
         boolean insert4 = hashMap.insert(1, "fourthOne");
         int size = hashMap.getSize();
-        String value1 = hashMap.get(1);
-        String value2 = hashMap.get(1);
-        String value3 = hashMap.get(1);
-        String value4 = hashMap.get(1);
+        String value = hashMap.get(1);
         assertThat(insert1, is(true));
         assertThat(delete1, is(true));
         assertThat(insert2, is(true));
@@ -254,10 +326,7 @@ public class SimpleHashMapTest {
         assertThat(delete3, is(true));
         assertThat(insert4, is(true));
         assertThat(size, is(1));
-        assertThat(value1, is("fourthOne"));
-        assertThat(value2, is("fourthOne"));
-        assertThat(value3, is("fourthOne"));
-        assertThat(value4, is("fourthOne"));
+        assertThat(value, is("fourthOne"));
     }
 
     /**

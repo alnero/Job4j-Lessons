@@ -35,7 +35,7 @@ public class SimpleHashMap<K, V> implements Iterable<Entry<K, V>> {
     /**
      * Adding entry to hash map.
      * If no space, storage expands.
-     * No adding of entry if bucket is already occupied.
+     * If bucket is already occupied check keys equality and if true replace entry.
      * Fol null keys only first bucket.
      * @param key key of entry
      * @param value value of entry
@@ -51,12 +51,15 @@ public class SimpleHashMap<K, V> implements Iterable<Entry<K, V>> {
             buckets[indexOfBucket] = new Entry<>(key, value);
             size++;
             result = true;
+        } else if (key == null || buckets[indexOfBucket].getKey().equals(key)) {
+            buckets[indexOfBucket] = new Entry<>(key, value);
+            result = true;
         }
         return result;
     }
 
     /**
-     * Get value of entry by key.
+     * Get value of entry by key via keys' hashCode and equality check.
      * Fol null keys search only in first bucket.
      * @param key key of entry
      * @return value of entry or null if entry not found
@@ -64,14 +67,14 @@ public class SimpleHashMap<K, V> implements Iterable<Entry<K, V>> {
     public V get(K key) {
         V value = null;
         int indexOfBucket = key != null ? getBucketForKey(key) : 0;
-        if (buckets[indexOfBucket] != null) {
+        if (buckets[indexOfBucket] != null && (key == null || buckets[indexOfBucket].getKey().equals(key))) {
             value = buckets[indexOfBucket].getValue();
         }
         return value;
     }
 
     /**
-     * Remove entry from hash map by key.
+     * Remove entry from hash map by key via keys' hashCode and equality check.
      * If entry not found returns false.
      * Fol null keys deletion only from first bucket.
      * @param key key of entry
@@ -80,7 +83,7 @@ public class SimpleHashMap<K, V> implements Iterable<Entry<K, V>> {
     public boolean delete(K key) {
         boolean result = false;
         int indexOfBucket = key != null ? getBucketForKey(key) : 0;
-        if (buckets[indexOfBucket] != null) {
+        if (buckets[indexOfBucket] != null && (key == null || buckets[indexOfBucket].getKey().equals(key))) {
             buckets[indexOfBucket] = null;
             size--;
             result = true;
