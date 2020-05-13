@@ -89,4 +89,42 @@ public class AnalyseTest {
 
         assertThat(collectionStat.getModified(), is(2));
     }
+
+    /**
+     * Number of new, deleted and modified users is correct.
+     */
+    @Test
+    public void whenUsersAreAddedDeletedModifiedThenCorrectStatisticsReturned() {
+        Analyse analyse = new Analyse();
+        Analyse.User user1 = new Analyse.User(1, "One");
+        Analyse.User user2 = new Analyse.User(2, "Two");
+        Analyse.User user3 = new Analyse.User(3, "Three");
+        Analyse.User user4 = new Analyse.User(4, "Four");
+        Analyse.User user5 = new Analyse.User(4, "Five");
+        List<Analyse.User> previous = new ArrayList<>();
+        previous.add(user1);
+        previous.add(user2);
+        previous.add(user3);
+        previous.add(user4);
+        previous.add(user5);
+
+        user2 = new Analyse.User(2, "2");
+        user3 = new Analyse.User(3, "3");
+        Analyse.User user6 = new Analyse.User(6, "Six");
+        Analyse.User user7 = new Analyse.User(7, "Seven");
+        List<Analyse.User> current = new ArrayList<>();
+        // two modified users - user2, user3
+        // two new users - user6, user7
+        // two deleted users - user4, user5
+        current.add(user1);
+        current.add(user2);
+        current.add(user3);
+        current.add(user6);
+        current.add(user7);
+
+        Analyse.Info collectionStat = analyse.diff(previous, current);
+        assertThat(collectionStat.getAdded(), is(2));
+        assertThat(collectionStat.getDeleted(), is(2));
+        assertThat(collectionStat.getModified(), is(2));
+    }
 }
