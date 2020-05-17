@@ -127,4 +127,30 @@ public class AnalyseTest {
         assertThat(collectionStat.getDeleted(), is(2));
         assertThat(collectionStat.getModified(), is(2));
     }
+
+    /**
+     * Statistics for equal collections.
+     */
+    @Test
+    public void whenUsersAreNotAddedDeletedModifiedThenCorrectStatisticsReturned() {
+        Analyse analyse = new Analyse();
+        Analyse.User user1 = new Analyse.User(1, "One");
+        Analyse.User user2 = new Analyse.User(2, "Two");
+        Analyse.User user3 = new Analyse.User(3, "Three");
+        Analyse.User user4 = new Analyse.User(4, "Four");
+        List<Analyse.User> previous = new ArrayList<>();
+        previous.add(user1);
+        previous.add(user2);
+        previous.add(user3);
+        previous.add(user4);
+        List<Analyse.User> current = new ArrayList<>();
+        current.add(user1);
+        current.add(user2);
+        current.add(user3);
+        current.add(user4);
+        Analyse.Info collectionStat = analyse.diff(previous, current);
+        assertThat(collectionStat.getAdded(), is(0));
+        assertThat(collectionStat.getDeleted(), is(0));
+        assertThat(collectionStat.getModified(), is(0));
+    }
 }

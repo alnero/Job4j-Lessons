@@ -1,6 +1,8 @@
 package alnero.collectionStatistic;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Analyse {
@@ -11,7 +13,7 @@ public class Analyse {
      * @return class with integer numbers showing added, deleted, modified users
      */
     public Info diff(List<User> previous, List<User> current) {
-        // answer via streams
+//        // answer via streams
 //        int numOfNewUsers = (int) current.stream().filter(currentUser -> {
 //            return !previous.contains(currentUser);
 //        }).count();
@@ -28,24 +30,49 @@ public class Analyse {
 //        result.setModified(numOfModifiedUsers);
 //        return result;
 
-        Info result = new Info();
-        int previousUsers = previous.size();
-        int currentUsers = current.size();
-        int modifiedUsers  = 0;
-        for (User currentUser : current) {
-            for (User previousUser : previous) {
-                if (previousUser.getId() == currentUser.getId()) {
-                    currentUsers--;
-                    previousUsers--;
-                    if (!previousUser.getName().equals(currentUser.getName())) {
-                        modifiedUsers++;
-                    }
-                }
+//        // answer using loops
+//        Info result = new Info();
+//        int previousUsers = previous.size();
+//        int currentUsers = current.size();
+//        int modifiedUsers  = 0;
+//        for (User currentUser : current) {
+//            for (User previousUser : previous) {
+//                if (previousUser.getId() == currentUser.getId()) {
+//                    currentUsers--;
+//                    previousUsers--;
+//                    if (!previousUser.getName().equals(currentUser.getName())) {
+//                        modifiedUsers++;
+//                    }
+//                }
+//            }
+//        }
+//        result.setAdded(currentUsers);
+//        result.setDeleted(previousUsers);
+//        result.setModified(modifiedUsers);
+//        return result;
+
+        int numOfNewUsers = 0;
+        int numOfDeletedUsers = 0;
+        int numOfModifiedUsers = 0;
+        Map<Integer, User> previosMap = new HashMap<>();
+        for (User user : previous) {
+            if (!current.contains(user)) {
+                numOfDeletedUsers++;
+            }
+            previosMap.put(user.getId(), user);
+        }
+        for (User user : current) {
+            if (!previous.contains(user)) {
+                numOfNewUsers++;
+            }
+            if (previosMap.containsValue(user) && !user.getName().equals(previosMap.get(user.getId()).getName())) {
+                numOfModifiedUsers++;
             }
         }
-        result.setAdded(currentUsers);
-        result.setDeleted(previousUsers);
-        result.setModified(modifiedUsers);
+        Info result = new Info();
+        result.setAdded(numOfNewUsers);
+        result.setDeleted(numOfDeletedUsers);
+        result.setModified(numOfModifiedUsers);
         return result;
     }
 
@@ -89,8 +116,7 @@ public class Analyse {
                 return false;
             }
             User user = (User) o;
-            return id == user.id
-                   && Objects.equals(name, user.name);
+            return id == user.id;
         }
 
         @Override
