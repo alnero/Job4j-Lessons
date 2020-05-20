@@ -51,28 +51,27 @@ public class Analyse {
 //        result.setModified(modifiedUsers);
 //        return result;
 
-        int numOfNewUsers = 0;
-        int numOfDeletedUsers = 0;
-        int numOfModifiedUsers = 0;
-        Map<Integer, User> previosMap = new HashMap<>();
+        int currentUsers = current.size();
+        int previousUsers = previous.size();
+        int modifiedUsers = 0;
+        Map<Integer, User> previousMap = new HashMap<>();
         for (User user : previous) {
-            if (!current.contains(user)) {
-                numOfDeletedUsers++;
-            }
-            previosMap.put(user.getId(), user);
+            previousMap.put(user.getId(), user);
         }
         for (User user : current) {
-            if (!previous.contains(user)) {
-                numOfNewUsers++;
-            }
-            if (previosMap.containsValue(user) && !user.getName().equals(previosMap.get(user.getId()).getName())) {
-                numOfModifiedUsers++;
+            if (previousMap.containsValue(user)) {
+                currentUsers--;
+                previousUsers--;
+                if (!user.getName().equals(previousMap.get(user.getId()).getName())) {
+                    modifiedUsers++;
+
+                }
             }
         }
         Info result = new Info();
-        result.setAdded(numOfNewUsers);
-        result.setDeleted(numOfDeletedUsers);
-        result.setModified(numOfModifiedUsers);
+        result.setAdded(currentUsers);
+        result.setDeleted(previousUsers);
+        result.setModified(modifiedUsers);
         return result;
     }
 
