@@ -23,7 +23,7 @@ public class MultiplicationTableToFile {
             for (int j = 0; j <= tableSize; j++) {
                 formatter.format(tabulationFormat, i * j);
             }
-            sb.append("\n");
+            sb.append(System.lineSeparator());
         }
         this.writeDataToFile(sb.toString().getBytes(), file);
     }
