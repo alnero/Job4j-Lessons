@@ -28,6 +28,7 @@ public class ConfigTest {
         Config config = new Config(path);
         config.load();
         assertNull(config.value("## PostgreSQL"));
+        assertNull(config.value("# important comment"));
         assertNull(config.value(""));
     }
 }

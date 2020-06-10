@@ -29,7 +29,7 @@ public class Config {
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             read.lines()
-                    .filter(str -> !"".equals(str) && !str.startsWith("##"))
+                    .filter(str -> !"".equals(str) && !str.startsWith("#"))
                     .map(str -> str.split("="))
                     .forEach(prop -> values.put(prop[0], prop[1])
             );
