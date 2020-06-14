@@ -21,7 +21,7 @@ public class ServerLogAnalyseTest {
     public TemporaryFolder folder = new TemporaryFolder();
 
     @Test
-    public void whenReadServerLog() throws IOException {
+    public void whenReadServerLogThenCorrectDownTimeReturned() throws IOException {
         String source = "src/test/resources/server.log";
         String target = folder.newFile("unavailable.csv").getAbsolutePath();
         ServerLogAnalyse logAnalyse = new ServerLogAnalyse();
