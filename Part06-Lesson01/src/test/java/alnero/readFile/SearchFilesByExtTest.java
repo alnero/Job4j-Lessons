@@ -27,6 +27,16 @@ public class SearchFilesByExtTest {
         assertThat(result, is(expected));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void whenNoArgumentsThenThrowIllegalArgumentException() throws IOException {
+        SearchFilesByExt.main(new String[]{});
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenOnlyOneArgumentThenThrowIllegalArgumentException() throws IOException {
+        SearchFilesByExt.main(new String[]{"src/test/resources"});
+    }
+
     @Test
     public void whenNoArgumentsThenThrowAndMessageHowToUseProgramFromCommandLine() {
         String result = "";
