@@ -14,6 +14,6 @@ public class ListDirTest {
     public void whenListDirThenProperFileNamesAndSizesReturned() {
         ListDir listDir = new ListDir();
         List<String> result = listDir.listFiles("src/test/resources");
-        assertThat(result.toString(), is("[numbers.txt 7, log.txt 852, server.log 180, app.properties 296]"));
+        assertThat(result.toString(), is("[numbers.txt 7, Test_folder_1 4096, log.txt 852, server.log 180, app.properties 296]"));
     }
 }
