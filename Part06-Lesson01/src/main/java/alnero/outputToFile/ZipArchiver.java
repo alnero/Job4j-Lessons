@@ -1,22 +1,17 @@
 package alnero.outputToFile;
 
+import alnero.readFile.SearchFiles;
+
 import java.util.List;
-import java.util.ArrayList;
 import java.io.File;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Files;
-import java.nio.file.FileVisitor;
-import java.nio.file.FileVisitResult;
-import java.nio.file.attribute.BasicFileAttributes;
+import java.util.stream.Collectors;
 import java.util.zip.ZipOutputStream;
 import java.util.zip.ZipEntry;
-
-import static java.nio.file.FileVisitResult.CONTINUE;
 
 /**
  * Create zip archives. Sources can be folders or single files.
@@ -61,35 +56,11 @@ public class ZipArchiver {
      * @param root where to search
      * @param ext skip files with this extension
      * @return list of files
-     * @throws IOException as defined by FileVisitor API
+     * @throws IOException as defined by FileVisitor API used in SearchFiles class
      */
     public List<File> searchFilesExcludingExtension(File root, String ext) throws IOException {
-        List<File> result = new ArrayList<>();
-        FileVisitor<Path> fileVisitor = new FileVisitor<>() {
-            @Override
-            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
-                return CONTINUE;
-            }
-
-            @Override
-            public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
-                if (!path.toString().endsWith(ext)) {
-                    result.add(path.toFile());
-                }
-                return CONTINUE;
-            }
-
-            @Override
-            public FileVisitResult visitFileFailed(Path path, IOException exc) throws IOException {
-                return CONTINUE;
-            }
-
-            @Override
-            public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-                return CONTINUE;
-            }
-        };
-        Files.walkFileTree(root.toPath(), fileVisitor);
+        List<File> allFiles = new SearchFiles().searchFiles(root, "*");
+        List<File> result = allFiles.stream().filter(file -> !file.getName().endsWith(ext)).collect(Collectors.toList());
         return result;
     }
 

@@ -3,8 +3,8 @@ package alnero.outputToFile;
 import java.nio.file.Paths;
 import java.nio.file.InvalidPathException;
 import org.junit.Test;
-import static org.hamcrest.Matchers.is;
 
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class ZipArgsParserTest {
