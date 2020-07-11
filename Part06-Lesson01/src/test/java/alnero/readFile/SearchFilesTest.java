@@ -27,7 +27,7 @@ public class SearchFilesTest {
 
     @Test
     public void whenSearchOneFileThenProperFileReturned() throws IOException {
-        List<File> fileList = searcher.searchFiles(searchDirectory, "log.txt");
+        List<File> fileList = searcher.searchFiles(searchDirectory, file -> "log.txt".equals(file.getName()));
         List<String> result = fileList.stream().map(File::getName).collect(Collectors.toList());
         List<String> expected = Arrays.asList("log.txt");
         assertEquals(expected, result);
@@ -35,7 +35,8 @@ public class SearchFilesTest {
 
     @Test
     public void whenSearchFilesByExtensionThenProperFilesReturned() throws IOException {
-        List<File> fileList = searcher.searchFiles(searchDirectory, "*.txt");
+        String regExp = "*.txt".replace("*", ".*?");
+        List<File> fileList = searcher.searchFiles(searchDirectory, file -> file.getName().matches(regExp));
         List<String> result = fileList.stream().map(File::getName).collect(Collectors.toList());
         List<String> expected = Arrays.asList("numbers.txt", "log.txt");
         assertEquals(expected, result);
@@ -43,7 +44,7 @@ public class SearchFilesTest {
 
     @Test
     public void whenSearchFilesByNamePartThenProperFilesReturned() throws IOException {
-        List<File> fileList = searcher.searchFiles(searchDirectory, "test");
+        List<File> fileList = searcher.searchFiles(searchDirectory, file -> file.getName().contains("test"));
         List<String> result = fileList.stream().map(File::getName).collect(Collectors.toList());
         List<String> expected = Arrays.asList("test_file_2.test", "test_file_1.test");
         assertEquals(expected, result);
@@ -51,7 +52,8 @@ public class SearchFilesTest {
 
     @Test
     public void whenSearchFilesByExtensionPartThenProperFilesReturned() throws IOException {
-        List<File> fileList = searcher.searchFiles(searchDirectory, "app.prop*");
+        String regExp = "app.prop*".replace("*", ".*?");
+        List<File> fileList = searcher.searchFiles(searchDirectory, file -> file.getName().matches(regExp));
         List<String> result = fileList.stream().map(File::getName).collect(Collectors.toList());
         List<String> expected = Arrays.asList("app.properties");
         assertEquals(expected, result);
@@ -59,7 +61,8 @@ public class SearchFilesTest {
 
     @Test
     public void whenSearchFilesByWildcardThenProperFilesReturned() throws IOException {
-        List<File> fileList = searcher.searchFiles(searchDirectory, "test_file_?.test");
+        String regExp = "test_file_?.test".replace("?", ".?");
+        List<File> fileList = searcher.searchFiles(searchDirectory, file -> file.getName().matches(regExp));
         List<String> result = fileList.stream().map(File::getName).collect(Collectors.toList());
         List<String> expected = Arrays.asList("test_file_2.test", "test_file_1.test");
         assertEquals(expected, result);
@@ -67,7 +70,8 @@ public class SearchFilesTest {
 
     @Test
     public void whenSearchAllFilesThenAllFilesReturned() throws IOException {
-        List<File> fileList = searcher.searchFiles(searchDirectory, "*");
+        String regExp = "*".replace("*", ".*?");
+        List<File> fileList = searcher.searchFiles(searchDirectory, file -> file.getName().matches(regExp));
         List<String> result = fileList.stream().map(File::getName).collect(Collectors.toList());
         List<String> expected = Arrays.asList("numbers.txt", "test_file_2.test", "test_file_1.test", "log.txt", "server.log", "app.properties");
         assertEquals(expected, result);

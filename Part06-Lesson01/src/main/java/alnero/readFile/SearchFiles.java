@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import static java.nio.file.FileVisitResult.CONTINUE;
 
@@ -19,12 +20,11 @@ public class SearchFiles {
     /**
      * Get list of files.
      * @param root where to search
-     * @param searchString file name, part of file name, file name with ? or *
+     * @param predicate search clause
      * @return list of files
      * @throws IOException as defined by FileVisitor API
      */
-    public List<File> searchFiles(File root, String searchString) throws IOException {
-        String searchRegExp = searchString.replace("?", ".?").replace("*", ".*?");
+    public List<File> searchFiles(File root, Predicate<File> predicate) throws IOException {
         List<File> result = new ArrayList<>();
         FileVisitor<Path> fileVisitor = new FileVisitor<>() {
             @Override
@@ -34,11 +34,9 @@ public class SearchFiles {
 
             @Override
             public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
-                String fileName = path.getFileName().toString();
-                if (fileName.equals(searchString)
-                    || fileName.contains(searchString)
-                    || fileName.matches(searchRegExp)) {
-                    result.add(path.toFile());
+                File file = path.toFile();
+                if (predicate.test(file)) {
+                    result.add(file);
                 }
                 return CONTINUE;
             }

@@ -9,7 +9,6 @@ import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.stream.Collectors;
 import java.util.zip.ZipOutputStream;
 import java.util.zip.ZipEntry;
 
@@ -59,9 +58,7 @@ public class ZipArchiver {
      * @throws IOException as defined by FileVisitor API used in SearchFiles class
      */
     public List<File> searchFilesExcludingExtension(File root, String ext) throws IOException {
-        List<File> allFiles = new SearchFiles().searchFiles(root, "*");
-        List<File> result = allFiles.stream().filter(file -> !file.getName().endsWith(ext)).collect(Collectors.toList());
-        return result;
+        return new SearchFiles().searchFiles(root, file -> !file.getName().endsWith(ext));
     }
 
     /**
