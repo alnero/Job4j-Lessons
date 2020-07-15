@@ -33,6 +33,7 @@ public class ZipArchiverTest {
         List<String> expected = Arrays.asList(
                 "src/test/resources/Test_folder_1/Test_folder_2/test_file_2.test",
                 "src/test/resources/Test_folder_1/test_file_1.test",
+                "src/test/resources/chat.log",
                 "src/test/resources/server.log",
                 "src/test/resources/app.properties"
         );

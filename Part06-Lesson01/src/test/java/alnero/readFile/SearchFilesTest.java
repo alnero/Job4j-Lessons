@@ -38,7 +38,7 @@ public class SearchFilesTest {
         String regExp = "*.txt".replace("*", ".*?");
         List<File> fileList = searcher.searchFiles(searchDirectory, file -> file.getName().matches(regExp));
         List<String> result = fileList.stream().map(File::getName).collect(Collectors.toList());
-        List<String> expected = Arrays.asList("numbers.txt", "log.txt");
+        List<String> expected = Arrays.asList("numbers.txt", "line_separator.txt", "lorem_ipsum.txt", "one_sentense.txt", "log.txt", "empty_file.txt");
         assertEquals(expected, result);
     }
 
@@ -73,7 +73,7 @@ public class SearchFilesTest {
         String regExp = "*".replace("*", ".*?");
         List<File> fileList = searcher.searchFiles(searchDirectory, file -> file.getName().matches(regExp));
         List<String> result = fileList.stream().map(File::getName).collect(Collectors.toList());
-        List<String> expected = Arrays.asList("numbers.txt", "test_file_2.test", "test_file_1.test", "log.txt", "server.log", "app.properties");
+        List<String> expected = Arrays.asList("numbers.txt", "line_separator.txt", "test_file_2.test", "test_file_1.test", "lorem_ipsum.txt", "one_sentense.txt", "chat.log", "log.txt", "server.log", "empty_file.txt", "app.properties");
         assertEquals(expected, result);
     }
 }

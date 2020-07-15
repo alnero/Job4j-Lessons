@@ -23,7 +23,7 @@ public class SearchFilesByExtTest {
         Path path = Paths.get("src/test/resources");
         List<Path> pathsToTxtFiles = searchFiles.search(path, "txt");
         List<String> result = pathsToTxtFiles.stream().map(Path::getFileName).map(Path::toString).collect(Collectors.toList());
-        List<String> expected = Arrays.asList("numbers.txt", "log.txt");
+        List<String> expected = Arrays.asList("numbers.txt", "line_separator.txt", "lorem_ipsum.txt", "one_sentense.txt", "log.txt", "empty_file.txt");
         assertThat(result, is(expected));
     }
 
@@ -69,8 +69,12 @@ public class SearchFilesByExtTest {
         // search txt files
         SearchFilesByExt.main(new String[]{"src/test/resources", "txt"});
         assertThat(byteArrayOutputStream.toString(), is(
-                "src/test/resources/numbers.txt"  + System.lineSeparator()
+                "src/test/resources/numbers.txt" + System.lineSeparator()
+                    + "src/test/resources/line_separator.txt" + System.lineSeparator()
+                    + "src/test/resources/lorem_ipsum.txt" + System.lineSeparator()
+                    + "src/test/resources/one_sentense.txt" + System.lineSeparator()
                     + "src/test/resources/log.txt" + System.lineSeparator()
+                    + "src/test/resources/empty_file.txt"  + System.lineSeparator()
         ));
         // restore console output
         System.out.flush();
