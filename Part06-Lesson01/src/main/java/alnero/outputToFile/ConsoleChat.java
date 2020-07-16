@@ -1,5 +1,8 @@
 package alnero.outputToFile;
 
+import java.nio.file.Files;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Optional;
 import java.util.Scanner;
@@ -15,6 +18,13 @@ import java.io.IOException;
  * Chat in console. Replies are random strings from supplied text file. Commands to stop/continue replies and finish chat are supported.
  */
 public class ConsoleChat {
+    /** Console constant to finish chat. */
+    private static final String FINISH_CHAT = "завершить";
+    /** Console constant to stop reply from chat program. */
+    private static final String STOP = "стоп";
+    /** Console constant to continue reply from chat program. */
+    private static final String CONTINUE = "продолжить";
+
     /**
      * Get random string constrained between two line separators from text file.
      * @param textFile source file with text
@@ -53,36 +63,73 @@ public class ConsoleChat {
     }
 
     /**
-     * Main chat method.
-     * @param textFile source file for random replies
-     * @param outputFile all chat is saved to this file
+     * Get list of strings from text file.
+     * If file is empty the list will have only one string: "Size of text file is 0."
+     * @param textFile source file with text
+     * @return list of strings
      */
-    public void chat(File textFile, File outputFile) {
-        Scanner sc = new Scanner(System.in);
-        String line = sc.nextLine();
-        Optional<String> isSilenceOn = Optional.ofNullable(null);
-        try (PrintWriter logger = new PrintWriter(new BufferedOutputStream(new FileOutputStream(outputFile)))) {
-            while (!"завершить".equals(line)) {
-                logger.println(line);
-                switch (line) {
-                    case "стоп":
-                        isSilenceOn = Optional.of(line);
-                        break;
-                    case "продолжить":
-                        isSilenceOn = Optional.ofNullable(null);
-                    default:
-                        if (isSilenceOn.isEmpty()) {
-                            String str = getRandomString(textFile);
-                            System.out.println(str);
-                            logger.println(str);
-                        }
-                        break;
-                }
-                line = sc.nextLine();
+    public List<String> getStrings(File textFile) {
+        List<String> lines = null;
+        try {
+            if (textFile.length() == 0) {
+                lines = new ArrayList<>();
+                lines.add("Size of text file is 0.");
+            } else {
+                lines = Files.readAllLines(textFile.toPath());
             }
-            logger.println(line);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return lines;
+    }
+
+    /**
+     * Save list of strings to file.
+     * @param log list of strings
+     * @param file destination file
+     */
+    public void saveStringLogToFile(List<String> log, File file) {
+        try (PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(file)))) {
+            for (String s : log) {
+                out.println(s);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Main chat method.
+     * @param textFile   source file for random replies
+     * @param outputFile all chat is saved to this file
+     */
+    public void chat(File textFile, File outputFile) {
+        List<String> chatLog = new ArrayList<>();
+        List<String> stringCorpus = getStrings(textFile);
+        int numOfStrings = stringCorpus.size();
+        Optional<String> isSilenceOn = Optional.ofNullable(null);
+        Scanner sc = new Scanner(System.in);
+        String line = sc.nextLine();
+        while (!FINISH_CHAT.equals(line)) {
+            chatLog.add(line);
+            switch (line) {
+                case STOP:
+                    isSilenceOn = Optional.of(line);
+                    break;
+                case CONTINUE:
+                    isSilenceOn = Optional.ofNullable(null);
+                default:
+                    if (isSilenceOn.isEmpty()) {
+                        int random = new Random().ints(0, numOfStrings).findFirst().getAsInt();
+                        String str = stringCorpus.get(random);
+                        System.out.println(str);
+                        chatLog.add(str);
+                    }
+                    break;
+            }
+            line = sc.nextLine();
+        }
+        chatLog.add(line);
+        this.saveStringLogToFile(chatLog, outputFile);
     }
 }

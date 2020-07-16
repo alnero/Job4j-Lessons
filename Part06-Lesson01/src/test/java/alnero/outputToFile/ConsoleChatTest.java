@@ -272,10 +272,11 @@ public class ConsoleChatTest {
         System.setIn(byteArrayInputStream);
 
         new ConsoleChat().chat(textFile, chatLog);
-        assertThat(getChatLog(), containsString("Lorem"));
-        assertThat(getChatLog(), containsString("стоп"));
-        assertThat(getChatLog(), containsString("продолжить"));
-        assertThat(getChatLog(), containsString("завершить"));
+        String log = getChatLog();
+        assertThat(log, containsString("Lorem"));
+        assertThat(log, containsString("стоп"));
+        assertThat(log, containsString("продолжить"));
+        assertThat(log, containsString("завершить"));
 
         // restore console input
         System.setIn(systemIn);
