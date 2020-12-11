@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 public class UsageLog4jViaSlf4j {
 
-    private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(UsageLog4jViaSlf4j.class.getName());
 
     public static void main(String[] args) {
         LOG.trace("trace message");
