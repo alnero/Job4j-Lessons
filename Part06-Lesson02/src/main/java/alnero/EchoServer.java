@@ -1,5 +1,8 @@
 package alnero;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.BufferedReader;
@@ -11,7 +14,9 @@ import java.net.Socket;
  * Simple socket server.
  */
 public class EchoServer {
-    public static void main(String[] args) throws IOException {
+    private static final Logger LOG = LoggerFactory.getLogger(EchoServer.class.getName());
+
+    public static void main(String[] args) {
         try (ServerSocket server = new ServerSocket(9000)) {
             boolean isRunning = true;
             while (isRunning) {
@@ -30,6 +35,8 @@ public class EchoServer {
                     out.write("HTTP/1.1 200 OK\r\n\\".getBytes());
                 }
             }
+        } catch (IOException ex) {
+            LOG.error("Exception in socket echo server", ex);
         }
     }
 }
