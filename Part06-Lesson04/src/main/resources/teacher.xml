@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teacher isAvailable="true" age="30" name="Smith">
+    <contact serialVersionUID="1" zipCode="123456" phone="+7 (111) 111-11-11"/>
+    <studies>
+        <study>math</study>
+        <study>history</study>
+        <study>english</study>
+    </studies>
+</teacher>
