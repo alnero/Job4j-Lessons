@@ -30,6 +30,26 @@ public class Teacher {
         this.studies = studies;
     }
 
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public String[] getStudies() {
+        return studies;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
