@@ -1,14 +1,26 @@
 package alnero;
 
+import javax.xml.bind.annotation.*;
 import java.util.Arrays;
 import java.util.Objects;
 
+@XmlRootElement(name = "teacher")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Teacher {
-    private final boolean isAvailable;
-    private final int age;
-    private final String name;
-    private final Contact contact;
-    private final String[] studies;
+    @XmlAttribute
+    private boolean isAvailable;
+    @XmlAttribute
+    private int age;
+    @XmlAttribute
+    private String name;
+    private Contact contact;
+    @XmlElementWrapper(name = "studies")
+    @XmlElement(name = "study")
+    private String[] studies;
+
+    public Teacher() {
+
+    }
 
     public Teacher(boolean isAvailable, int age, String name, Contact contact, String[] studies) {
         this.isAvailable = isAvailable;

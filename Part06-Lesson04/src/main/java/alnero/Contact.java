@@ -1,12 +1,23 @@
 package alnero;
 
+import com.sun.xml.txw2.annotation.XmlElement;
+
+import javax.xml.bind.annotation.XmlAttribute;
 import java.io.Serializable;
 import java.util.Objects;
 
+@XmlElement(value = "contact")
 public class Contact implements Serializable {
+    @XmlAttribute
     private static final long serialVersionUID = 1L;
-    private final int zipCode;
-    private final String phone;
+    @XmlAttribute
+    private int zipCode;
+    @XmlAttribute
+    private String phone;
+
+    public Contact() {
+
+    }
 
     public Contact(int zipCode, String phone) {
         this.zipCode = zipCode;
