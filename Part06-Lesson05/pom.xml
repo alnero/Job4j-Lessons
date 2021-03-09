@@ -32,7 +32,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>alnero.fileSearch.Finder</mainClass>
+                            <mainClass>alnero.fileSearch.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
