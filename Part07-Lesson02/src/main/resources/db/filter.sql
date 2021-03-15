@@ -55,8 +55,7 @@ SELECT * FROM product WHERE name LIKE '%Ice-cream%';
 
 --- all products that expire next month ---
 SELECT * FROM product
-WHERE expired_date > DATE_TRUNC('month', CURRENT_DATE) + '1 month'
-  AND expired_date < DATE_TRUNC('month', CURRENT_DATE) + '2 month';
+WHERE DATE_TRUNC('month', expired_date) = DATE_TRUNC('month', CURRENT_DATE) + '1 month';
 
 --- all products with max price ---
 SELECT * FROM product WHERE price = (SELECT MAX(price) FROM product);
