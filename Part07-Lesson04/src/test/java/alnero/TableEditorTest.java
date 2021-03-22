@@ -54,7 +54,7 @@ public class TableEditorTest {
     @Test
     public void whenCreateTableThenTableExistsInDB() throws SQLException {
         this.tableEditor.createTable(TEST_TABLE_NAME);
-        DatabaseMetaData metaData = this.tableEditor.getConnection().getMetaData();
+        DatabaseMetaData metaData = this.tableEditor.getDatabaseMetaData();
         ResultSet tables = metaData.getTables(null, null, TEST_TABLE_NAME, new String[] {"TABLE"});
         while (tables.next()) {
             assertEquals(TEST_TABLE_NAME, tables.getString("TABLE_NAME"));
@@ -65,7 +65,7 @@ public class TableEditorTest {
     public void whenDropTableThenTableDoesNotExistInDB() throws SQLException {
         this.tableEditor.createTable(TEST_TABLE_NAME);
         this.tableEditor.dropTable(TEST_TABLE_NAME);
-        DatabaseMetaData metaData = this.tableEditor.getConnection().getMetaData();
+        DatabaseMetaData metaData = this.tableEditor.getDatabaseMetaData();
         ResultSet tables = metaData.getTables(null, null, TEST_TABLE_NAME, new String[] {"TABLE"});
         if (tables.next()) {
             fail();
