@@ -25,8 +25,8 @@ public class StartUI {
     /** Console constant for quitting app. */
     private static final String EXIT = "7";
 
-    /** Main TaskTracker object for StartUI class. */
-    private TaskTracker taskTracker;
+    /** Main Store-TaskTracker object for StartUI class. */
+    private Store taskTracker;
     /** TrackerInput used in StartUI class. */
     private TrackerInput input;
 
@@ -35,7 +35,7 @@ public class StartUI {
      * @param taskTracker main handler of tasks
      * @param input main input used for interaction
      */
-    public StartUI(TaskTracker taskTracker, TrackerInput input) {
+    public StartUI(Store taskTracker, TrackerInput input) {
         this.taskTracker = taskTracker;
         this.input = input;
     }
@@ -326,9 +326,10 @@ public class StartUI {
      * @param args args for main method
      */
     public static void main(String[] args) {
-        TaskTracker taskTracker = new TaskTracker(INITIAL_TASK_TRACKER_SIZE);
+        SqlTaskTracker sqlTaskTracker = new SqlTaskTracker();
+        sqlTaskTracker.init();
         TrackerInput consoleInput = new ConsoleInput();
 
-        new StartUI(taskTracker, consoleInput).init();
+        new StartUI(sqlTaskTracker, consoleInput).init();
     }
 }

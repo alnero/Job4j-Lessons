@@ -1,6 +1,7 @@
 package alnero;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -45,6 +46,13 @@ public class Comment {
     }
 
     /**
+     * Id for a comment can be changed by storage mechanism.
+     */
+    public void changeId(long id) {
+        this.id = id;
+    }
+
+    /**
      * Get the contents of the comment.
      * @return comment contents
      */
@@ -61,11 +69,19 @@ public class Comment {
     }
 
     /**
-     * Only getter for the time of creation.
+     * Get the time of comment creation.
      * @return time of comment creation
      */
     public Date getCreateDate() {
         return createDate;
+    }
+
+    /**
+     * Set the time of comment creation.
+     * @param createDate time of task creation
+     */
+    public void setCreateDate(Date createDate) {
+        this.createDate =  createDate;
     }
 
     /**
@@ -75,5 +91,20 @@ public class Comment {
     @Override
     public String toString() {
         return  "[" + this.id + "/" + this.createDate + "] " + this.content + "\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Comment)) return false;
+        Comment comment = (Comment) o;
+        return getId() == comment.getId() &&
+                Objects.equals(getContent(), comment.getContent()) &&
+                Objects.equals(getCreateDate(), comment.getCreateDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getContent(), getCreateDate());
     }
 }

@@ -1,6 +1,8 @@
 package alnero;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -62,6 +64,13 @@ public class Task {
     }
 
     /**
+     * Id for a task can be changed by storage mechanism.
+     */
+    public void changeId(long id) {
+        this.id = id;
+    }
+
+    /**
      * Get the name of a task.
      * @return name
      */
@@ -99,6 +108,14 @@ public class Task {
      */
     public Date getCreateDate() {
         return createDate;
+    }
+
+    /**
+     * Set the time of task creation.
+     * @param createDate time of task creation
+     */
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     /**
@@ -152,5 +169,25 @@ public class Task {
         }
 
         return  str.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task)) return false;
+        Task task = (Task) o;
+        return getId() == task.getId() &&
+                nextCommentIndex == task.nextCommentIndex &&
+                Objects.equals(getName(), task.getName()) &&
+                Objects.equals(getDescription(), task.getDescription()) &&
+                Objects.equals(getCreateDate(), task.getCreateDate()) &&
+                Arrays.equals(getComments(), task.getComments());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(getId(), getName(), getDescription(), getCreateDate(), nextCommentIndex);
+        result = 31 * result + Arrays.hashCode(getComments());
+        return result;
     }
 }

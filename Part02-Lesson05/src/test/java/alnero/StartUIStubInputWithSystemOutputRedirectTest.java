@@ -19,11 +19,9 @@ import java.util.HashMap;
  */
 public class StartUIStubInputWithSystemOutputRedirectTest {
     /** Common object for task tracker. */
-    private TaskTracker taskTracker;
+    private SqlTaskTracker taskTracker;
     /** Common dictionary object for stub input strings. */
     private HashMap<String, String[]> stubInputDictionary;
-    /** Initial size of tracker storage, will increase automatically if needed. */
-    private final int initialTaskTrackerSize = 10;
     /** Common object for automatic stub inputs. */
     private TrackerInput stubInput;
     /** Object to save original default system output. */
@@ -34,7 +32,12 @@ public class StartUIStubInputWithSystemOutputRedirectTest {
     /** Create common task tracker and stub input dictionary objects before tests. */
     @Before
     public void createCommonTaskTrackerAndStubInputDictionaryObjectsForTesting() {
-        this.taskTracker = new TaskTracker(initialTaskTrackerSize);
+        this.taskTracker = new SqlTaskTracker();
+        this.taskTracker.init();
+        Task[] allTasksInTracker = this.taskTracker.findAll();
+        for (Task task : allTasksInTracker) {
+            this.taskTracker.delete(task);
+        }
         this.stubInputDictionary = new HashMap<>();
     }
 

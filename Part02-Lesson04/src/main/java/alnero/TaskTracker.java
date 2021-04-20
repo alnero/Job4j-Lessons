@@ -3,7 +3,7 @@ package alnero;
 /**
  * Class for tracking Task objects.
  */
-public class TaskTracker {
+public class TaskTracker implements Store {
     /**
      * Storage for all tasks.
      */
@@ -204,5 +204,15 @@ public class TaskTracker {
         }
 
         return null;
+    }
+
+    @Override
+    public void init() {
+        /* NOP */
+    }
+
+    @Override
+    public void close() throws Exception {
+        /* NOP */
     }
 }
