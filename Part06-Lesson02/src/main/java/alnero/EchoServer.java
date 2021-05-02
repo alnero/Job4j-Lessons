@@ -14,6 +14,7 @@ import java.net.Socket;
  * Simple socket server.
  */
 public class EchoServer {
+    /** Logger instance. **/
     private static final Logger LOG = LoggerFactory.getLogger(EchoServer.class.getName());
 
     public static void main(String[] args) {
