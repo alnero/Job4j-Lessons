@@ -1,5 +1,6 @@
 # Java in use
 language: java
+jdk: openjdk12
 # Regular user
 sudo: false
 
@@ -11,6 +12,6 @@ after_success:
 notifications:
   email:
     recipients:
-      -kimosicheg@yandex.ru
+      -
     on_success: never # default: change
     on_failure: always # default: always
