@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
 public class UsageLog4jParamsLogging {
+    /** Logger instance. **/
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4jParamsLogging.class.getName());
 
     public static void main(String[] args) {
