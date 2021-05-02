@@ -15,7 +15,7 @@ public class TeacherXmlTest {
     @Test
     public void whenStringifyTeacherToFromXmlThenSameTeacherReturned() throws Exception {
         Contact contact = new Contact(123456, "+7 (111) 111-11-11");
-        Teacher teacher = new Teacher(true, 30, "Smith",contact, new String[]{"math", "history", "english"});
+        Teacher teacher = new Teacher(true, 30, "Smith", contact, new String[]{"math", "history", "english"});
 
         JAXBContext context = JAXBContext.newInstance(Teacher.class);
         Marshaller marshaller = context.createMarshaller();

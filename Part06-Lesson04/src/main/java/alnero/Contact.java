@@ -10,8 +10,12 @@ import java.util.Objects;
 public class Contact implements Serializable {
     @XmlAttribute
     private static final long serialVersionUID = 1L;
+
+    /** ZipCode. **/
     @XmlAttribute
     private int zipCode;
+
+    /** Phone number. **/
     @XmlAttribute
     private String phone;
 
@@ -34,8 +38,12 @@ public class Contact implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Contact)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Contact)) {
+            return false;
+        }
         Contact contact = (Contact) o;
         return getZipCode() == contact.getZipCode() && Objects.equals(getPhone(), contact.getPhone());
     }
@@ -47,9 +55,9 @@ public class Contact implements Serializable {
 
     @Override
     public String toString() {
-        return "Contact{" +
-                "zipCode=" + zipCode +
-                ", phone='" + phone + '\'' +
-                '}';
+        return "Contact{"
+                + "zipCode=" + zipCode
+                + ", phone='" + phone + '\''
+                + '}';
     }
 }

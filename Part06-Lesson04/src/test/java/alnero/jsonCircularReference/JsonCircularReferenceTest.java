@@ -3,7 +3,7 @@ package alnero.jsonCircularReference;
 import org.json.JSONObject;
 import org.junit.Test;
 
-public class jsonCircularReferenceTest {
+public class JsonCircularReferenceTest {
     @Test
     public void whenUseJsonPropertyIgnoreThenNoStackOverflowError() {
         A a = new A();

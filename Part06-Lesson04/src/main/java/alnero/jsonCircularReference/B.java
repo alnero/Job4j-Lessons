@@ -1,6 +1,7 @@
 package alnero.jsonCircularReference;
 
 public class B {
+    /** A class field. **/
     private A a;
 
     public A getA() {
