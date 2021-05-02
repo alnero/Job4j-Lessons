@@ -1,19 +1,33 @@
 package alnero;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAccessType;
 import java.util.Arrays;
 import java.util.Objects;
 
 @XmlRootElement(name = "teacher")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Teacher {
+    /** Teacher availability. **/
     @XmlAttribute
     private boolean isAvailable;
+
+    /** Teacher age. **/
     @XmlAttribute
     private int age;
+
+    /** Teacher name. **/
     @XmlAttribute
     private String name;
+
+    /** Teacher contact. **/
     private Contact contact;
+
+    /** Teacher's lessons. **/
     @XmlElementWrapper(name = "studies")
     @XmlElement(name = "study")
     private String[] studies;
@@ -52,8 +66,12 @@ public class Teacher {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Teacher)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Teacher)) {
+            return false;
+        }
         Teacher teacher = (Teacher) o;
         return isAvailable == teacher.isAvailable && age == teacher.age && Objects.equals(name, teacher.name) && Objects.equals(contact, teacher.contact) && Arrays.equals(studies, teacher.studies);
     }
@@ -67,12 +85,12 @@ public class Teacher {
 
     @Override
     public String toString() {
-        return "Teacher{" +
-                "available=" + isAvailable +
-                ", age=" + age +
-                ", name='" + name + '\'' +
-                ", contact=" + contact +
-                ", studies=" + Arrays.toString(studies) +
-                '}';
+        return "Teacher{"
+                + "available=" + isAvailable
+                + ", age=" + age
+                + ", name='" + name + '\''
+                + ", contact=" + contact
+                + ", studies=" + Arrays.toString(studies)
+                + '}';
     }
 }
