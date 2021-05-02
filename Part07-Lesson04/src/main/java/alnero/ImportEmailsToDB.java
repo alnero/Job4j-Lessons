@@ -1,6 +1,9 @@
 package alnero;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,8 +13,9 @@ import java.util.List;
 import java.util.Properties;
 
 public class ImportEmailsToDB {
-
+    /** DB connection properties. **/
     private Properties cfg;
+    /** Email source file. **/
     private String dump;
 
     public ImportEmailsToDB(Properties cfg, String dump) {
@@ -48,10 +52,12 @@ public class ImportEmailsToDB {
     }
 
     private static class User {
-        String name;
-        String email;
+        /** User name. **/
+        private String name;
+        /** User email. **/
+        private String email;
 
-        public User(String name, String email) {
+        User(String name, String email) {
             this.name = name;
             this.email = email;
         }
