@@ -5,9 +5,12 @@ import java.util.List;
 import java.io.File;
 import java.io.IOException;
 import java.util.stream.Collectors;
+
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.Before;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -39,7 +42,7 @@ public class SearchFilesTest {
         List<File> fileList = searcher.searchFiles(searchDirectory, file -> file.getName().matches(regExp));
         List<String> result = fileList.stream().map(File::getName).collect(Collectors.toList());
         List<String> expected = Arrays.asList("numbers.txt", "line_separator.txt", "lorem_ipsum.txt", "one_sentense.txt", "log.txt", "empty_file.txt");
-        assertEquals(expected, result);
+        assertThat(result, Matchers.containsInAnyOrder(expected.toArray()));
     }
 
     @Test
@@ -47,7 +50,7 @@ public class SearchFilesTest {
         List<File> fileList = searcher.searchFiles(searchDirectory, file -> file.getName().contains("test"));
         List<String> result = fileList.stream().map(File::getName).collect(Collectors.toList());
         List<String> expected = Arrays.asList("test_file_2.test", "test_file_1.test");
-        assertEquals(expected, result);
+        assertThat(result, Matchers.containsInAnyOrder(expected.toArray()));
     }
 
     @Test
@@ -65,7 +68,7 @@ public class SearchFilesTest {
         List<File> fileList = searcher.searchFiles(searchDirectory, file -> file.getName().matches(regExp));
         List<String> result = fileList.stream().map(File::getName).collect(Collectors.toList());
         List<String> expected = Arrays.asList("test_file_2.test", "test_file_1.test");
-        assertEquals(expected, result);
+        assertThat(result, Matchers.containsInAnyOrder(expected.toArray()));
     }
 
     @Test
@@ -74,6 +77,6 @@ public class SearchFilesTest {
         List<File> fileList = searcher.searchFiles(searchDirectory, file -> file.getName().matches(regExp));
         List<String> result = fileList.stream().map(File::getName).collect(Collectors.toList());
         List<String> expected = Arrays.asList("numbers.txt", "line_separator.txt", "test_file_2.test", "test_file_1.test", "lorem_ipsum.txt", "one_sentense.txt", "chat.log", "log.txt", "server.log", "empty_file.txt", "app.properties");
-        assertEquals(expected, result);
+        assertThat(result, Matchers.containsInAnyOrder(expected.toArray()));
     }
 }

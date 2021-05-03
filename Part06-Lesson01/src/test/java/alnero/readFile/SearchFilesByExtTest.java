@@ -9,6 +9,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.IOException;
 
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -24,7 +26,7 @@ public class SearchFilesByExtTest {
         List<Path> pathsToTxtFiles = searchFiles.search(path, "txt");
         List<String> result = pathsToTxtFiles.stream().map(Path::getFileName).map(Path::toString).collect(Collectors.toList());
         List<String> expected = Arrays.asList("numbers.txt", "line_separator.txt", "lorem_ipsum.txt", "one_sentense.txt", "log.txt", "empty_file.txt");
-        assertThat(result, is(expected));
+        MatcherAssert.assertThat(result, Matchers.containsInAnyOrder(expected.toArray()));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -68,14 +70,15 @@ public class SearchFilesByExtTest {
         System.setOut(mockOut);
         // search txt files
         SearchFilesByExt.main(new String[]{"src/test/resources", "txt"});
-        assertThat(byteArrayOutputStream.toString(), is(
-                "src/test/resources/numbers.txt" + System.lineSeparator()
-                    + "src/test/resources/line_separator.txt" + System.lineSeparator()
-                    + "src/test/resources/lorem_ipsum.txt" + System.lineSeparator()
-                    + "src/test/resources/one_sentense.txt" + System.lineSeparator()
-                    + "src/test/resources/log.txt" + System.lineSeparator()
-                    + "src/test/resources/empty_file.txt"  + System.lineSeparator()
-        ));
+        List<String> result = Arrays.asList(byteArrayOutputStream.toString().split(System.lineSeparator()));
+        List<String> expected = Arrays.asList(
+                "src/test/resources/numbers.txt",
+                "src/test/resources/line_separator.txt",
+                "src/test/resources/lorem_ipsum.txt",
+                "src/test/resources/one_sentense.txt",
+                "src/test/resources/log.txt",
+                "src/test/resources/empty_file.txt");
+        MatcherAssert.assertThat(result, Matchers.containsInAnyOrder(expected.toArray()));
         // restore console output
         System.out.flush();
         System.setOut(systemOut);
