@@ -4,6 +4,11 @@ jdk: openjdk12
 # Regular user
 sudo: false
 
+# Postgresql
+services: postgresql
+before_script:
+  - psql -c 'CREATE DATABASE idea_db;' -U postgres
+
 # Collect JaCoCo statistics via https://codecov.io/
 after_success:
   - bash <(curl -s https://codecov.io/bash)
