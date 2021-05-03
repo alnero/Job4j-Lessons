@@ -31,6 +31,10 @@ public class KingBlack implements Figure {
             throw new ImpossibleMoveException(this.getClass().getName() + " impossible move.");
         }
 
+        if (0 == Math.abs(source.getX() - dest.getX()) && 0 == Math.abs(source.getY() - dest.getY())) {
+            throw new ImpossibleMoveException(this.getClass().getName() + " impossible move.");
+        }
+
         Cell[] steps = new Cell[1];
 
         int deltaX = Integer.compare(source.getX(), dest.getX());

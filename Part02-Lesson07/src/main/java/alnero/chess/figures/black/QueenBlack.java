@@ -35,6 +35,10 @@ public class QueenBlack implements Figure {
             throw new ImpossibleMoveException(this.getClass().getName() + " impossible move.");
         }
 
+        if (0 == Math.abs(source.getX() - dest.getX()) && 0 == Math.abs(source.getY() - dest.getY())) {
+            throw new ImpossibleMoveException(this.getClass().getName() + " impossible move.");
+        }
+
         int numberOfSteps = Math.abs(deltaX * (source.getX() - dest.getX())) + Math.abs(deltaY * (source.getY() - dest.getY()));
         if (Math.abs(source.getX() - dest.getX()) == Math.abs(source.getY() - dest.getY())) {
             numberOfSteps = numberOfSteps / 2;
