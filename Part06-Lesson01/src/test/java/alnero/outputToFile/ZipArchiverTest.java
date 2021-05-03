@@ -9,11 +9,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+
+import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Test zip archiver.
@@ -46,6 +48,6 @@ public class ZipArchiverTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals(expected, result);
+        assertThat(result, Matchers.containsInAnyOrder(expected.toArray()));
     }
 }
