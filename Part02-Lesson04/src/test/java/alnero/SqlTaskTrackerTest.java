@@ -1,5 +1,6 @@
 package alnero;
 
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -62,7 +63,7 @@ public class SqlTaskTrackerTest {
         Task[] allTasksFromDB = this.sqlTaskTracker.findAll();
         Task[] onlyAddedTasks = Arrays.copyOfRange(allTasksFromDB, qtyOfTaskBeforeAdd, allTasksFromDB.length);
         Assert.assertThat(onlyAddedTasks.length, is(testArrOfTasks.length));
-        Assert.assertThat(onlyAddedTasks, is(testArrOfTasks));
+        Assert.assertThat(Arrays.asList(onlyAddedTasks), Matchers.containsInAnyOrder(testArrOfTasks));
     }
 
     /**
@@ -346,8 +347,10 @@ public class SqlTaskTrackerTest {
         sqlTaskTracker.add(task1);
         sqlTaskTracker.add(task2);
 
-        Assert.assertThat(sqlTaskTracker.findByName("Task for Bender!")[0], is(task1));
-        Assert.assertThat(sqlTaskTracker.findByName("Task for Bender!")[1], is(task2));
+        Task[] result = sqlTaskTracker.findByName("Task for Bender!");
+        Assert.assertThat(result.length, is(2));
+        Assert.assertThat(Arrays.asList(result), Matchers.containsInAnyOrder(task1, task2));
+
     }
 
     /**
@@ -362,8 +365,9 @@ public class SqlTaskTrackerTest {
         sqlTaskTracker.add(task1);
         sqlTaskTracker.add(task2);
 
-        Assert.assertThat(sqlTaskTracker.findByName("Bender")[0], is(task1));
-        Assert.assertThat(sqlTaskTracker.findByName("Bender")[1], is(task2));
+        Task[] result = sqlTaskTracker.findByName("Bender");
+        Assert.assertThat(result.length, is(2));
+        Assert.assertThat(Arrays.asList(result), Matchers.containsInAnyOrder(task1, task2));
     }
 
     /**
