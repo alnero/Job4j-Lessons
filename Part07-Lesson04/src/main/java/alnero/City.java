@@ -3,10 +3,13 @@ package alnero;
 import java.util.Objects;
 
 public class City {
+    /** City id. **/
     private int id;
 
+    /** City name. **/
     private String name;
 
+    /** City population. **/
     private int population;
 
     public City(int id, String name, int population) {
@@ -41,8 +44,12 @@ public class City {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof City)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof City)) {
+            return false;
+        }
         City city = (City) o;
         return getId() == city.getId() && getPopulation() == city.getPopulation() && Objects.equals(getName(), city.getName());
     }
