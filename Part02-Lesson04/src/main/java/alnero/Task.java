@@ -65,6 +65,7 @@ public class Task {
 
     /**
      * Id for a task can be changed by storage mechanism.
+     * @param id new id for the task
      */
     public void changeId(long id) {
         this.id = id;
@@ -173,15 +174,19 @@ public class Task {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Task)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Task)) {
+            return false;
+        }
         Task task = (Task) o;
-        return getId() == task.getId() &&
-                nextCommentIndex == task.nextCommentIndex &&
-                Objects.equals(getName(), task.getName()) &&
-                Objects.equals(getDescription(), task.getDescription()) &&
-                Objects.equals(getCreateDate(), task.getCreateDate()) &&
-                Arrays.equals(getComments(), task.getComments());
+        return getId() == task.getId()
+                && nextCommentIndex == task.nextCommentIndex
+                && Objects.equals(getName(), task.getName())
+                && Objects.equals(getDescription(), task.getDescription())
+                && Objects.equals(getCreateDate(), task.getCreateDate())
+                && Arrays.equals(getComments(), task.getComments());
     }
 
     @Override

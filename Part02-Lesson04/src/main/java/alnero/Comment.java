@@ -47,6 +47,7 @@ public class Comment {
 
     /**
      * Id for a comment can be changed by storage mechanism.
+     * @param id new id for the comment
      */
     public void changeId(long id) {
         this.id = id;
@@ -95,12 +96,16 @@ public class Comment {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Comment)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Comment)) {
+            return false;
+        }
         Comment comment = (Comment) o;
-        return getId() == comment.getId() &&
-                Objects.equals(getContent(), comment.getContent()) &&
-                Objects.equals(getCreateDate(), comment.getCreateDate());
+        return getId() == comment.getId()
+                && Objects.equals(getContent(), comment.getContent())
+                && Objects.equals(getCreateDate(), comment.getCreateDate());
     }
 
     @Override

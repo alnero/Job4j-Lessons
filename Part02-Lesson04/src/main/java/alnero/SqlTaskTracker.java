@@ -1,11 +1,20 @@
 package alnero;
 
 import java.io.InputStream;
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.Properties;
+
 import java.util.Date;
+import java.util.Map;
+import java.util.HashMap;
 
 public class SqlTaskTracker implements Store {
+    /** DB connection instance. **/
     private Connection connection;
 
     @Override
@@ -81,15 +90,15 @@ public class SqlTaskTracker implements Store {
     public Task findById(long taskId) {
         Task result = null;
         try (PreparedStatement statement =
-                     connection.prepareStatement("SELECT " +
-                             "t.id as task_id, " +
-                             "t.name as task_name, " +
-                             "t.description as task_description, " +
-                             "t.create_date as task_create_date, " +
-                             "c.id as comment_id, " +
-                             "c.content as comment_content, " +
-                             "c.create_date as comment_create_date " +
-                             "FROM task t LEFT JOIN comment c ON t.id = c.task_id WHERE t.id = ?")) {
+                     connection.prepareStatement("SELECT "
+                             + "t.id as task_id, "
+                             + "t.name as task_name, "
+                             + "t.description as task_description, "
+                             + "t.create_date as task_create_date, "
+                             + "c.id as comment_id, "
+                             + "c.content as comment_content, "
+                             + "c.create_date as comment_create_date "
+                             + "FROM task t LEFT JOIN comment c ON t.id = c.task_id WHERE t.id = ?")) {
             statement.setLong(1, taskId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
@@ -123,15 +132,15 @@ public class SqlTaskTracker implements Store {
         }
         Map<Long, Task> resultMap = new HashMap<>();
         try (PreparedStatement statement =
-                     connection.prepareStatement("SELECT " +
-                             "t.id as task_id, " +
-                             "t.name as task_name, " +
-                             "t.description as task_description, " +
-                             "t.create_date as task_create_date, " +
-                             "c.id as comment_id, " +
-                             "c.content as comment_content, " +
-                             "c.create_date as comment_create_date " +
-                             "FROM task t LEFT JOIN comment c ON t.id = c.task_id WHERE t.name LIKE ?")) {
+                     connection.prepareStatement("SELECT "
+                             + "t.id as task_id, "
+                             + "t.name as task_name, "
+                             + "t.description as task_description, "
+                             + "t.create_date as task_create_date, "
+                             + "c.id as comment_id, "
+                             + "c.content as comment_content, "
+                             + "c.create_date as comment_create_date "
+                             + "FROM task t LEFT JOIN comment c ON t.id = c.task_id WHERE t.name LIKE ?")) {
             statement.setString(1, "%" + taskName + "%");
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
@@ -167,15 +176,15 @@ public class SqlTaskTracker implements Store {
     public Task[] findAll() {
         Map<Long, Task> resultMap = new HashMap<>();
         try (PreparedStatement statement =
-                     connection.prepareStatement("SELECT " +
-                             "t.id as task_id, " +
-                             "t.name as task_name, " +
-                             "t.description as task_description, " +
-                             "t.create_date as task_create_date, " +
-                             "c.id as comment_id, " +
-                             "c.content as comment_content, " +
-                             "c.create_date as comment_create_date " +
-                             "FROM task t LEFT JOIN comment c ON t.id = c.task_id")) {
+                     connection.prepareStatement("SELECT "
+                             + "t.id as task_id, "
+                             + "t.name as task_name, "
+                             + "t.description as task_description, "
+                             + "t.create_date as task_create_date, "
+                             + "c.id as comment_id, "
+                             + "c.content as comment_content, "
+                             + "c.create_date as comment_create_date "
+                             + "FROM task t LEFT JOIN comment c ON t.id = c.task_id")) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     Task task = null;
