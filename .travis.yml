@@ -14,7 +14,7 @@ branches:
 # Postgresql
 services: postgresql
 before_script:
-  - psql -c 'CREATE DATABASE idea_db;' -U postgres
+  - psql -c 'CREATE DATABASE tracker;' -U postgres
 
 # Collect JaCoCo statistics via https://codecov.io/
 after_success:
