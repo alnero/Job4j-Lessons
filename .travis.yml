@@ -1,8 +1,15 @@
 # Java in use
 language: java
 jdk: openjdk12
+
 # Regular user
 sudo: false
+
+# Branches
+branches:
+  only:
+    - master
+    - feature-TrackerWithSqlDb
 
 # Postgresql
 services: postgresql
