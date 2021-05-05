@@ -5,9 +5,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static org.hamcrest.core.Is.is;
@@ -21,15 +26,23 @@ public class SqlTaskTrackerTest {
     /** Common sql task tracker object for test. */
     private SqlTaskTracker sqlTaskTracker;
 
-    /** Create common object and init DB connection. */
+    /** Create common object and init rollback DB connection. */
     @Before
-    public void init() {
-        this.sqlTaskTracker = new SqlTaskTracker();
-        this.sqlTaskTracker.init();
-        Task[] allTasksInTracker = sqlTaskTracker.findAll();
-        for (Task task : allTasksInTracker) {
-            sqlTaskTracker.delete(task);
+    public void init() throws SQLException {
+        Connection connection = null;
+        try (InputStream in = SqlTaskTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
+            Properties config = new Properties();
+            config.load(in);
+            Class.forName(config.getProperty("driver-class-name"));
+            connection = DriverManager.getConnection(
+                    config.getProperty("url"),
+                    config.getProperty("username"),
+                    config.getProperty("password")
+            );
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
         }
+        this.sqlTaskTracker = new SqlTaskTracker(ConnectionRollback.create(connection));
     }
 
     /**

@@ -17,6 +17,14 @@ public class SqlTaskTracker implements Store {
     /** DB connection instance. **/
     private Connection connection;
 
+    public SqlTaskTracker() {
+
+    }
+
+    public SqlTaskTracker(Connection connection) {
+        this.connection = connection;
+    }
+
     @Override
     public void init() {
         try (InputStream in = SqlTaskTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
