@@ -13,7 +13,7 @@ branches:
 
 # Postgresql
 services: postgresql
-before_script:
+before_install:
   - psql -c 'CREATE DATABASE tracker;' -U postgres
 
 # Collect JaCoCo statistics via https://codecov.io/
