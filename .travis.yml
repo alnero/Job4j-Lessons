@@ -15,6 +15,7 @@ branches:
 services: postgresql
 before_install:
   - psql -c 'CREATE DATABASE tracker;' -U postgres
+  - psql -c 'CREATE DATABASE idea_db;' -U postgres
 
 # Collect JaCoCo statistics via https://codecov.io/
 after_success:
