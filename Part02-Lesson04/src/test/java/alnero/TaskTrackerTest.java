@@ -38,7 +38,7 @@ public class TaskTrackerTest {
      */
     @Test
     public void whenAddFromZeroToTenTasksInTrackerThenCorrectTasksReturnedFromTracker() {
-        int numOfTasks = ThreadLocalRandom.current().nextInt(11); // get ints from 0 to 10 inclusive
+        int numOfTasks = ThreadLocalRandom.current().nextInt(11);
 
         TaskTracker taskTracker = new TaskTracker(numOfTasks);
         Task[] testArrOfTasks = new Task[numOfTasks];
@@ -59,9 +59,9 @@ public class TaskTrackerTest {
      */
     @Test
     public void whenStorageInTrackerIsFullThenItIsIncreasedToStoreMoreTasks() {
-        int numOfTasks = ThreadLocalRandom.current().nextInt(11); // ints from 0 to 10 inclusive
+        int numOfTasks = ThreadLocalRandom.current().nextInt(11);
 
-        TaskTracker taskTracker = new TaskTracker(numOfTasks / 3); // initial size < numOfTasks
+        TaskTracker taskTracker = new TaskTracker(numOfTasks / 3);
         Task[] testArrOfTasks = new Task[numOfTasks];
 
         for (int i = 0; i < numOfTasks; i++) {
@@ -168,11 +168,10 @@ public class TaskTrackerTest {
         Task task = new Task();
         Comment comment = new Comment();
 
-        taskTracker.add(task); // add task to tracker
-        task.addComment(comment); // change task
-        taskTracker.update(task); // update task in tracker
+        taskTracker.add(task);
+        task.addComment(comment);
+        taskTracker.update(task);
 
-        // task in tracker is updated and has a comment
         Assert.assertThat(taskTracker.findAll()[0], is(task));
         Assert.assertThat(taskTracker.findAll()[0].getComments()[0], is(comment));
     }
@@ -257,11 +256,9 @@ public class TaskTrackerTest {
     @Test
     public void whenDeleteTaskNotInTrackerThenNothingChangesInTracker() {
         TaskTracker taskTracker = new TaskTracker(1);
-        // add one task to stay in tracker
         Task taskToKeep = new Task();
         taskTracker.add(taskToKeep);
 
-        // try to delete task which is not in tracker
         Task taskToDelete = new Task();
         taskTracker.delete(taskToDelete);
 
@@ -316,12 +313,11 @@ public class TaskTrackerTest {
      */
     @Test
     public void whenRandomlyAddAndDeleteTasksThenCorrectTasksReturnedFromTracker() {
-        int numOfTasks = ThreadLocalRandom.current().nextInt(51); // ints [0 to 50]
+        int numOfTasks = ThreadLocalRandom.current().nextInt(51);
 
         TaskTracker taskTracker = new TaskTracker(numOfTasks);
         Task[] testArrOfTasks = new Task[numOfTasks];
 
-        // add tasks
         for (int i = 0; i < numOfTasks; i++) {
             Task task = new Task();
 
@@ -329,16 +325,14 @@ public class TaskTrackerTest {
             testArrOfTasks[i] = task;
         }
 
-        // randomly delete half of tasks
         for (int i = 0; i < numOfTasks / 2; i++) {
-            int indexOfTask = ThreadLocalRandom.current().nextInt(numOfTasks); // [0 to numOfTasks-1]
+            int indexOfTask = ThreadLocalRandom.current().nextInt(numOfTasks);
             Task taskToDelete = testArrOfTasks[indexOfTask];
 
             taskTracker.delete(taskToDelete);
             testArrOfTasks[indexOfTask] = null;
         }
 
-        // remove null from test array
         List<Task> list = new ArrayList<>(Arrays.asList(testArrOfTasks));
         list.removeAll(Collections.singleton(null));
         testArrOfTasks = list.toArray(new Task[list.size()]);
@@ -458,6 +452,4 @@ public class TaskTrackerTest {
 
         Assert.assertThat(taskTracker.findById(taskId), is(nullValue()));
     }
-
-
 }

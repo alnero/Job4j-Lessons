@@ -24,7 +24,9 @@ public class ReplyServer {
                         } else if (req.contains("msg=Exit")) {
                             isRunning = false;
                         } else if (req.contains("msg=")) {
-                            // get substring between 'msg=' and 'HTTP/1.1', then split if there are more than one parameter
+                            /**
+                             * get substring between 'msg=' and 'HTTP/1.1', then split if there are more than one parameter
+                             */
                             String paramString = req.substring(req.indexOf("msg=") + 4, req.indexOf("HTTP") - 1);
                             repl = paramString.split("&")[0];
                         }

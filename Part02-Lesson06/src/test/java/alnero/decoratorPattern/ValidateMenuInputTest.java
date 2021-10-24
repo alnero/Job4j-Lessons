@@ -52,7 +52,6 @@ public class ValidateMenuInputTest {
             possibleMenuItems[i] = String.valueOf(i);
         }
 
-        // take random menu item from possible menu items
         int randomMenuItemIndex = ThreadLocalRandom.current().nextInt(possibleMenuItems.length);
         String randomPossibleMenuItem = possibleMenuItems[randomMenuItemIndex];
 
@@ -74,11 +73,9 @@ public class ValidateMenuInputTest {
             possibleMenuItems[i] = String.valueOf(i);
         }
 
-        // take random menu item from possible menu items
         int randomMenuItemIndex = ThreadLocalRandom.current().nextInt(possibleMenuItems.length);
         String randomPossibleMenuItem = possibleMenuItems[randomMenuItemIndex];
 
-        // take random string value of negative number
         int randomNegativeNumber = ThreadLocalRandom.current().nextInt(Integer.MIN_VALUE, 0);
         String incorrectMenuItem = String.valueOf(randomNegativeNumber);
 
@@ -101,11 +98,9 @@ public class ValidateMenuInputTest {
             possibleMenuItems[i] = String.valueOf(i);
         }
 
-        // take random menu item from possible menu items
         int randomMenuItemIndex = ThreadLocalRandom.current().nextInt(possibleMenuItems.length);
         String randomPossibleMenuItem = possibleMenuItems[randomMenuItemIndex];
 
-        // take random string letter
         char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         int randomAlphabetIndex = ThreadLocalRandom.current().nextInt(alphabet.length);
         String incorrectMenuItem = String.valueOf(alphabet[randomAlphabetIndex]);

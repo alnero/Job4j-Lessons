@@ -18,20 +18,16 @@ public class ValidateMenuInput extends ConsoleInput {
     @Override
     public String readInputLine(String[] inputRangeOfStringValues) {
         String userInput;
-
         while (true) {
             try {
                 userInput = super.readInputLine(inputRangeOfStringValues);
                 break;
-            // user inputs wrong numbers or even strings for menu items
             } catch (OutOfInputRangeValuesException e) {
                 System.out.println("Please select correct key from Menu.");
-            // if no line was found
             } catch (NoSuchElementException e) {
                 System.err.println(e);
             }
         }
-
         return userInput;
     }
 }

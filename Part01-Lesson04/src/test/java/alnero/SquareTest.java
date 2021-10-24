@@ -90,8 +90,6 @@ public class SquareTest {
         Assert.assertThat(result, not(0.0f));
     }
 
-    // For the following tests the MockOutput object is used to check the printouts
-
     /**
      * Show values from x1=0.0 to x2=1.0 and step 1.0 for simple function y = x^2.
      */

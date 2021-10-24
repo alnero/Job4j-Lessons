@@ -13,43 +13,49 @@ public class Analyse {
      * @return class with integer numbers showing added, deleted, modified users
      */
     public Info diff(List<User> previous, List<User> current) {
-//        // answer via streams
-//        int numOfNewUsers = (int) current.stream().filter(currentUser -> {
-//            return !previous.contains(currentUser);
-//        }).count();
-//        int numOfDeletedUsers = (int) previous.stream().filter(previousUser -> {
-//            return !current.contains(previousUser);
-//        }).count();
-//        int numOfModifiedUsers = (int) current.stream().filter(currentUser -> previous.stream().anyMatch(previousUser -> {
-//            return currentUser.id == previousUser.id && !currentUser.name.equals(previousUser.name);
-//                })
-//        ).count();
-//        Info result = new Info();
-//        result.setAdded(numOfNewUsers);
-//        result.setDeleted(numOfDeletedUsers);
-//        result.setModified(numOfModifiedUsers);
-//        return result;
+        /**
+         * answer via streams
+         *
+         * int numOfNewUsers = (int) current.stream().filter(currentUser -> {
+         *     return !previous.contains(currentUser);
+         * }).count();
+         * int numOfDeletedUsers = (int) previous.stream().filter(previousUser -> {
+         *     return !current.contains(previousUser);
+         * }).count();
+         * int numOfModifiedUsers = (int) current.stream().filter(currentUser -> previous.stream().anyMatch(previousUser -> {
+         *     return currentUser.id == previousUser.id && !currentUser.name.equals(previousUser.name);
+         *         })
+         * ).count();
+         * Info result = new Info();
+         * result.setAdded(numOfNewUsers);
+         * result.setDeleted(numOfDeletedUsers);
+         * result.setModified(numOfModifiedUsers);
+         * return result;
+         */
 
-//        // answer using loops
-//        Info result = new Info();
-//        int previousUsers = previous.size();
-//        int currentUsers = current.size();
-//        int modifiedUsers  = 0;
-//        for (User currentUser : current) {
-//            for (User previousUser : previous) {
-//                if (previousUser.getId() == currentUser.getId()) {
-//                    currentUsers--;
-//                    previousUsers--;
-//                    if (!previousUser.getName().equals(currentUser.getName())) {
-//                        modifiedUsers++;
-//                    }
-//                }
-//            }
-//        }
-//        result.setAdded(currentUsers);
-//        result.setDeleted(previousUsers);
-//        result.setModified(modifiedUsers);
-//        return result;
+        /**
+         * answer using loops
+         *
+         * Info result = new Info();
+         * int previousUsers = previous.size();
+         * int currentUsers = current.size();
+         * int modifiedUsers  = 0;
+         * for (User currentUser : current) {
+         *    for (User previousUser : previous) {
+         *        if (previousUser.getId() == currentUser.getId()) {
+         *            currentUsers--;
+         *            previousUsers--;
+         *            if (!previousUser.getName().equals(currentUser.getName())) {
+         *                modifiedUsers++;
+         *            }
+         *        }
+         *    }
+         * }
+         * result.setAdded(currentUsers);
+         * result.setDeleted(previousUsers);
+         * result.setModified(modifiedUsers);
+         * return result;
+         */
 
         int currentUsers = current.size();
         int previousUsers = previous.size();

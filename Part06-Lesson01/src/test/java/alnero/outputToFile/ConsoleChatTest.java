@@ -39,9 +39,11 @@ public class ConsoleChatTest {
         return result.toString();
     }
 
+    /**
+     * Test redirects console input and then restores console input.
+     */
     @Test
     public void whenOnlyFinishCommandThenOnlyFinishCommandInOutputFile() {
-        // redirect console input
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream("завершить".getBytes());
         InputStream systemIn = System.in;
         System.setIn(byteArrayInputStream);
@@ -49,13 +51,14 @@ public class ConsoleChatTest {
         new ConsoleChat().chat(oneSentenceFile, chatLog);
         assertThat(getChatLog(), is("завершить" + System.lineSeparator()));
 
-        // restore console input
         System.setIn(systemIn);
     }
 
+    /**
+     * Test redirects console input and then restores console input.
+     */
     @Test
     public void whenStopTalkAndFinishCommandThenStopTalkAndFinishCommandsInOutputFile() {
-        // redirect console input
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(("стоп" + System.lineSeparator() + "завершить").getBytes());
         InputStream systemIn = System.in;
         System.setIn(byteArrayInputStream);
@@ -63,13 +66,14 @@ public class ConsoleChatTest {
         new ConsoleChat().chat(oneSentenceFile, chatLog);
         assertThat(getChatLog(), is("стоп" + System.lineSeparator() + "завершить" + System.lineSeparator()));
 
-        // restore console input
         System.setIn(systemIn);
     }
 
+    /**
+     * Test redirects console input and then restores console input.
+     */
     @Test
     public void whenOneUserInputAndFinishCommandThenOneUserInputOneReplyAndFinishCommandInOutputFile() {
-        // redirect console input
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(("aaa" + System.lineSeparator() + "завершить").getBytes());
         InputStream systemIn = System.in;
         System.setIn(byteArrayInputStream);
@@ -81,13 +85,14 @@ public class ConsoleChatTest {
                 + "завершить" + System.lineSeparator()
         ));
 
-        // restore console input
         System.setIn(systemIn);
     }
 
+    /**
+     * Test redirects console input and then restores console input.
+     */
     @Test
     public void whenFourUserInputAndFinishCommandThenFourUserInputFourReplyAndFinishCommandInOutputFile() {
-        // redirect console input
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream((
                 "aaa" + System.lineSeparator()
               + "bbb" + System.lineSeparator()
@@ -110,13 +115,14 @@ public class ConsoleChatTest {
               + "завершить" + System.lineSeparator()
         ));
 
-        // restore console input
         System.setIn(systemIn);
     }
 
+    /**
+     * Test redirects console input and then restores console input.
+     */
     @Test
     public void whenStopTalkContinutTalkInChatThenNoReplyBetweenStopTalkAndContinueTalkInOutputFile() {
-        // redirect console input
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream((
                 "aaa" + System.lineSeparator()
                         + "стоп" + System.lineSeparator()
@@ -142,13 +148,14 @@ public class ConsoleChatTest {
                         + "завершить" + System.lineSeparator()
         ));
 
-        // restore console input
         System.setIn(systemIn);
     }
 
+    /**
+     * Test redirects console input and then restores console input.
+     */
     @Test
     public void whenThreeContinueTalkCommandThenNormalChatInOutputFile() {
-        // redirect console input
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream((
                 "продолжить" + System.lineSeparator()
                         + "продолжить" + System.lineSeparator()
@@ -168,13 +175,14 @@ public class ConsoleChatTest {
                         + "завершить" + System.lineSeparator()
         ));
 
-        // restore console input
         System.setIn(systemIn);
     }
 
+    /**
+     * Test redirects console input and then restores console input.
+     */
     @Test
     public void whenThreeStopTalkCommandThenNoReplyInOutputFile() {
-        // redirect console input
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream((
                 "стоп" + System.lineSeparator()
                         + "стоп" + System.lineSeparator()
@@ -191,13 +199,14 @@ public class ConsoleChatTest {
                         + "завершить" + System.lineSeparator()
         ));
 
-        // restore console input
         System.setIn(systemIn);
     }
 
+    /**
+     * Test redirects console input and then restores console input.
+     */
     @Test
     public void whenOnlyNewLineInTextFileThenOnlyNewLineAsReplyInChatAndOutputFile() {
-        // redirect console input
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream((
                 "aaa" + System.lineSeparator()
                         + "стоп" + System.lineSeparator()
@@ -223,13 +232,14 @@ public class ConsoleChatTest {
                         + "завершить" + System.lineSeparator()
         ));
 
-        // restore console input
         System.setIn(systemIn);
     }
 
+    /**
+     * Test redirects console input and then restores console input.
+     */
     @Test
     public void whenZeroLengthTextFileThenReplyAboutZeroLengthTextFileInChatAndOutputFile() {
-        // redirect console input
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream((
                 "aaa" + System.lineSeparator()
                         + "bbb" + System.lineSeparator()
@@ -246,13 +256,15 @@ public class ConsoleChatTest {
                         + "завершить" + System.lineSeparator()
         ));
 
-        // restore console input
         System.setIn(systemIn);
     }
 
+    /**
+     * Test generates a thousand user input strings with random continue and stop talk commands and also
+     * redirects console input and then restores console input.
+     */
     @Test
     public void whenChatWithThousandUserInputsThenChatWorksProperly() {
-        // generate thousand user input string with random continue and stop talk commands
         StringBuilder thousandUserInput = new StringBuilder();
         String candidateChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         for (int i = 0; i < 1000; i++) {
@@ -266,7 +278,6 @@ public class ConsoleChatTest {
         }
         thousandUserInput.append("завершить");
 
-        // redirect console input
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(thousandUserInput.toString().getBytes());
         InputStream systemIn = System.in;
         System.setIn(byteArrayInputStream);
@@ -278,7 +289,6 @@ public class ConsoleChatTest {
         assertThat(log, containsString("продолжить"));
         assertThat(log, containsString("завершить"));
 
-        // restore console input
         System.setIn(systemIn);
     }
 

@@ -23,7 +23,6 @@ public class TaskTracker {
      * @param initSize initial size of task storage inside tracker.
      */
     public TaskTracker(int initSize) {
-        // check for negative and zero initial size;
         if (initSize <= 0) {
             this.initSize = 1;
         } else {
@@ -120,25 +119,16 @@ public class TaskTracker {
         long taskId = task.getId();
 
         for (int i = 0; i < this.nextTaskIndex; i++) {
-            // find task to delete by id
             if (this.taskStorage[i].getId() == taskId) {
-                // if there is only one task in storage and it is to be deleted
-                // create new empty storage and reset index of next task
                 if (this.nextTaskIndex == 1) {
                     this.taskStorage = new Task[this.initSize];
                     this.nextTaskIndex = 0;
                 } else if (this.nextTaskIndex != i + 1) {
-                    // if there is more than one task in storage and one to be deleted is NOT last one
-                    // make a copy of storage without deleted task,
-                    // null the last task in storage,
-                    // decrement index of next task
                     System.arraycopy(this.taskStorage, i + 1,
                             this.taskStorage, i,
                             this.nextTaskIndex - i - 1);
                     this.taskStorage[--nextTaskIndex] = null;
                 } else {
-                    // if there is more than one task in storage and one to be deleted is last one
-                    // just make it null and decrement index of next task
                     this.taskStorage[i] = null;
                     this.nextTaskIndex--;
                 }

@@ -112,17 +112,13 @@ public class SchoolTest {
     @Test
     public void whenTransformListOfStudentsToMapOfStudentsThenCorrectMapCreated() {
         School school = new School();
-        // create list of students with duplicates
         List<Student> listOfStudentsWithDuplicates = new ArrayList<>();
         listOfStudentsWithDuplicates.addAll(unfilteredStudents);
         listOfStudentsWithDuplicates.addAll(unfilteredStudents);
-        // create map of students with unique key-values
         Map<String, Student> studentMap = school.toMap(listOfStudentsWithDuplicates);
-        // check key set
         Set<String> studentSurnames = studentMap.keySet();
         Set<String> expectedStudentSurnames = unfilteredStudents.stream().map(student -> student.getSurname()).collect(Collectors.toSet());
         assertEquals(studentSurnames, expectedStudentSurnames);
-        // check value set
         Set<Student> studentSet = studentMap.values().stream().collect(Collectors.toSet());
         Set<Student> expectedStudentSet = unfilteredStudents.stream().collect(Collectors.toSet());
         assertEquals(studentSet, expectedStudentSet);
@@ -146,7 +142,6 @@ public class SchoolTest {
     public void whenCollectStudentsWithScoreMoreThan69ThenReturnedListIsSorted() {
         School school = new School();
         List<Student> studentsWithScoreMoreThan60 = school.levelOf(unfilteredStudents, 60);
-        // reverse received list to be in ascending order, as correctClassA
         Collections.reverse(studentsWithScoreMoreThan60);
         Assert.assertEquals(studentsWithScoreMoreThan60, correctClassA);
     }
@@ -156,7 +151,6 @@ public class SchoolTest {
      */
     @Test
     public void whenStudentListHasNullsAndWeCollectStudentsWithScoreMoreThan60ThenReturnedListDoesNotHaveNulls() {
-        // add nulls to unfiltered list of students
         List<Student> unfilteredStudentsWithNulls = unfilteredStudents
                 .stream()
                 .map(student -> Arrays.asList(student, null))

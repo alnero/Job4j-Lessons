@@ -1,6 +1,5 @@
 package alnero.collectionsFramework.PriorityQueue;
 
-//import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -14,10 +13,28 @@ public class PriorityQueue {
 
     /**
      * Put task in appropriate position according to its priority.
+     *
+     * There is also a long solution for this task:
+     *
+     *         int newTaskPriority = newTask.getPriority();
+     *         int queueIndexForNewTask = 0;
+     *         if (0 == tasks.size()) {
+     *             this.tasks.add(queueIndexForNewTask, newTask);
+     *         } else {
+     *             Iterator<Task> tasksIterator = this.tasks.iterator();
+     *             while (tasksIterator.hasNext()) {
+     *                 Task addedTask = tasksIterator.next();
+     *                 int addedTaskPriority = addedTask.getPriority();
+     *                 if (newTaskPriority > addedTaskPriority) {
+     *                     queueIndexForNewTask = this.tasks.indexOf(addedTask) + 1;
+     *                 }
+     *             }
+     *             this.tasks.add(queueIndexForNewTask, newTask);
+     *         }
+     *
      * @param newTask task to add
      */
     public void put(Task newTask) {
-        // Short solution
         var newTaskPriority = newTask.getPriority();
         var queueIndexForNewTask = 0;
         var index = 0;
@@ -29,23 +46,6 @@ public class PriorityQueue {
             }
         }
         this.tasks.add(queueIndexForNewTask, newTask);
-
-       /* // Long solution
-        int newTaskPriority = newTask.getPriority();
-        int queueIndexForNewTask = 0;
-        if (0 == tasks.size()) {
-            this.tasks.add(queueIndexForNewTask, newTask);
-        } else {
-            Iterator<Task> tasksIterator = this.tasks.iterator();
-            while (tasksIterator.hasNext()) {
-                Task addedTask = tasksIterator.next();
-                int addedTaskPriority = addedTask.getPriority();
-                if (newTaskPriority > addedTaskPriority) {
-                    queueIndexForNewTask = this.tasks.indexOf(addedTask) + 1;
-                }
-            }
-            this.tasks.add(queueIndexForNewTask, newTask);
-        }*/
     }
 
     /**

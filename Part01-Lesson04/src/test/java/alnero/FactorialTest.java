@@ -56,10 +56,10 @@ public class FactorialTest {
 
     /**
      * Factorial of negative number is not defined, method throws an exception.
+     * Test generates integer in range [-10, -1].
      */
     @Test(expected = IllegalArgumentException.class)
     public void whenCalculateFactorialOfNegativeIntegerThenAlwaysReturnZero() {
-        // generates integer in range [-10, -1]
         Random random = new Random();
         int num = random.nextInt(10) - 10;
 
@@ -77,10 +77,10 @@ public class FactorialTest {
 
     /**
      * Factorial is always positive.
+     * Test generates integer in range [0, 9].
      */
     @Test
     public void whenCalculateFactorialForIntegerInRangeFromZeroToNineThenReturnedResultIsAlwaysPositive() {
-        // generates integer in range [0, 9]
         Random random = new Random();
         int num = random.nextInt(10);
 

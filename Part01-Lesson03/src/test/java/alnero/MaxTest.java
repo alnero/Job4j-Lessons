@@ -34,10 +34,10 @@ public class MaxTest {
 
     /**
      * Test for the triangle longest side which is on y-axis.
+     * Longest side is on y-axis between points (0,0) and (0, 10).
      */
     @Test
     public void whenLongestSideOfTriangleOnYAxisThenThisSideIsReturned() {
-        // longest side is on y-axis between points (0,0) and (0, 10)
         Point a = new Point(0.0, 0.0);
         Point b = new Point(0.0, 10.0);
         Point c = new Point(1.0, 5.0);

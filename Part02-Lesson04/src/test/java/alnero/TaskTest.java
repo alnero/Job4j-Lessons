@@ -157,7 +157,7 @@ public class TaskTest {
      */
     @Test
     public void whenArrayForCommentsInTaskIsFullThenItsSizeIsIncreasedAndAllCommentsStoredCorrectly() {
-        int numOfComments = ThreadLocalRandom.current().nextInt(11, 50); // should be more than 10
+        int numOfComments = ThreadLocalRandom.current().nextInt(11, 50);
 
         Task task = new Task();
         Comment[] testComments = new Comment[numOfComments];

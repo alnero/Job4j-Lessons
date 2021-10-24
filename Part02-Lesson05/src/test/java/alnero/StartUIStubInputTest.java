@@ -173,10 +173,8 @@ public class StartUIStubInputTest {
         this.stubInput = new StubInput(this.stubInputDictionary);
         new StartUI(this.taskTracker, this.stubInput).init();
 
-        // Test task is not deleted from Tracker
         Assert.assertThat(this.taskTracker.findAll().length, is(1));
 
-        // Test task is not changed
         Task taskFromTracker = this.taskTracker.findAll()[0];
         Assert.assertThat(taskFromTracker.getName(), is("Test task"));
         Assert.assertThat(taskFromTracker.getDescription(), is("Test description"));
@@ -222,10 +220,8 @@ public class StartUIStubInputTest {
         this.stubInput = new StubInput(this.stubInputDictionary);
         new StartUI(this.taskTracker, this.stubInput).init();
 
-        // Test task is not deleted from Tracker
         Assert.assertThat(this.taskTracker.findAll().length, is(1));
 
-        // Test task is not changed
         Task taskFromTracker = this.taskTracker.findAll()[0];
         Assert.assertThat(taskFromTracker.getName(), is("Test task"));
         Assert.assertThat(taskFromTracker.getDescription(), is("Test description"));
@@ -251,10 +247,8 @@ public class StartUIStubInputTest {
         this.stubInput = new StubInput(this.stubInputDictionary);
         new StartUI(this.taskTracker, this.stubInput).init();
 
-        // Test task is not deleted from Tracker
         Assert.assertThat(this.taskTracker.findAll().length, is(1));
 
-        // Test task is not changed
         Task taskFromTracker = this.taskTracker.findAll()[0];
         Assert.assertThat(taskFromTracker.getName(), is("Test task"));
         Assert.assertThat(taskFromTracker.getDescription(), is("Test description"));
@@ -280,7 +274,6 @@ public class StartUIStubInputTest {
         this.stubInput = new StubInput(this.stubInputDictionary);
         new StartUI(this.taskTracker, this.stubInput).init();
 
-        // Test task is deleted, Tracker is empty
         Assert.assertThat(this.taskTracker.findAll().length, is(0));
     }
 
@@ -300,7 +293,6 @@ public class StartUIStubInputTest {
         this.stubInput = new StubInput(this.stubInputDictionary);
         new StartUI(this.taskTracker, this.stubInput).init();
 
-        // Test task is not changed
         Task taskFromTracker = this.taskTracker.findAll()[0];
         Assert.assertThat(taskFromTracker.getComments().length, is(0));
     }
@@ -324,7 +316,6 @@ public class StartUIStubInputTest {
         this.stubInput = new StubInput(this.stubInputDictionary);
         new StartUI(this.taskTracker, this.stubInput).init();
 
-        // Test task is not changed
         Task taskFromTracker = this.taskTracker.findAll()[0];
         Assert.assertThat(taskFromTracker.getComments().length, is(0));
     }

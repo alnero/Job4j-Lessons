@@ -23,14 +23,12 @@ public class TeacherXmlTest {
 
         String teacherXml = "";
         try (StringWriter writer = new StringWriter()) {
-            // Serialize
             marshaller.marshal(teacher, writer);
             teacherXml = writer.getBuffer().toString();
             System.out.println(teacherXml);
         }
         Unmarshaller unmarshaller = context.createUnmarshaller();
         try (StringReader reader = new StringReader(teacherXml)) {
-            // De-serialize
             Teacher teacherFromXml = (Teacher) unmarshaller.unmarshal(reader);
             System.out.println(teacherFromXml);
             assertThat(teacher, is(teacherFromXml));

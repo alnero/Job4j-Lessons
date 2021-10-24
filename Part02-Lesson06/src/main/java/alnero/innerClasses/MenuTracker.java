@@ -35,17 +35,15 @@ public class MenuTracker {
 
     /**
      * Initialize user actions. All further actions are added manually.
+     * Inner classes: elems 0-3, inner static classes: elems 4-5, inner classes in same file: elems 6-7.
      */
     private void addUserActions() {
-        // inner class
         this.userActions[0] = this.new AddNewTask(0, "0. Add new task");
         this.userActions[1] = this.new ShowAllTasks(1, "1. Show all tasks");
         this.userActions[2] = this.new EditTask(2, "2. Edit task");
         this.userActions[3] = this.new DeleteTask(3, "3. Delete task");
-        // inner static class
         this.userActions[4] = new MenuTracker.FindTaskById(4, "4. Find task by ID");
         this.userActions[5] = new MenuTracker.FindTaskByName(5, "5. Find tasks by name");
-        // inner class in same file
         this.userActions[6] = new AddCommentToTask(6, "6. Add comment to task");
         this.userActions[7] = new Exit(7, "7. Exit Program");
     }
@@ -73,9 +71,8 @@ public class MenuTracker {
         userActions[key].execute(this.taskTracker, this.input);
     }
 
-    // INNER CLASSES
-
     /**
+     * Inner class.
      * Console interaction and adding new task to tracker,
      * name and description for new task to be entered.
      */
@@ -112,6 +109,7 @@ public class MenuTracker {
     }
 
     /**
+     * Inner class.
      * Show all tasks in tracker, could be zero and more tasks.
      */
     private class ShowAllTasks extends BaseAction {
@@ -141,6 +139,7 @@ public class MenuTracker {
     }
 
     /**
+     * Inner class.
      * Console interaction and editing a task in tracker.
      * Task for editing is searched by id, if not found app returns to main menu.
      */
@@ -193,6 +192,7 @@ public class MenuTracker {
     }
 
     /**
+     * Inner class.
      * Console interaction and deletion of a task in tracker.
      * Task for deleting is searched by id, if not found app returns to main menu.
      * Deletion can be aborted.
@@ -241,9 +241,8 @@ public class MenuTracker {
         }
     }
 
-    // INNER STATIC CLASSES
-
     /**
+     * Inner static class.
      * Console interaction and finding a task in tracker by id.
      * One or zero tasks can be found.
      */
@@ -276,6 +275,7 @@ public class MenuTracker {
     }
 
     /**
+     * Inner static class.
      * Console interaction and finding a task in tracker by name.
      * Zero and more tasks can be found.
      */
@@ -310,9 +310,8 @@ public class MenuTracker {
     }
 }
 
-// INNER CLASSES IN SAME FILE
-
 /**
+ * Inner class in same file.
  * Console interaction and adding a comment to task in tracker.
  * Task for adding a comment is searched by id, if not found app returns to main menu.
  */

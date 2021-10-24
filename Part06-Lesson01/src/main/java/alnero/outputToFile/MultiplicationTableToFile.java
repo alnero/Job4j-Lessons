@@ -10,13 +10,13 @@ import java.util.Formatter;
 public class MultiplicationTableToFile {
     /**
      * Write multiplication table to file.
+     * Log10 is used to find number of digits in integer and to find number of places for tabulation.
      * @param tableSize size of multiplication table
      * @param file destination file
      */
     public void write(int tableSize, File file) {
         StringBuilder sb = new StringBuilder();
         Formatter formatter = new Formatter(sb);
-        // number of places for tabulation, log10 is used to find number of digits in integer
         int tabulationLength = (int) (Math.log10(tableSize * tableSize) + 2);
         String tabulationFormat = "%-" + tabulationLength + "d";
         for (int i = 0; i <= tableSize; i++) {

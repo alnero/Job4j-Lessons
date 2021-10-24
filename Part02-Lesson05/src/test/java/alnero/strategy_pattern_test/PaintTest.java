@@ -57,7 +57,7 @@ public class PaintTest {
                                 .append("+     +\n")
                                 .append("+     +\n")
                                 .append("+++++++\n")
-                                .append(System.lineSeparator()) // System.out.println() adds line separator
+                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
@@ -77,7 +77,7 @@ public class PaintTest {
                                 .append("  + +\n")
                                 .append(" +   +\n")
                                 .append("+++++++\n")
-                                .append(System.lineSeparator()) // System.out.println() adds line separator
+                                .append(System.lineSeparator())
                                 .toString()
                 )
         );

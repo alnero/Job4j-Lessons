@@ -32,6 +32,8 @@ public class StartUI {
     /**
      * Init method for user interface interaction.
      * Method includes welcome message and starts menu presentation.
+     * User input for menu items is checked for allowed values from 0 to MenuTracker.MAX_NUMBER_OF_TASKS.
+     * ArrayOutOfBoundException and NumberFormatException are not possible.
      */
     public void init() {
         System.out.println("Welcome to Task Tracker!");
@@ -40,7 +42,6 @@ public class StartUI {
 
         MenuTracker menu = new MenuTracker(taskTracker, input);
 
-        // generate acceptable values for input in menu
         String[] possibleMenuValues = new String[MenuTracker.MAX_NUMBER_OF_TASKS];
         for (int i = 0; i < possibleMenuValues.length; i++) {
             possibleMenuValues[i] = String.valueOf(i);
@@ -48,14 +49,9 @@ public class StartUI {
 
         while (true) {
             menu.showMenu();
-
-            // user input for menu items is checked for allowed values from 0 to MenuTracker.MAX_NUMBER_OF_TASKS
-            // ArrayOutOfBoundException and NumberFormatException are not possible
             String userInput = this.input.readInputLine(possibleMenuValues);
             int menuItemKey = Integer.parseInt(userInput);
             menu.select(menuItemKey);
-
-            // last item of menu is "Exit", enumeration starts from 0
             if (MenuTracker.MAX_NUMBER_OF_TASKS - 1 == menuItemKey) {
                 break;
             }

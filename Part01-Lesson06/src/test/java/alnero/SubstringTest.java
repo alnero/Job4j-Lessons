@@ -83,12 +83,12 @@ public class SubstringTest {
     /**
      * Test that generated UUID string contains its random part.
      * Test inspired by http://stackoverflow.com/questions/41107/how-to-generate-a-random-alpha-numeric-string
+     * Example of UUID: a989bcef-e040-4fd3-9b9f-bebb0ed83075
      */
     @Test
     public void whenSearchForRandomPartOfUUIDStringThenResultIsAlwaysTrue() {
-        String uuid = UUID.randomUUID().toString(); // e.g. a989bcef-e040-4fd3-9b9f-bebb0ed83075
+        String uuid = UUID.randomUUID().toString();
         String randomUUIDPart = uuid.split("-")[new Random().nextInt(5)];
-
         boolean result = this.substringFinder.contains(uuid, randomUUIDPart);
         Assert.assertThat(result, is(true));
     }

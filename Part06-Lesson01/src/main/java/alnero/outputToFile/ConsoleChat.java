@@ -27,6 +27,7 @@ public class ConsoleChat {
 
     /**
      * Get random string constrained between two line separators from text file.
+     * Method takes random position in file and gets string which has this position and is enclosed between two line separators.
      * @param textFile source file with text
      * @return random string, message about empty file or null in case of exception
      */
@@ -41,9 +42,7 @@ public class ConsoleChat {
             }
             long position = new Random().longs(0, length).findFirst().getAsLong();
             file.seek(position);
-            // add part of line from seek position to next System.lineSeparator()
             sb.append(file.readLine());
-            // add part of line from previous System.lineSeparator() to seek position
             for (long i = position - 1; i >= 0; i--) {
                 file.seek(i);
                 String letter = Character.toString(file.read());

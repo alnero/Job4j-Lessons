@@ -43,10 +43,8 @@ public class ValidateMenuInput implements TrackerInput {
             try {
                 userInput = this.input.readInputLine(inputRangeOfStringValues);
                 break;
-                // user inputs wrong numbers or even strings for menu items
             } catch (OutOfInputRangeValuesException e) {
                 System.out.println("Please select correct key from Menu.");
-                // if no line was found
             } catch (NoSuchElementException e) {
                 System.err.println(e);
             }

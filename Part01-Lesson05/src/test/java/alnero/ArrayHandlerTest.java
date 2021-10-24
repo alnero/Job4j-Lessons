@@ -230,7 +230,6 @@ public class ArrayHandlerTest {
                 {4, 4, 4, 4}
         };
 
-        // rotations #1 -> #4
         int[][] firstRotation = this.arrayHandler.rotateArray90DegreesClockwise(initialArray);
         int[][] secondRotation = this.arrayHandler.rotateArray90DegreesClockwise(firstRotation);
         int[][] thirdRotation = this.arrayHandler.rotateArray90DegreesClockwise(secondRotation);

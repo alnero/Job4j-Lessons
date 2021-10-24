@@ -104,26 +104,17 @@ public class MergeSortTest {
     @Test
     public void whenMergeSortTwoRandomArraysOfDifferentLengthWithNegativeAndPositiveNumbersThenSortedArrayOfIntegersReturned() {
         Random random = new Random();
-
-        // create first array
         int leftLength = random.nextInt(100);
         int[] left = random.ints(leftLength, -100, 101).toArray();
         Arrays.sort(left);
-
-        // create second array
         int rightLength = random.nextInt(100);
         int[] right = random.ints(rightLength, -100, 101).toArray();
         Arrays.sort(right);
-
-        // create check array by copying and sorting
         int[] check = new int[leftLength + rightLength];
         System.arraycopy(left, 0, check, 0, leftLength);
         System.arraycopy(right, 0, check, leftLength, rightLength);
         Arrays.sort(check);
-
-        // test results of the merge method on created arrays
         int[] result = this.mergeSort.merge(left, right);
-
         Assert.assertThat(result, is(check));
     }
 }

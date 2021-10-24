@@ -21,24 +21,24 @@ public class Logic3T {
 
     /**
      * Check for winner. It can be X or O depending on supplied predicate.
+     * Method checks horizontal lines, vertical lines, main diagonal, reverse diagonal.
      * @param predicate condition to be checked on rectangle
      * @return is there a winner in the game - true/false
      */
     public boolean checkWinner(Predicate<Figure3T> predicate) {
-        // check horizontal lines
         for (int row = 0; row < this.table.length; row++) {
             if (Arrays.stream(this.table[row]).filter(rect -> predicate.test(rect)).count() == 3) {
                 return true;
             }
         }
-        // check vertical lines
+
         for (int column = 0; column < this.table.length; column++) {
             int col = column;
             if (Arrays.stream(this.table).map(o -> o[col]).filter(rect -> predicate.test(rect)).count() == 3) {
                 return true;
             }
         }
-        // check main diagonal
+
         Figure3T[] mainDiagonal = new Figure3T[3];
         IntStream.range(0, this.table.length).forEach(
                 i -> {
@@ -47,7 +47,7 @@ public class Logic3T {
         if (Arrays.stream(mainDiagonal).filter(rect -> predicate.test(rect)).count() == 3) {
             return true;
         }
-        // check reverse diagonal
+
         Figure3T[] reverseDiagonal = new Figure3T[3];
         IntStream.range(0, this.table.length).forEach(
                 i -> {

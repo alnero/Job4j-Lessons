@@ -94,8 +94,6 @@ public class ConvertArrayToListTest {
         assertThat(result, is(expect));
     }
 
-    //--- Test combine list of arrays to one list ---
-
     /**
      * List with 3 arrays each having 2 cells -> common list with 6 elements.
      */

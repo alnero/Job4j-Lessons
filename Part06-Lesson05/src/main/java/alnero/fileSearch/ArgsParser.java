@@ -7,6 +7,9 @@ import java.util.Arrays;
 public class ArgsParser {
     /**
      * Parsing of required arguments.
+     * 1. Args to have only one separator symbol "=".
+     * 2. Only predefined keys are allowed.
+     * 3. Only predefined search types are allowed.
      * @param args CLI supplied arguments in key=value format
      * @param keys required keys
      * @param searchTypeNames predefined search type names
@@ -19,18 +22,15 @@ public class ArgsParser {
         }
         Map<String, String> searchArguments = new HashMap<>();
         for (String argument : args) {
-            // args to have only one separator symbol "="
             if (!argument.contains("=") || argument.indexOf("=", argument.indexOf("=") + 1) > -1) {
                 printHelpThrowIllegalArgumentException();
             }
             String[] keyValue = argument.split("=");
             String key = keyValue[0];
-            // only predefined keys allowed
             if (Arrays.stream(keys).noneMatch(key::matches)) {
                 printHelpThrowIllegalArgumentException();
             }
             String value = keyValue[1];
-            // only predefined search types allowed
             if (searchTypeKey.equals(key) && Arrays.stream(searchTypeNames).noneMatch(value::matches)) {
                 printHelpThrowIllegalArgumentException();
             }

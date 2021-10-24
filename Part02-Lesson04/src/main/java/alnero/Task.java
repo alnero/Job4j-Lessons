@@ -126,7 +126,7 @@ public class Task {
         }
 
         if (this.nextCommentIndex == this.comments.length) {
-            int newCommentsSize = this.comments.length * 2; //MAGIC NUMBER
+            int newCommentsSize = this.comments.length * 2;
             Comment[] newComments = new Comment[newCommentsSize];
             System.arraycopy(this.comments, 0,
                              newComments, 0,

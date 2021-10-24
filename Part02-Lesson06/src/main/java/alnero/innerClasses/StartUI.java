@@ -41,8 +41,6 @@ public class StartUI {
 
         while (true) {
             menu.showMenu();
-
-            // get key value from user input string
             String userInput = this.input.readInputLine();
             int menuItemKey;
             try {
@@ -50,10 +48,7 @@ public class StartUI {
             } catch (NumberFormatException e) {
                 continue;
             }
-
             menu.select(menuItemKey);
-
-            // last item of menu is "Exit", enumeration starts from 0
             if (MenuTracker.MAX_NUMBER_OF_TASKS - 1 == menuItemKey) {
                 break;
             }

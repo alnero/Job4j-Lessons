@@ -29,7 +29,6 @@ public class Finder {
      */
     public List<File> searchFiles(String dir, String searchType, String searchPhrase) throws IOException {
         List<File> result = new ArrayList<>();
-        // choose pattern depending on required search type
         String pattern = "glob:" + searchPhrase;
         if ("regex".equals(searchType)) {
             pattern = "regex:" + searchPhrase;

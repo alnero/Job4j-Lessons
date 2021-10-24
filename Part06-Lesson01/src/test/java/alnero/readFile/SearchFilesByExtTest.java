@@ -61,14 +61,16 @@ public class SearchFilesByExtTest {
         assertThat(result, is("Arguments required, usage: java -cp Part06-Lesson01-1.0.0.jar alnero.readFile.SearchFilesByExt PATH_TO_SEARCH_FOLDER FILE_EXTENSION"));
     }
 
+    /**
+     * Test redirects console input and then restores console input.
+     */
     @Test
     public void whenTwoCorrectArgumentThenProperResultsReturned() throws IOException {
-        // redirect console output for test
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         PrintStream mockOut = new PrintStream(byteArrayOutputStream);
         PrintStream systemOut = System.out;
         System.setOut(mockOut);
-        // search txt files
+
         SearchFilesByExt.main(new String[]{"src/test/resources", "txt"});
         List<String> result = Arrays.asList(byteArrayOutputStream.toString().split(System.lineSeparator()));
         List<String> expected = Arrays.asList(
@@ -79,7 +81,7 @@ public class SearchFilesByExtTest {
                 "src/test/resources/log.txt",
                 "src/test/resources/empty_file.txt");
         MatcherAssert.assertThat(result, Matchers.containsInAnyOrder(expected.toArray()));
-        // restore console output
+
         System.out.flush();
         System.setOut(systemOut);
     }

@@ -92,6 +92,9 @@ public class AnalyseTest {
 
     /**
      * Number of new, deleted and modified users is correct.
+     * two modified users - user2, user3.
+     * two new users - user6, user7.
+     * two deleted users - user4, user5.
      */
     @Test
     public void whenUsersAreAddedDeletedModifiedThenCorrectStatisticsReturned() {
@@ -113,9 +116,6 @@ public class AnalyseTest {
         Analyse.User user6 = new Analyse.User(6, "Six");
         Analyse.User user7 = new Analyse.User(7, "Seven");
         List<Analyse.User> current = new ArrayList<>();
-        // two modified users - user2, user3
-        // two new users - user6, user7
-        // two deleted users - user4, user5
         current.add(user1);
         current.add(user2);
         current.add(user3);

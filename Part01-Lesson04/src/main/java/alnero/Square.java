@@ -68,28 +68,20 @@ public class Square {
      * @param step step of calculations
      */
     public void show(float start, float finish, float step) {
-        // step is always positive
         step = Math.abs(step);
-
-        // finish is always greater then start
         if (start > finish) {
             float temp = start;
             start = finish;
             finish = temp;
         }
-
         StringBuilder dataStr = new StringBuilder();
-
         String delimiter = "";
         for (float i = start; i < finish; i += step) {
             float value = this.calculate(i);
             dataStr.append(delimiter).append(value);
             delimiter = "  ";
         }
-
-        // function value for finish argument is always included
         dataStr.append(delimiter).append(this.calculate(finish));
-
         output.println(dataStr);
     }
 
