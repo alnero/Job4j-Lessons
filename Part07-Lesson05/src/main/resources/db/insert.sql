@@ -3,7 +3,8 @@ VALUES (1, 'Atari'),
        (2, 'Boing'),
        (3, 'Cisco'),
        (4, 'D-Link'),
-       (5, 'Fazer');
+       (5, 'Fazer'),
+       (6, 'Google');
 
 INSERT INTO person (id, name, company_id)
 VALUES (1, 'Alice', 1),
@@ -20,6 +21,11 @@ VALUES (1, 'Alice', 1),
        (12, 'Fabian', 5),
        (13, 'Fiona', 5),
        (14, 'Freya', 5),
-       (15, 'Finn', 5);
+       (15, 'Finn', 5),
+       (16, 'George', 6),
+       (17, 'Grant', 6),
+       (18, 'Griffin', 6),
+       (19, 'Gabriella', 6),
+       (20, 'Grace', 6);
 
 
