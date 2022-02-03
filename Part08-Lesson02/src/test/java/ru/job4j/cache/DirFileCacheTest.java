@@ -45,7 +45,9 @@ public class DirFileCacheTest {
         Map<String, SoftReference<String>> spyMap = Mockito.spy(
                 (HashMap<String, SoftReference<String>>) Whitebox.getInternalState(spyCache, "cache"));
         Whitebox.setInternalState(spyCache, "cache", spyMap);
-        Mockito.doReturn(null).when(spyMap).get(Mockito.anyString());
+        Mockito.doReturn(new SoftReference<String>(null))
+                .when(spyMap)
+                .getOrDefault(Mockito.anyString(), Mockito.any(SoftReference.class));
 
         spyCache.get(TEST_FILE);
         spyCache.get(TEST_FILE);
