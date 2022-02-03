@@ -15,12 +15,10 @@ public abstract class AbstractCache<K, V> {
     public V get(K key) {
         V value = cache.getOrDefault(key, new SoftReference<>(null)).get();
         if (value == null) {
-            V contents = this.load(key);
-            this.put(key, contents);
-            return contents;
-        } else {
-            return value;
+            value = this.load(key);
+            this.put(key, value);
         }
+        return value;
     }
 
     protected abstract V load(K key);
