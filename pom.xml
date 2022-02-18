@@ -54,6 +54,8 @@
 
 		<module>Part08-Lesson01</module>
 		<module>Part08-Lesson02</module>
+
+		<module>Part09-Lesson01</module>
 	</modules>
 
 	<properties>
