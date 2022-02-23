@@ -2,6 +2,7 @@ package alnero;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +16,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
+@Ignore
 public class TableEditorTest {
     /** Test table name. */
     private static final String TEST_TABLE_NAME = "table_editor_test_table";
