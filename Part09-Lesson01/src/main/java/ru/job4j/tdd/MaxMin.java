@@ -10,7 +10,7 @@ public class MaxMin {
     }
 
     public <T> T min(List<T> value, Comparator<T> comparator) {
-        return findByComparatorPredicate(value, (a, b) -> Comparator.nullsFirst(comparator).compare(a, b) < 0);
+        return findByComparatorPredicate(value, (a, b) -> Comparator.nullsLast(comparator).compare(a, b) < 0);
     }
 
     private <T> T findByComparatorPredicate(List<T> value, BiPredicate<T, T> predicate) {
